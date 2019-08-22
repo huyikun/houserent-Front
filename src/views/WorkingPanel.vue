@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-btn color="info">
-      这里是工作主界面
-    </v-btn>
+    <v-container>
+      <v-btn>2</v-btn>
+    </v-container>
   </div>
 </template>
 

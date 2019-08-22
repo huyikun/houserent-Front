@@ -54,7 +54,7 @@
       </v-form>
       <v-divider></v-divider>
       <v-card-actions>
-        <v-btn text @click="$refs.form.reset()">
+        <v-btn @click="$refs.form.reset()">
           Clear
         </v-btn>
         <div class="flex-grow-1"></div>
@@ -84,7 +84,7 @@
               Yes
             </v-btn>
             <div class="flex-grow-1"></div>
-            <v-btn text @click="(agreement = false), (dialog = false)">
+            <v-btn @click="(agreement = false), (dialog = false)">
               No
             </v-btn>
           </v-card-actions>

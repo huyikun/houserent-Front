@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <v-card class="mx-auto" style="max-width: 500px;">
-      <v-toolbar color="primary" cards dark flat>
+      <v-toolbar color="primary" cards dark>
         <v-card-title class="title font-weight-regular"
           >House Renting</v-card-title
         >
