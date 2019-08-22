@@ -6,8 +6,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: () => import('./components/HelloWorld.vue')
+      name: 'Signin',
+      component: () => import('./components/Signin.vue')
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: () => import('./components/Signup.vue')
     },
     {
       path: '/main',
