@@ -8,7 +8,7 @@
       </v-toolbar>
       <v-form ref="form" v-model="form" class="pa-4 pt-6">
         <v-text-field
-          v-model="email"
+          v-model="loginInfoVo.email"
           :rules="[rules.email]"
           filled
           color="primary"
@@ -16,7 +16,7 @@
           type="email"
         ></v-text-field>
         <v-text-field
-          v-model="password"
+          v-model="loginInfoVo.password"
           :rules="[rules.password, rules.length(6)]"
           filled
           color="primary"
@@ -43,30 +43,36 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Hello, Vue!',
-      card_text: 'Only time will tell',
+      loginInfoVo: { email: '', password: '' },
       agreement: false,
-      username: '',
-      dialog: false,
       email: undefined,
       form: false,
-      isLoading: false,
       password: undefined,
-      phone: undefined,
       rules: {
-        username: v => (v || '').match(/^[a-zA-Z]{2,}$/) || 'Please enter your name',
-        phone: v => (v || '').match(/^1[3456789]\d{9}$/) || 'Please enter a correct phone number',
         email: v => (v || '').match(/@/) || 'Please enter a valid email',
         length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
         password: v => (v || '').match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/) ||
           'Password must contain letters and numeric characters',
-        required: v => !!v || 'This field is required',
       }
     }
   },
   methods: {
     goSignup: function () {
       this.$router.push({ name: 'Signup' })
+    },
+    Signin () {
+      this.$axios
+        .post('/login', {
+          username: this.loginInfoVo.username,
+          password: this.loginInfoVo.password
+        })
+        .then(successResponse => {
+          this.responseResult = JSON.stringify(successResponse.data)
+          if (successResponse.data.code === 200) {
+            this.$router.replace({ path: '/index' })
+          }
+        })
+        .catch(failResponse => { })
     },
   }
 }

@@ -8,14 +8,14 @@
         <v-card-title class="title font-weight-regular">Sign up</v-card-title>
       </v-toolbar>
       <v-form ref="form" v-model="form" class="pa-4 pt-6">
-        <v-textarea
+        <v-text-field
           v-model="username"
           :rules="[rules.username]"
           filled
+          style="min-height: 96px"
           color="primary"
           label="Username"
-          rows="1"
-        ></v-textarea>
+        ></v-text-field>
         <v-text-field
           v-model="password"
           :rules="[rules.password, rules.length(6)]"
@@ -30,14 +30,14 @@
           v-model="phone"
           :rules="[rules.phone]"
           filled
-          color="deep-purple"
+          color="primary"
           label="Phone number"
         ></v-text-field>
         <v-text-field
           v-model="email"
           :rules="[rules.email]"
           filled
-          color="deep-purple"
+          color="primary"
           label="Email address"
           type="email"
         ></v-text-field>
@@ -79,12 +79,12 @@
             <v-btn
               class="white--text"
               color="primary"
-              @click=";(agreement = true), (dialog = false)"
+              @click="(agreement = true), (dialog = false)"
             >
               Yes
             </v-btn>
             <div class="flex-grow-1"></div>
-            <v-btn text @click=";(agreement = false), (dialog = false)">
+            <v-btn text @click="(agreement = false), (dialog = false)">
               No
             </v-btn>
           </v-card-actions>
