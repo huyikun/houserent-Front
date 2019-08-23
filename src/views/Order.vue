@@ -104,7 +104,6 @@ export default {
     return {
       dialog: false,
       e13: 1,
-<<<<<<< HEAD:src/views/Page1.vue
       indate: new Date().toISOString().substr(0, 10),
       outdate: new Date().toISOString().substr(0, 10),
       menu: false,
@@ -146,15 +145,5 @@ export default {
     },
   },
 }
-=======
-      column: null
-    };
-  },
-  methods: {
-    search() {
-      dialog = false;
-    }
-  }
-};
->>>>>>> ae99de777764e1d8534184c47bc9931bd446b756:src/views/Order.vue
+
 </script>

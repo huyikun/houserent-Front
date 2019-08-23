@@ -7,20 +7,12 @@ export default new Router({
     {
       path: '/',
       name: 'Signin',
-<<<<<<< HEAD
       component: () => import('@/views/Signin.vue')
-=======
-      component: () => import('./views/Signin.vue')
->>>>>>> ae99de777764e1d8534184c47bc9931bd446b756
     },
     {
       path: '/signup',
       name: 'Signup',
-<<<<<<< HEAD
       component: () => import('@/views/Signup.vue')
-=======
-      component: () => import('./views/Signup.vue')
->>>>>>> ae99de777764e1d8534184c47bc9931bd446b756
     },
     {
       path: '/main',
