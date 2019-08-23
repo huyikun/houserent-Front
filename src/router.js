@@ -7,12 +7,20 @@ export default new Router({
     {
       path: '/',
       name: 'Signin',
+<<<<<<< HEAD
       component: () => import('@/views/Signin.vue')
+=======
+      component: () => import('./views/Signin.vue')
+>>>>>>> ae99de777764e1d8534184c47bc9931bd446b756
     },
     {
       path: '/signup',
       name: 'Signup',
+<<<<<<< HEAD
       component: () => import('@/views/Signup.vue')
+=======
+      component: () => import('./views/Signup.vue')
+>>>>>>> ae99de777764e1d8534184c47bc9931bd446b756
     },
     {
       path: '/main',
@@ -25,14 +33,14 @@ export default new Router({
           component: () => import('./views/WorkingPanel.vue')
         },
         {
-          path: 'Page1',
-          name: 'Page1',
-          component: () => import('./views/Page1.vue')
+          path: 'Order',
+          name: 'Order',
+          component: () => import('./views/Order.vue')
         },
         {
-          path: 'Page2',
-          name: 'Page2',
-          component: () => import('./views/Page2.vue')
+          path: 'Complaint',
+          name: 'Complaint',
+          component: () => import('./views/Complaint.vue')
         },
         {
           path: 'Page3',
