@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import Navigator from './Navigator.vue'
+import Navigator from "../components/Navigator";
 export default {
   components: {
-    Navigator,
+    Navigator
   }
-}
+};
 </script>

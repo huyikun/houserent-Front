@@ -1,9 +1,7 @@
 <template>
   <v-card>
     <v-stepper v-model="e13" vertical>
-      <v-stepper-step step="1" complete>
-        Step 1
-      </v-stepper-step>
+      <v-stepper-step step="1" complete>Step 1</v-stepper-step>
 
       <v-stepper-content step="1">
         <v-radio-group class="pt-3 pl-3 pr-3" v-model="column" column>
@@ -33,22 +31,18 @@
 </template>
 
 <script>
-import Picbody from '../components/Picbody'
 export default {
-  data () {
+  data() {
     return {
       dialog: false,
       e13: 1,
-      column: null,
-    }
+      column: null
+    };
   },
   methods: {
-    search () {
-      dialog = false
+    search() {
+      dialog = false;
     }
-  },
-  components: {
-    Picbody,
   }
-}
+};
 </script>

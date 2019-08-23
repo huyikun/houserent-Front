@@ -2,9 +2,7 @@
   <div class="hello">
     <v-card class="mx-auto" style="max-width: 500px;">
       <v-toolbar color="primary" cards dark>
-        <v-card-title class="title font-weight-regular"
-          >House Renting</v-card-title
-        >
+        <v-card-title class="title font-weight-regular">House Renting</v-card-title>
       </v-toolbar>
       <v-form ref="form" v-model="form" class="pa-4 pt-6">
         <v-text-field
@@ -54,7 +52,6 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
   data () {
     return {
       email: '',
