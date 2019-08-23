@@ -101,7 +101,6 @@
 </template>
 
 <script>
-import Picbody from '../components/Picbody'
 export default {
   data () {
     return {

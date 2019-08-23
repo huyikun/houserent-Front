@@ -7,17 +7,17 @@ export default new Router({
     {
       path: '/',
       name: 'Signin',
-      component: () => import('./components/Signin.vue')
+      component: () => import('@/views/Signin.vue')
     },
     {
       path: '/signup',
       name: 'Signup',
-      component: () => import('./components/Signup.vue')
+      component: () => import('@/views/Signup.vue')
     },
     {
       path: '/main',
       name: 'Main',
-      component: () => import('./components/Main.vue'),
+      component: () => import('./views/Main.vue'),
       children: [
         {
           path: '',
