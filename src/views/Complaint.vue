@@ -1,9 +1,16 @@
 <template>
   <div>
-    <v-file-input chips multiple label="FileUpload"></v-file-input>
+    <br />
+    <v-file-input
+      class="mx-10"
+      chips
+      multiple
+      label="FileUpload"
+    ></v-file-input>
+    <br />
     <v-container fluid>
       <v-row>
-        <v-col>
+        <v-col class="px-10">
           <v-textarea solo name="input-7-4" label="ComplaintText"></v-textarea>
         </v-col>
       </v-row>
@@ -13,14 +20,14 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       url: [],
       complaintText: ""
     };
   },
   methods: {
-    submit: function() {
+    submit: function () {
       //getUrlArray
       //getComplaintText
     }
