@@ -99,14 +99,12 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Hello, Vue!',
-      card_text: 'Only time will tell',
       agreement: false,
-      username: '',
       dialog: false,
-      email: undefined,
       form: false,
       isLoading: false,
+      username: '',
+      email: undefined,
       password: undefined,
       phone: undefined,
       rules: {
@@ -125,8 +123,21 @@ export default {
       window.history.back()
     },
 
-    Signup: function () {
-      //
+    Signup () {
+      this.$axios
+        .post('/login', {
+          username: this.username,
+          password: this.password,
+          email: this.email,
+          phone: this.phone,
+        })
+        .then(successResponse => {
+          this.responseResult = JSON.stringify(successResponse.data)
+          if (successResponse.data.code === 200) {
+            this.$router.replace({ path: '/' })
+          }
+        })
+        .catch(failResponse => { })
     }
 
   }

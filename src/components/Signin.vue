@@ -8,7 +8,7 @@
       </v-toolbar>
       <v-form ref="form" v-model="form" class="pa-4 pt-6">
         <v-text-field
-          v-model="loginInfoVo.email"
+          v-model="email"
           :rules="[rules.email]"
           filled
           color="primary"
@@ -16,11 +16,10 @@
           type="email"
         ></v-text-field>
         <v-text-field
-          v-model="loginInfoVo.password"
+          v-model="password"
           :rules="[rules.password, rules.length(6)]"
           filled
           color="primary"
-          counter="6"
           label="Password"
           style="min-height: 96px"
           type="password"
@@ -43,11 +42,10 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      loginInfoVo: { email: '', password: '' },
+      email: '',
+      password: '',
       agreement: false,
-      email: undefined,
       form: false,
-      password: undefined,
       rules: {
         email: v => (v || '').match(/@/) || 'Please enter a valid email',
         length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
@@ -63,13 +61,13 @@ export default {
     Signin () {
       this.$axios
         .post('/login', {
-          username: this.loginInfoVo.username,
-          password: this.loginInfoVo.password
+          username: this.username,
+          password: this.password
         })
         .then(successResponse => {
           this.responseResult = JSON.stringify(successResponse.data)
           if (successResponse.data.code === 200) {
-            this.$router.replace({ path: '/index' })
+            this.$router.replace({ path: '/main' })
           }
         })
         .catch(failResponse => { })
