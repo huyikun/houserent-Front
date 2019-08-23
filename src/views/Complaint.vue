@@ -4,7 +4,7 @@
     <v-container fluid>
       <v-row>
         <v-col>
-          <v-textarea solo name="input-7-4" label="Opinions"></v-textarea>
+          <v-textarea solo name="input-7-4" label="ComplaintText"></v-textarea>
         </v-col>
       </v-row>
     </v-container>
