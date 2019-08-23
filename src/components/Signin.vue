@@ -34,6 +34,21 @@
         <v-btn color="primary" @click="goSignup" depressed>Signup</v-btn>
       </v-card-actions>
     </v-card>
+    <v-snackbar
+      v-model="snackbar"
+      :bottom="y === 'bottom'"
+      :left="x === 'left'"
+      :multi-line="mode === 'multi-line'"
+      :right="x === 'right'"
+      :timeout="timeout"
+      :top="y === 'top'"
+      :vertical="mode === 'vertical'"
+    >
+      {{ text }}
+      <v-btn color="pink" @click="snackbar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -51,7 +66,13 @@ export default {
         length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
         password: v => (v || '').match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/) ||
           'Password must contain letters and numeric characters',
-      }
+      },
+      snackbar: false,
+      y: 'bottom',
+      x: null,
+      mode: '',
+      timeout: 6000,
+      text: '邮箱或密码错误',
     }
   },
   methods: {
@@ -67,11 +88,10 @@ export default {
         .then(successResponse => {
           // this.responseResult = JSON.stringify(successResponse.data)
           if (successResponse.data.code === 200) {
-            console.log('jjkjjkjkjk')
             this.$router.push({ path: '/signup' })
           }
           else {
-            assert(successResponse.data.message)
+            Snackbar = true
           }
         })
         .catch(failResponse => { })
