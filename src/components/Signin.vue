@@ -61,13 +61,17 @@ export default {
     Signin () {
       this.$axios
         .post('/login', {
-          username: this.username,
+          username: this.email,
           password: this.password
         })
         .then(successResponse => {
-          this.responseResult = JSON.stringify(successResponse.data)
+          // this.responseResult = JSON.stringify(successResponse.data)
           if (successResponse.data.code === 200) {
-            this.$router.replace({ path: '/main' })
+            console.log('jjkjjkjkjk')
+            this.$router.push({ path: '/signup' })
+          }
+          else {
+            assert(successResponse.data.message)
           }
         })
         .catch(failResponse => { })
