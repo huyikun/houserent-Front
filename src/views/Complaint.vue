@@ -14,7 +14,7 @@
           <v-textarea solo name="input-7-4" label="ComplaintText"></v-textarea>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row justify="center">
         <v-btn @click="submit">submit</v-btn>
       </v-row>
     </v-container>
