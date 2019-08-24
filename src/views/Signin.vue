@@ -8,12 +8,12 @@
       </v-toolbar>
       <v-form ref="form" v-model="form" class="pa-4 pt-6">
         <v-text-field
-          v-model="email"
-          :rules="[rules.email]"
+          v-model="username"
+          :rules="[rules.username]"
           filled
           color="primary"
-          label="Email address"
-          type="email"
+          label="username"
+          type="username"
         ></v-text-field>
         <v-text-field
           v-model="password"
@@ -61,7 +61,7 @@ export default {
       agreement: false,
       form: false,
       rules: {
-        email: v => (v || '').match(/@/) || 'Please enter a valid email',
+        username: v => (v || '').match(/^[a-zA-Z]{2,}$/) || 'Please enter your name',
         length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
         password: v => (v || '').match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/) ||
           'Password must contain letters and numeric characters',
@@ -71,7 +71,7 @@ export default {
       x: null,
       mode: '',
       timeout: 6000,
-      text: '邮箱或密码错误',
+      text: '用户名或密码错误',
     }
   },
   methods: {
@@ -81,7 +81,7 @@ export default {
     Signin () {
       this.$axios
         .post('/login', {
-          username: this.email,
+          username: this.username,
           password: this.password
         })
         .then(successResponse => {
@@ -90,7 +90,8 @@ export default {
             this.$router.push({ path: '/signup' })
           }
           else {
-            Snackbar = true
+            text = successResponse.data.message
+            snackbar = true
           }
         })
         .catch(failResponse => { })
