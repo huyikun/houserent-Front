@@ -2,10 +2,9 @@
   <v-card>
     <v-stepper v-model="e13" vertical>
       <v-stepper-step step="1" complete>Step 1</v-stepper-step>
-
       <v-stepper-content step="1">
         <v-radio-group
-          class="pt-3 pl-3 pr-3"
+          class=" pl-3 pr-3"
           v-model="postdata.keyword1"
           :mandatory="false"
         >
@@ -100,7 +99,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       dialog: false,
       e13: 1,
@@ -145,5 +144,4 @@ export default {
     },
   },
 }
-
 </script>

@@ -1,8 +1,10 @@
 <template>
   <div class="hello">
-    <v-card class="mx-auto" style="max-width: 500px;">
+    <v-card class="mx-auto mt-1" style="max-width: 500px;">
       <v-toolbar color="primary" cards dark>
-        <v-card-title class="title font-weight-regular">House Renting</v-card-title>
+        <v-card-title class="title font-weight-regular"
+          >House Renting</v-card-title
+        >
       </v-toolbar>
       <v-form ref="form" v-model="form" class="pa-4 pt-6">
         <v-text-field
@@ -83,7 +85,7 @@ export default {
           password: this.password
         })
         .then(successResponse => {
-          // this.responseResult = JSON.stringify(successResponse.data)
+          this.responseResult = JSON.stringify(successResponse.data)
           if (successResponse.data.code === 200) {
             this.$router.push({ path: '/signup' })
           }

@@ -3,14 +3,21 @@
     <v-btn icon @click="goBack">
       <v-icon>arrow_back</v-icon>
     </v-btn>
-
-    <v-toolbar-title class="font-weight-bold">hello, {{ username }}</v-toolbar-title>
+    <v-btn icon @click="goHome">
+      <v-icon>home</v-icon>
+    </v-btn>
+    <v-btn icon @click="goUser">
+      <v-icon>account_circle</v-icon>
+    </v-btn>
 
     <v-spacer />
 
     <v-toolbar-items class="hidden-xs-only">
-      <v-btn text @click.stop="goOrder">Order</v-btn>
-      <v-btn text @click.stop="goComplaint">Complaint</v-btn>
+      <v-btn v-if="mode === 1" text @click.stop="goOrder">Order</v-btn>
+      <v-btn v-if="mode === 1" text @click.stop="goComplaint">Complaint</v-btn>
+      <v-btn v-if="mode === 2" text @click.stop="">房东</v-btn>
+      <v-btn v-if="mode === 2" text @click.stop="">房东2</v-btn>
+      <v-btn v-if="mode === 3" text @click.stop="">工人</v-btn>
       <v-btn text @click="logout">Logout</v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -18,25 +25,32 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      username: "HUYK",
+      username: this.$store.state.username,
+      mode: this.$store.state.mode,
     }
   },
   methods: {
     goBack: () => {
-      window.history.back();
+      window.history.back()
     },
-    goOrder: function() {
-      if (this.$route.name !== "Order") this.$router.push({ name: "Order" });
+    goUser: function () {
+      if (this.$route.name !== 'User') this.$router.push({ name: 'User' })
     },
-    goComplaint: function() {
-      if (this.$route.name !== "Complaint") this.$router.push({ name: "Complaint" });
+    goHome: function () {
+      if (this.$route.name !== 'WorkingPanel') this.$router.push({ name: 'WorkingPanel' })
     },
-    logout: function() {
-      this.$router.push({ name: "Signin" });
+    goOrder: function () {
+      if (this.$route.name !== 'Order') this.$router.push({ name: 'Order' })
     },
-    search: function() {},
+    goComplaint: function () {
+      if (this.$route.name !== 'Complaint') this.$router.push({ name: 'Complaint' })
+    },
+    logout: function () {
+      this.$router.push({ name: 'Signin' })
+    },
+    search: function () { }
   }
 };
 </script>

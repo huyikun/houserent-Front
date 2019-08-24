@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <v-card class="mx-auto" style="max-width: 500px;">
+    <v-card class="mx-auto mt-1" style="max-width: 500px;">
       <v-toolbar color="primary" cards dark flat>
         <v-btn icon @click="goBack">
           <v-icon>mdi-arrow-left</v-icon>
@@ -20,7 +20,7 @@
           v-model="password"
           :rules="[rules.password, rules.length(6)]"
           filled
-          color="deep-purple"
+          color="primary"
           counter="6"
           label="Password"
           style="min-height: 96px"
@@ -124,7 +124,7 @@ export default {
 
     Signup () {
       this.$axios
-        .post('/login', {
+        .post('/register', {
           username: this.username,
           password: this.password,
           email: this.email,

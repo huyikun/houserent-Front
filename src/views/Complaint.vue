@@ -8,14 +8,16 @@
       label="FileUpload"
     ></v-file-input>
     <br />
-    <v-container fluid>
+    <v-container>
       <v-row>
         <v-col class="px-10">
           <v-textarea solo name="input-7-4" label="ComplaintText"></v-textarea>
         </v-col>
       </v-row>
+      <v-row>
+        <v-btn @click="submit">submit</v-btn>
+      </v-row>
     </v-container>
-    <v-btn @click="submit">submit</v-btn>
   </div>
 </template>
 <script>

@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import Vuetify from 'vuetify'
 
 import 'vuetify/dist/vuetify.min.css'
@@ -22,6 +23,7 @@ new Vue({
   el: '#app',
   vuetify: new Vuetify(),
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
