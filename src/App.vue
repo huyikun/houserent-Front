@@ -3,6 +3,21 @@
     <div id="app">
       <router-view />
     </div>
+    <v-snackbar
+      v-model="snackbar"
+      :bottom="y === 'bottom'"
+      :left="x === 'left'"
+      :multi-line="mode === 'multi-line'"
+      :right="x === 'right'"
+      :timeout="timeout"
+      :top="y === 'top'"
+      :vertical="mode === 'vertical'"
+    >
+      {{ text }}
+      <v-btn color="pink" @click="closesnackbar">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -11,6 +26,33 @@ export default {
   name: 'App',
   data () {
     return {
+      y: 'bottom',
+      x: null,
+      mode: '',
+      timeout: 6000,
+    }
+  },
+  methods: {
+    closesnackbar: function () {
+      this.$store.commit('updateSnackbar', false)
+    }
+  },
+  computed: {
+    snackbar: {
+      get () {
+        return this.$store.state.snackbar
+      },
+      set (value) {
+        this.$store.commit('updateSnackbar', value)
+      }
+    },
+    text: {
+      get () {
+        return this.$store.state.text
+      },
+      set (value) {
+        this.$store.commit('updateSnackbar', value)
+      }
     }
   }
 }

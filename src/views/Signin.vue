@@ -34,21 +34,6 @@
         <v-btn color="primary" @click="goSignup" depressed>Signup</v-btn>
       </v-card-actions>
     </v-card>
-    <v-snackbar
-      v-model="snackbar"
-      :bottom="y === 'bottom'"
-      :left="x === 'left'"
-      :multi-line="mode === 'multi-line'"
-      :right="x === 'right'"
-      :timeout="timeout"
-      :top="y === 'top'"
-      :vertical="mode === 'vertical'"
-    >
-      {{ text }}
-      <v-btn color="pink" @click="snackbar = false">
-        Close
-      </v-btn>
-    </v-snackbar>
   </div>
 </template>
 
@@ -66,12 +51,6 @@ export default {
         password: v => (v || '').match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/) ||
           'Password must contain letters and numeric characters',
       },
-      snackbar: false,
-      y: 'bottom',
-      x: null,
-      mode: '',
-      timeout: 6000,
-      text: '用户名或密码错误',
     }
   },
   methods: {
@@ -88,10 +67,10 @@ export default {
           this.responseResult = JSON.stringify(successResponse.data)
           if (successResponse.data.code === 200) {
             this.$router.push({ name: 'WorkingPanel' })
+            this.$store.commit('updateSnackbarContent', '登录成功')
           }
           else {
-            this.text = successResponse.data.message
-            this.snackbar = true
+            this.$store.commit('updateSnackbarContent', successResponse.data.message)
           }
         })
         .catch(failResponse => { })

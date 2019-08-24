@@ -133,7 +133,10 @@ export default {
         .then(successResponse => {
           this.responseResult = JSON.stringify(successResponse.data)
           if (successResponse.data.code === 200) {
-            this.$router.replace({ path: '/main' })
+            this.$store.commit('updateSnackbarContent', '注册成功')
+            this.$router.push({ name: 'Signin' })
+          } else {
+            this.$store.commit('updateSnackbarContent', successResponse.data.message)
           }
         })
         .catch(failResponse => { })

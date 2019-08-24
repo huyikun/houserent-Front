@@ -8,7 +8,9 @@ const store = new Vuex.Store({
     password: 'hyk123',
     email: '958337834@qq.com',
     phone: '15901092037',
-    mode: 1
+    usermode: 1,
+    snackbar: true,
+    text: ''
   },
   mutations: {
     updateMode (state, value) {
@@ -17,6 +19,14 @@ const store = new Vuex.Store({
       state.password = value.password
       state.email = value.email
       state.phone = value.phone
+    },
+    updateSnackbar (state, value) {
+      state.snackbar = value
+      console.log(state.snackbar)
+    },
+    updateSnackbarContent (state, value) {
+      store.commit('updateSnackbar', true)
+      state.text = value
     }
   }
 })

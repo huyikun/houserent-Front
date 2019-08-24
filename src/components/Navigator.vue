@@ -13,11 +13,13 @@
     <v-spacer />
 
     <v-toolbar-items class="hidden-xs-only">
-      <v-btn v-if="mode === 1" text @click.stop="goOrder">Order</v-btn>
-      <v-btn v-if="mode === 1" text @click.stop="goComplaint">Complaint</v-btn>
-      <v-btn v-if="mode === 2" text @click.stop="">房东</v-btn>
-      <v-btn v-if="mode === 2" text @click.stop="">房东2</v-btn>
-      <v-btn v-if="mode === 3" text @click.stop="">工人</v-btn>
+      <v-btn v-if="usermode === 1" text @click.stop="goOrder">Order</v-btn>
+      <v-btn v-if="usermode === 1" text @click.stop="goComplaint"
+        >Complaint</v-btn
+      >
+      <v-btn v-if="usermode === 2" text @click.stop="">房东</v-btn>
+      <v-btn v-if="usermode === 2" text @click.stop="">房东2</v-btn>
+      <v-btn v-if="usermode === 3" text @click.stop="">工人</v-btn>
       <v-btn text @click="logout">Logout</v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -28,7 +30,7 @@ export default {
   data () {
     return {
       username: this.$store.state.username,
-      mode: this.$store.state.mode,
+      usermode: this.$store.state.usermode,
     }
   },
   methods: {
@@ -48,9 +50,11 @@ export default {
       if (this.$route.name !== 'Complaint') this.$router.push({ name: 'Complaint' })
     },
     logout: function () {
+      this.$store.commit('updateSnackbarContent', '已登出')
       this.$router.push({ name: 'Signin' })
     },
     search: function () { }
-  }
+  },
+
 };
 </script>
