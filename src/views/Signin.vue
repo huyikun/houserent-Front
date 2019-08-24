@@ -87,11 +87,11 @@ export default {
         .then(successResponse => {
           this.responseResult = JSON.stringify(successResponse.data)
           if (successResponse.data.code === 200) {
-            this.$router.push({ path: '/signup' })
+            this.$router.push({ name: 'WorkingPanel' })
           }
           else {
-            text = successResponse.data.message
-            snackbar = true
+            this.text = successResponse.data.message
+            this.snackbar = true
           }
         })
         .catch(failResponse => { })
