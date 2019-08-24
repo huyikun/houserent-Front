@@ -35,6 +35,11 @@ export default new Router({
           component: () => import('./views/Complaint.vue')
         },
         {
+          path: 'HouseList',
+          name: 'HouseList',
+          component: () => import('./views/HouseList.vue')
+        },
+        {
           path: 'User',
           name: 'User',
           component: () => import('./views/User.vue')
