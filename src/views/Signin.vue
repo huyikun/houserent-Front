@@ -67,6 +67,7 @@ export default {
         .then(successResponse => {
           this.responseResult = JSON.stringify(successResponse.data)
           if (successResponse.data.code === 200) {
+            // this.$store.commit('updateMode', successResponse.data.user)
             this.$router.push({ name: 'WorkingPanel' })
             this.$store.commit('updateSnackbarContent', '登录成功')
           }

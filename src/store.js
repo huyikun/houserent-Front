@@ -16,7 +16,6 @@ const store = new Vuex.Store({
     updateMode (state, value) {
       state.mode = value.mode
       state.username = value.username
-      state.password = value.password
       state.email = value.email
       state.phone = value.phone
     },
