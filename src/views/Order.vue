@@ -62,12 +62,13 @@ export default {
           keywords: this.postdata
         })
         .then(successResponse => {
-          // this.responseResult = JSON.stringify(successResponse.data)
+          // var responseResult = JSON.parse(JSON.stringify(successResponse.data.houselist))
           if (successResponse.data.code === 200) {
-            this.$router.push({ path: '/signup' })
+            // this.$store.commit('updateHouseList', responseResult)
+            this.$router.push({ name: 'HouseList' })
           }
           else {
-            Snackbar = true
+            this.$store.commit('updateSnackbarContent', successResponse.data.message)
           }
         })
         .catch(failResponse => { })

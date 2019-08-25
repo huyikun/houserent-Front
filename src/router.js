@@ -25,22 +25,22 @@ export default new Router({
           component: () => import('./views/WorkingPanel.vue')
         },
         {
-          path: 'Order',
+          path: 'order',
           name: 'Order',
           component: () => import('./views/Order.vue')
         },
         {
-          path: 'Complaint',
+          path: 'complaint',
           name: 'Complaint',
           component: () => import('./views/Complaint.vue')
         },
         {
-          path: 'HouseList',
+          path: 'houseList',
           name: 'HouseList',
           component: () => import('./views/HouseList.vue')
         },
         {
-          path: 'User',
+          path: 'user',
           name: 'User',
           component: () => import('./views/User.vue')
         }

@@ -12,7 +12,7 @@
           :rules="[rules.username]"
           filled
           color="primary"
-          label="username"
+          label="Username"
           type="username"
         ></v-text-field>
         <v-text-field
@@ -65,9 +65,9 @@ export default {
           password: this.password
         })
         .then(successResponse => {
-          this.responseResult = JSON.stringify(successResponse.data)
+          var responseResult = JSON.parse(JSON.stringify(successResponse.data.user))
           if (successResponse.data.code === 200) {
-            // this.$store.commit('updateMode', successResponse.data.user)
+            this.$store.commit('updateMode', responseResult)
             this.$router.push({ name: 'WorkingPanel' })
             this.$store.commit('updateSnackbarContent', '登录成功')
           }

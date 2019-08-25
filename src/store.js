@@ -10,21 +10,25 @@ const store = new Vuex.Store({
     phone: '15901092037',
     usermode: 1,
     snackbar: false,
-    text: 'Default text?'
+    text: 'Default text?',
+    houseList: []
   },
   mutations: {
-    updateMode (state, value) {
-      state.mode = value.mode
+    updateMode(state, value) {
+      state.usermode = value.usermode
       state.username = value.username
       state.email = value.email
       state.phone = value.phone
     },
-    updateSnackbar (state, value) {
+    updateSnackbar(state, value) {
       state.snackbar = value
     },
-    updateSnackbarContent (state, value) {
+    updateSnackbarContent(state, value) {
       store.commit('updateSnackbar', true)
       state.text = value
+    },
+    updateHouseList(state, value) {
+      state.houseList = value
     }
   }
 })
