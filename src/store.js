@@ -15,10 +15,10 @@ const store = new Vuex.Store({
   },
   mutations: {
     updateMode(state, value) {
-      state.usermode = value.usermode
+      state.usermode = value.mode
       state.username = value.username
       state.email = value.email
-      state.phone = value.phone
+      state.phone = value.phoneNumber
     },
     updateSnackbar(state, value) {
       state.snackbar = value

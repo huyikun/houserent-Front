@@ -62,7 +62,7 @@ export default {
           keywords: this.postdata
         })
         .then(successResponse => {
-          // var responseResult = JSON.parse(JSON.stringify(successResponse.data.houselist))
+          // var responseResult = JSON.parse(JSON.stringify(successResponse.data.data))
           if (successResponse.data.code === 200) {
             // this.$store.commit('updateHouseList', responseResult)
             this.$router.push({ name: 'HouseList' })

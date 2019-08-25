@@ -62,10 +62,10 @@ export default {
       this.$axios
         .post('/login', {
           username: this.username,
-          password: this.password
+          password: this.password,
         })
         .then(successResponse => {
-          var responseResult = JSON.parse(JSON.stringify(successResponse.data.user))
+          var responseResult = JSON.parse(JSON.stringify(successResponse.data.data))
           if (successResponse.data.code === 200) {
             this.$store.commit('updateMode', responseResult)
             this.$router.push({ name: 'WorkingPanel' })

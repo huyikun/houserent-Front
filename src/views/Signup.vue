@@ -128,7 +128,7 @@ export default {
           username: this.username,
           password: this.password,
           email: this.email,
-          phone: this.phone,
+          phoneNumber: this.phone,
         })
         .then(successResponse => {
           this.responseResult = JSON.stringify(successResponse.data)

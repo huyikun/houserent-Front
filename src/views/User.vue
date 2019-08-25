@@ -55,11 +55,11 @@
 export default {
   data () {
     return {
-      dialog: 'false',
+      dialog: false,
       username: this.$store.state.username,
       email: this.$store.state.email,
       phone: this.$store.state.phone,
     }
-  }
+  },
 }
 </script>
