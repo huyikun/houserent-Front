@@ -45,9 +45,9 @@ export default new Router({
           component: () => import('./views/User.vue')
         },
         {
-          path: 'Test',
-          name: 'Test',
-          component: () => import('./views/Test.vue')
+          path: 'addhouse',
+          name: 'AddHouse',
+          component: () => import('./views/AddHouse.vue')
         }
       ]
     }

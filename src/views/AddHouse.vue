@@ -83,9 +83,14 @@ export default {
       }
       this.$axios.post('/opinion', this.formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
-      }).then(res => {
-        this.alertShow = true;
-      });
+      }).then(successResponse => {
+        this.responseResult = JSON.stringify(successResponse.data)
+        if (successResponse.data.code === 200) {
+          this.$store.commit('updateSnackbarContent', '上传成功')
+        } else {
+          this.$store.commit('updateSnackbarContent', successResponse.data.message)
+        }
+      }).catch(failResponse => { })
     },
   }
 }

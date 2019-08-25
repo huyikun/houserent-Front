@@ -13,6 +13,9 @@
     <v-spacer />
 
     <v-toolbar-items class="hidden-xs-only">
+      <v-btn v-if="usermode === 0" text @click.stop="goAddHouse"
+        >AddHouse</v-btn
+      >
       <v-btn v-if="usermode === 1" text @click.stop="goOrder">Order</v-btn>
       <v-btn v-if="usermode === 1" text @click.stop="goComplaint"
         >Complaint</v-btn
@@ -36,6 +39,9 @@ export default {
   methods: {
     goBack: () => {
       window.history.back()
+    },
+    goAddHouse: function () {
+      if (this.$route.name !== 'AddHouse') this.$router.push({ name: 'AddHouse' })
     },
     goUser: function () {
       if (this.$route.name !== 'User') this.$router.push({ name: 'User' })
