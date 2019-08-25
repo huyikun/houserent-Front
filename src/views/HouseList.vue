@@ -2,7 +2,7 @@
   <div>
     <v-container class="pa-2">
       <v-row>
-        <v-col v-for="house in houseList" :key="house.houseId">
+        <v-col v-for="(house, index) in houseList" :key="index" v-if="index >= (page - 1) * 3 && index < page * 3">
           <v-card>
             <v-img
               :src="house.photoList[0]"
@@ -21,64 +21,71 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-container class="pa-2">
-      <v-row>
-        <v-col v-for="house in houseList" :key="house.houseId">
-          <v-card>
-            <v-img
-              :src="house.photoList[0]"
-              class="white--text"
-              height="200px"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            >
-              <v-card-title class="fill-height align-end" v-text="house.address"></v-card-title>
-            </v-img>
-
-            <v-card-actions>
-              <div class="flex-grow-1"></div>
-              <v-btn @click>DETAILS</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+    <div class="text-center">
+      <v-pagination total-visible="5" v-model="page" :length="houseList.length / 3"></v-pagination>
+    </div>
   </div>
 </template>
 <script>
 export default {
   data: () => ({
+    page: 1,
     houseList: [
       {
-        houseId: "1",
-        address: "Pre-fab homes",
+        address: "1",
         size: "",
         introduce: "",
         rent: 0.0,
         houseOwnerPhone: "",
-        photoList: ["https://cdn.vuetifyjs.com/images/cards/house.jpg"],
+        photoList: ["src/assets/img/2B 01.jpg",],
         timeLine: []
       },
       {
-        houseId: "2",
-        address: "Favorite road trips",
+        address: "2",
         size: "",
         introduce: "",
         rent: 0.0,
         houseOwnerPhone: "",
-        photoList: ["https://cdn.vuetifyjs.com/images/cards/road.jpg"],
+        photoList: ["src/assets/img/2B 02.jpg"],
         timeLine: []
       },
       {
-        houseId: "2",
-        address: "Best airlines",
+        address: "3",
         size: "",
         introduce: "",
         rent: 0.0,
         houseOwnerPhone: "",
-        photoList: ["https://cdn.vuetifyjs.com/images/cards/plane.jpg"],
+        photoList: ["../assets/img/Andersen.jpg"],
+        timeLine: []
+      },
+      {
+        address: "4",
+        size: "",
+        introduce: "",
+        rent: 0.0,
+        houseOwnerPhone: "",
+        photoList: ["../assets/img/Angela.jpg"],
+        timeLine: []
+      },
+      {
+        address: "5",
+        size: "",
+        introduce: "",
+        rent: 0.0,
+        houseOwnerPhone: "",
+        photoList: ["../assets/img/Cuora.jpg"],
+        timeLine: []
+      },
+      {
+        address: "6",
+        size: "",
+        introduce: "",
+        rent: 0.0,
+        houseOwnerPhone: "",
+        photoList: ["../assets/img/Date A Live.jpg"],
         timeLine: []
       }
     ]
-  })
+  }),
 };
 </script>
