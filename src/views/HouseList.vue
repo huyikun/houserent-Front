@@ -2,7 +2,11 @@
   <div>
     <v-container class="pa-2">
       <v-row>
-        <v-col v-for="(house, index) in houseList" :key="index" v-if="index >= (page - 1) * 3 && index < page * 3">
+        <v-col
+          v-for="(house, index) in houseList"
+          :key="index"
+          v-if="index >= (page - 1) * 3 && index < page * 3"
+        >
           <v-card>
             <v-img
               :src="house.photoList[0]"
@@ -10,7 +14,10 @@
               height="200px"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             >
-              <v-card-title class="fill-height align-end" v-text="house.address"></v-card-title>
+              <v-card-title
+                class="fill-height align-end"
+                v-text="house.address"
+              ></v-card-title>
             </v-img>
 
             <v-card-actions>
@@ -22,7 +29,11 @@
       </v-row>
     </v-container>
     <div class="text-center">
-      <v-pagination total-visible="5" v-model="page" :length="houseList.length / 3"></v-pagination>
+      <v-pagination
+        total-visible="5"
+        v-model="page"
+        :length="houseList.length / 3"
+      ></v-pagination>
     </div>
   </div>
 </template>
