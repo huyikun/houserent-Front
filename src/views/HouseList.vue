@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
     <v-container class="pa-2">
       <v-row>
         <v-col
@@ -14,10 +14,7 @@
               height="145px"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             >
-              <v-card-title
-                class="fill-height align-end"
-                v-text="house.address"
-              ></v-card-title>
+              <v-card-title class="fill-height align-end" v-text="house.address"></v-card-title>
             </v-img>
 
             <v-card-actions>
@@ -25,15 +22,11 @@
               <v-spacer />
               <v-dialog v-model="dialog[index % cnt]" width="500">
                 <template v-slot:activator="{ on }">
-                  <v-btn color="red lighten-2" dark v-on="on">
-                    Details
-                  </v-btn>
+                  <v-btn color="red lighten-2" dark v-on="on">Details</v-btn>
                 </template>
 
                 <v-card>
-                  <v-card-title class="headline grey lighten-1" primary-title>
-                    欢迎您预览 {{ house.name }}
-                  </v-card-title>
+                  <v-card-title class="headline grey lighten-1" primary-title>欢迎您预览 {{ house.name }}</v-card-title>
                   <v-carousel
                     :continuous="false"
                     :cycle="cycle"
@@ -49,16 +42,16 @@
                     </v-carousel-item>
                   </v-carousel>
                   <v-card-text>
-                    房屋地址: {{ house.address }} <br />
-                    房屋简介: {{ house.introduce }} <br />
+                    房屋地址: {{ house.address }}
+                    <br />
+                    房屋简介: {{ house.introduce }}
+                    <br />
                     房东电话: {{ house.ownerphone }}
                   </v-card-text>
                   <v-divider></v-divider>
                   <v-card-actions>
                     <div class="flex-grow-1"></div>
-                    <v-btn color="red lighten-2" dark @click="closeall(index)">
-                      Order Now
-                    </v-btn>
+                    <v-btn color="red lighten-2" dark @click="closeall(index)">Order Now</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -67,40 +60,24 @@
         </v-col>
       </v-row>
     </v-container>
-    <div class="text-center">
-      <v-pagination
-        total-visible="5"
-        v-model="page"
-        :length="Math.ceil(houseList.length / cnt)"
-      ></v-pagination>
+    <div class="text-center" style="z-index:1">
+      <v-pagination  v-model="page" :length="Math.ceil(houseList.length / cnt)"></v-pagination>
     </div>
   </div>
+  
 </template>
 <script>
-import DatePicker from '@/components/DatePicker.vue'
+import DatePicker from "@/components/DatePicker.vue";
 export default {
   components: {
-    DatePicker,
+    DatePicker
   },
   data: () => ({
     page: 1,
     cnt: 6,
-    dialog: [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-    ],
+    dialog: [false, false, false, false, false, false],
     cycle: false,
-    slides: [
-      'First',
-      'Second',
-      'Third',
-      'Fourth',
-      'Fifth',
-    ],
+    slides: ["First", "Second", "Third", "Fourth", "Fifth"],
     houseList: [
       {
         name: "room1",
@@ -110,7 +87,7 @@ export default {
         introduce: "iam1",
         rent: 0.0,
         ownerphone: "111111",
-        photoList: ["../assets/pic2.jpg",],
+        photoList: ["../assets/pic2.jpg"],
         timeLine: []
       },
       {
@@ -176,15 +153,15 @@ export default {
         introduce: "iam7",
         rent: 0.0,
         ownerphone: "77777",
-        photoList: ["../assets/pic2.jpg",],
+        photoList: ["../assets/pic2.jpg"],
         timeLine: []
-      },
+      }
     ]
   }),
   methods: {
-    closeall (index) {
-      this.$router.push({ name: 'OrderConfirm' })
-      this.dialog[index] = false
+    closeall(index) {
+      this.$router.push({ name: "OrderConfirm" });
+      this.dialog[index] = false;
     }
   }
 };

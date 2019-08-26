@@ -1,65 +1,67 @@
 <template>
-  <v-toolbar color="primary" dark>
-    <v-btn icon @click="goBack">
-      <v-icon>arrow_back</v-icon>
-    </v-btn>
-    <v-btn icon @click="goHome">
-      <v-icon>home</v-icon>
-    </v-btn>
-    <v-btn icon @click="goUser">
-      <v-icon>account_circle</v-icon>
-    </v-btn>
+  <div>
+    <img style="width:100%; height:100%; position:fixed;" src="static/img/material.jpg" />
+    <v-toolbar color="primary" dark>
+      <v-btn icon @click="goBack">
+        <v-icon>arrow_back</v-icon>
+      </v-btn>
+      <v-btn icon @click="goHome">
+        <v-icon>home</v-icon>
+      </v-btn>
+      <v-btn icon @click="goUser">
+        <v-icon>account_circle</v-icon>
+      </v-btn>
 
-    <v-spacer />
+      <v-spacer />
 
-    <v-toolbar-items class="hidden-xs-only">
-      <v-btn v-if="usermode === 0" text @click.stop="goAddHouse"
-        >AddHouse</v-btn
-      >
-      <v-btn v-if="usermode === 1" text @click.stop="goOrder">Order</v-btn>
-      <v-btn v-if="usermode === 1" text @click.stop="goComplaint"
-        >Complaint</v-btn
-      >
-      <v-btn v-if="usermode === 2" text @click.stop="">房东</v-btn>
-      <v-btn v-if="usermode === 2" text @click.stop="">房东2</v-btn>
-      <v-btn v-if="usermode === 3" text @click.stop="">工人</v-btn>
-      <v-btn text @click="logout">Logout</v-btn>
-    </v-toolbar-items>
-  </v-toolbar>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn v-if="usermode === 0" text @click.stop="goAddHouse">AddHouse</v-btn>
+        <v-btn v-if="usermode === 1" text @click.stop="goOrder">Order</v-btn>
+        <v-btn v-if="usermode === 1" text @click.stop="goComplaint">Complaint</v-btn>
+        <v-btn v-if="usermode === 2" text @click.stop>房东</v-btn>
+        <v-btn v-if="usermode === 2" text @click.stop>房东2</v-btn>
+        <v-btn v-if="usermode === 3" text @click.stop>工人</v-btn>
+        <v-btn text @click="logout">Logout</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+  </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       username: this.$store.state.username,
-      usermode: this.$store.state.usermode,
-    }
+      usermode: this.$store.state.usermode
+    };
   },
   methods: {
     goBack: () => {
-      window.history.back()
+      window.history.back();
     },
-    goAddHouse: function () {
-      if (this.$route.name !== 'AddHouse') this.$router.push({ name: 'AddHouse' })
+    goAddHouse: function() {
+      if (this.$route.name !== "AddHouse")
+        this.$router.push({ name: "AddHouse" });
     },
-    goUser: function () {
-      if (this.$route.name !== 'User') this.$router.push({ name: 'User' })
+    goUser: function() {
+      if (this.$route.name !== "User") this.$router.push({ name: "User" });
     },
-    goHome: function () {
-      if (this.$route.name !== 'WorkingPanel') this.$router.push({ name: 'WorkingPanel' })
+    goHome: function() {
+      if (this.$route.name !== "WorkingPanel")
+        this.$router.push({ name: "WorkingPanel" });
     },
-    goOrder: function () {
-      if (this.$route.name !== 'Order') this.$router.push({ name: 'Order' })
+    goOrder: function() {
+      if (this.$route.name !== "Order") this.$router.push({ name: "Order" });
     },
-    goComplaint: function () {
-      if (this.$route.name !== 'Complaint') this.$router.push({ name: 'Complaint' })
+    goComplaint: function() {
+      if (this.$route.name !== "Complaint")
+        this.$router.push({ name: "Complaint" });
     },
-    logout: function () {
-      this.$store.commit('updateSnackbarContent', '已登出')
-      this.$router.push({ name: 'Signin' })
+    logout: function() {
+      this.$store.commit("updateSnackbarContent", "已登出");
+      this.$router.push({ name: "Signin" });
     },
-    search: function () { }
-  },
+    search: function() {}
+  }
 };
 </script>
