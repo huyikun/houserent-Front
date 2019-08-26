@@ -1,42 +1,86 @@
 <template>
-  <div class="form-group">
-    <label class="control-label">上传图片</label>
-    <div class="control-form">
-      <p class="help-block">
-        (建议图片格式为：JPEG/BMP/PNG/GIF，大小不超过5M，最多可上传4张)
-      </p>
-      <ul class="upload-imgs">
-        <li v-if="imgLen >= 4 ? false : true">
-          <input
-            type="file"
-            class="upload"
-            @change="addImg"
-            ref="inputer"
-            multiple
-            accept="image/png,image/jpeg,image/gif,image/jpg"
-          />
+  <v-card class="mt-3">
+    <v-row>
+      <v-col>
+        <v-card-title>上传图片</v-card-title>
+        <v-card-text>
+          (建议图片格式为：JPEG/BMP/PNG/GIF，大小不超过5M，最多可上传3张) <br />
+          上传成功后再进行房屋其他信息的注册
+        </v-card-text>
+        <ul>
+          <li v-if="imgLen >= 3 ? false : true">
+            <input
+              type="file"
+              class="upload"
+              @change="addImg"
+              ref="inputer"
+              multiple
+              accept="image/png,image/jpeg,image/gif,image/jpg"
+            />
+          </li>
+          <li v-else>
+            <input value="每次最多上传3张图片 0v0" />
+          </li>
+          <v-row>
+            <v-col v-for="(value, key) in imgs" style="max-width: 200px;">
+              <v-img :src="getObjectURL(value)" height="150px" /><a
+                class="close"
+                @click="delImg(key)"
+                >×</a
+              >
+            </v-col>
+          </v-row>
           <v-btn @click="submit">点击上传</v-btn>
-        </li>
-        <li v-for="(value, key) in imgs">
-          <p class="img">
-            <img :src="getObjectURL(value)" /><a
-              class="close"
-              @click="delImg(key)"
-              >×</a
-            >
-          </p>
-        </li>
-      </ul>
-    </div>
-  </div>
+        </ul> </v-col
+      ><v-col>
+        <v-text-field
+          style="max-width: 400px;"
+          label="房屋名称"
+          v-model="house.name"
+          filled
+        ></v-text-field>
+        <v-text-field
+          style="max-width: 400px;"
+          label="房屋地址"
+          v-model="house.address"
+          filled
+        ></v-text-field
+        ><v-text-field
+          style="max-width: 400px;"
+          label="房主联系方式"
+          v-model="house.ownerphone"
+          filled
+        ></v-text-field
+        ><v-textarea
+          filled
+          name="input-7-4"
+          label="房屋简介"
+          v-model="house.introduce"
+          style="max-width: 400px;"
+        ></v-textarea>
+        <v-btn v-if="showaddhouse" dark color="red lighten-2" @click="addhouse">
+          注册房屋
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-card>
 </template>
 <script>
 export default {
   data () {
     return {
       formData: new FormData(),
+      fil: {},
       imgs: {},
       imgLen: 0,
+      showaddhouse: false,
+      house: {
+        name: '',
+        address: '',
+        ownerphone: '',
+        introduce: '',
+        photos: {}
+      },
     }
   },
   methods: {
@@ -76,6 +120,11 @@ export default {
       this.imgLen--;
     },
     submit () {
+      let config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'  //之前说的以表单传数据的格式来传递fromdata
+        }
+      }
       for (let key in this.imgs) {
         console.log(this.imgs[key])
         let name = key.split('?')[0];
@@ -87,11 +136,15 @@ export default {
         this.responseResult = JSON.stringify(successResponse.data)
         if (successResponse.data.code === 200) {
           this.$store.commit('updateSnackbarContent', '上传成功')
+          this.showaddhouse = true
         } else {
           this.$store.commit('updateSnackbarContent', successResponse.data.message)
         }
       }).catch(failResponse => { })
     },
+    addhouse () {
+
+    }
   }
 }
 </script>
