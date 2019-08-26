@@ -65,6 +65,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
   color: #000;
-  margin-top: 4px;
+  /* margin-top: 4px; */
 }
 </style>

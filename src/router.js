@@ -48,6 +48,11 @@ export default new Router({
           path: 'addhouse',
           name: 'AddHouse',
           component: () => import('./views/AddHouse.vue')
+        },
+        {
+          path: 'orderconfirm',
+          name: 'OrderConfirm',
+          component: () => import('./views/OrderConfirm.vue')
         }
       ]
     }

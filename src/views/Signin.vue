@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <v-card class="mx-auto mt-1" style="max-width: 500px;">
+    <v-card class="mx-auto py-auto mt-1" style="max-width: 500px;">
       <v-toolbar color="primary" cards dark>
         <v-card-title class="title font-weight-regular"
           >House Renting</v-card-title

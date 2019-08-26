@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main">
     <Navigator />
     <keep-alive>
       <router-view />
@@ -16,3 +16,9 @@ export default {
   }
 };
 </script>
+<style>
+#main {
+  height: 100%;
+  width: 100%;
+}
+</style>

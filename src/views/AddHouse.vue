@@ -22,7 +22,11 @@
             <input value="每次最多上传3张图片 0v0" />
           </li>
           <v-row>
-            <v-col v-for="(value, key) in imgs" style="max-width: 200px;">
+            <v-col
+              v-for="(value, key) in imgs"
+              :key="key"
+              style="max-width: 200px;"
+            >
               <v-img :src="getObjectURL(value)" height="150px" /><a
                 class="close"
                 @click="delImg(key)"

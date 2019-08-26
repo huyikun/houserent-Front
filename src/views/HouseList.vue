@@ -7,11 +7,11 @@
           :key="index"
           v-if="index >= (page - 1) * cnt && index < page * cnt"
         >
-          <v-card style="max-width: 300px;">
+          <v-card style="max-width: 300px;" class="mx-auto">
             <v-img
               :src="require('@/assets/pic2.jpg')"
               class="white--text"
-              height="200px"
+              height="145px"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             >
               <v-card-title
@@ -48,12 +48,16 @@
                       />
                     </v-carousel-item>
                   </v-carousel>
-                  <v-card-text> {{ house.introduce }} </v-card-text>
+                  <v-card-text>
+                    房屋地址: {{ house.address }} <br />
+                    房屋简介: {{ house.introduce }} <br />
+                    房东电话: {{ house.ownerphone }}
+                  </v-card-text>
                   <v-divider></v-divider>
                   <v-card-actions>
                     <div class="flex-grow-1"></div>
-                    <v-btn color="primary" text @click="closeall">
-                      I accept
+                    <v-btn color="red lighten-2" dark @click="closeall(index)">
+                      Order Now
                     </v-btn>
                   </v-card-actions>
                 </v-card>
@@ -73,11 +77,18 @@
   </div>
 </template>
 <script>
+import DatePicker from '@/components/DatePicker.vue'
 export default {
+  components: {
+    DatePicker,
+  },
   data: () => ({
     page: 1,
-    cnt: 3,
+    cnt: 6,
     dialog: [
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -98,7 +109,7 @@ export default {
         size: "",
         introduce: "iam1",
         rent: 0.0,
-        houseOwnerPhone: "",
+        ownerphone: "111111",
         photoList: ["../assets/pic2.jpg",],
         timeLine: []
       },
@@ -109,7 +120,7 @@ export default {
         size: "",
         introduce: "iam2",
         rent: 0.0,
-        houseOwnerPhone: "",
+        ownerphone: "222222",
         photoList: ["src/assets/img/2B 02.jpg"],
         timeLine: []
       },
@@ -120,7 +131,7 @@ export default {
         size: "",
         introduce: "iam3",
         rent: 0.0,
-        houseOwnerPhone: "",
+        ownerphone: "33333",
         photoList: ["../assets/img/Andersen.jpg"],
         timeLine: []
       },
@@ -131,7 +142,7 @@ export default {
         size: "",
         introduce: "iam4",
         rent: 0.0,
-        houseOwnerPhone: "",
+        ownerphone: "44444",
         photoList: ["../assets/img/Angela.jpg"],
         timeLine: []
       },
@@ -142,7 +153,7 @@ export default {
         size: "",
         introduce: "iam5",
         rent: 0.0,
-        houseOwnerPhone: "",
+        ownerphone: "55555",
         photoList: ["../assets/img/Cuora.jpg"],
         timeLine: []
       },
@@ -153,17 +164,27 @@ export default {
         size: "",
         introduce: "iam6",
         rent: 0.0,
-        houseOwnerPhone: "",
+        ownerphone: "66666",
         photoList: ["../assets/img/Date A Live.jpg"],
         timeLine: []
-      }
+      },
+      {
+        name: "room7",
+        address: "address7",
+        price: 70.0,
+        size: "",
+        introduce: "iam7",
+        rent: 0.0,
+        ownerphone: "77777",
+        photoList: ["../assets/pic2.jpg",],
+        timeLine: []
+      },
     ]
   }),
   methods: {
-    closeall () {
-      this.dialog[0] = false
-      this.dialog[1] = false
-      this.dialog[2] = false
+    closeall (index) {
+      this.$router.push({ name: 'OrderConfirm' })
+      this.dialog[index] = false
     }
   }
 };

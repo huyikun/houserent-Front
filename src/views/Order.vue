@@ -57,6 +57,9 @@ export default {
   },
   methods: {
     search () {
+      // 用于展示 后期删除
+      this.$router.push({ name: 'HouseList' })
+
       this.$axios
         .post('/search', {
           keywords: this.postdata
