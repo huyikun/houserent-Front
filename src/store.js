@@ -18,7 +18,7 @@ const store = new Vuex.Store({
         price: 10.0,
         introduce: 'iam1',
         ownerphone: '111111',
-        photoList: ['../assets/pic2.jpg'],
+        photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -27,7 +27,7 @@ const store = new Vuex.Store({
         price: 20.0,
         introduce: 'iam2',
         ownerphone: '222222',
-        photoList: ['src/assets/img/2B 02.jpg'],
+        photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -36,7 +36,7 @@ const store = new Vuex.Store({
         price: 30.0,
         introduce: 'iam3',
         ownerphone: '33333',
-        photoList: ['../assets/img/Andersen.jpg'],
+        photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -45,7 +45,7 @@ const store = new Vuex.Store({
         price: 40.0,
         introduce: 'iam4',
         ownerphone: '44444',
-        photoList: ['../assets/img/Angela.jpg'],
+        photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -54,7 +54,7 @@ const store = new Vuex.Store({
         price: 50.0,
         introduce: 'iam5',
         ownerphone: '55555',
-        photoList: ['../assets/img/Cuora.jpg'],
+        photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -63,7 +63,7 @@ const store = new Vuex.Store({
         price: 60.0,
         introduce: 'iam6',
         ownerphone: '66666',
-        photoList: ['../assets/img/Date A Live.jpg'],
+        photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -72,7 +72,7 @@ const store = new Vuex.Store({
         price: 70.0,
         introduce: 'iam7',
         ownerphone: '77777',
-        photoList: ['../assets/pic2.jpg'],
+        photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -81,7 +81,7 @@ const store = new Vuex.Store({
         price: 70.0,
         introduce: 'iam7',
         ownerphone: '77777',
-        photoList: ['../assets/pic2.jpg'],
+        photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -90,7 +90,7 @@ const store = new Vuex.Store({
         price: 70.0,
         introduce: 'iam7',
         ownerphone: '77777',
-        photoList: ['../assets/pic2.jpg'],
+        photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       }
     ]

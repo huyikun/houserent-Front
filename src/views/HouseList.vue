@@ -8,7 +8,7 @@
         <v-col v-for="(house, index) in houseList" :key="index" offset="left">
           <v-card style="max-width: 300px;" class="ml-10">
             <v-img
-              :src="require('@/assets/pic2.jpg')"
+              :src="house.photos[0]"
               class="white--text"
               height="145px"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
