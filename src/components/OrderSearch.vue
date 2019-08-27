@@ -24,7 +24,7 @@ export default {
   methods: {
     search () {
       this.$axios
-        .post("/search", keyword)
+        .post("/house/searchHouse", this.keyword)
         .then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
