@@ -2,7 +2,7 @@
   <v-card
     style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
   >
-    <v-row class="mt-10">
+    <v-row class="my-10">
       <v-col>
         <v-card-title>上传图片</v-card-title>
         <v-card-text>
@@ -53,11 +53,23 @@
         ></v-text-field
         ><v-text-field
           style="max-width: 400px;"
+          label="房屋定价(每晚)"
+          v-model="house.price"
+          filled
+        ></v-text-field>
+        <v-text-field
+          style="max-width: 400px;"
+          label="房屋类型"
+          v-model="house.type"
+          filled
+        ></v-text-field>
+        <v-text-field
+          style="max-width: 400px;"
           label="房主联系方式"
           v-model="house.ownerphone"
           filled
-        ></v-text-field
-        ><v-textarea
+        ></v-text-field>
+        <v-textarea
           filled
           name="input-7-4"
           label="房屋简介"
@@ -79,11 +91,13 @@ export default {
       fil: {},
       imgs: {},
       imgLen: 0,
-      showaddhouse: false,
+      showaddhouse: true,
       house: {
         name: '',
         address: '',
         ownerphone: '',
+        type: null,
+        price: null,
         introduce: '',
         photos: {}
       },
@@ -136,20 +150,35 @@ export default {
         let name = key.split('?')[0];
         this.formData.append('multipartFiles', this.imgs[key], name);
       }
-      this.$axios.post('/opinion', this.formData, {
+      this.$axios.post('/picture/batch/upload', this.formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       }).then(successResponse => {
-        this.responseResult = JSON.stringify(successResponse.data)
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
         if (successResponse.data.code === 200) {
           this.$store.commit('updateSnackbarContent', '上传成功')
           this.showaddhouse = true
+          this.house.photos = responseResult
         } else {
           this.$store.commit('updateSnackbarContent', successResponse.data.message)
         }
       }).catch(failResponse => { })
     },
     addhouse () {
-
+      this.$axios.post('/house/AddHouse', this.house)
+        .then(successResponse => {
+          var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          );
+          if (successResponse.data.code === 200) {
+            this.$store.commit('updateSnackbarContent', '上传成功')
+            this.showaddhouse = true
+            this.house.photos = responseResult
+          } else {
+            this.$store.commit('updateSnackbarContent', successResponse.data.message)
+          }
+        }).catch(failResponse => { })
     }
   }
 }
