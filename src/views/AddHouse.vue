@@ -1,6 +1,8 @@
 <template>
-  <v-card class="mt-3">
-    <v-row>
+  <v-card
+    style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
+  >
+    <v-row class="mt-10">
       <v-col>
         <v-card-title>上传图片</v-card-title>
         <v-card-text>
