@@ -1,28 +1,21 @@
 <template>
   <v-row class="mx-2">
     <v-col>
-      <v-text-field
-        v-model="keyword"
-        solo
-        hide-details
-        placeholder="找找你想要的吧"
-      >
-        <v-icon slot="prepend" color="green">search</v-icon>
-      </v-text-field>
+      <v-text-field v-model="keyword" solo hide-details placeholder="找找你想要的吧"></v-text-field>
     </v-col>
-    <v-btn class="mt-4" color="red lighten-2" dark @click="search">查找</v-btn>
+    <v-btn class="mt-3" large color="red lighten-2" dark @click="search">搜索</v-btn>
   </v-row>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      keyword: '',
-    }
+      keyword: ""
+    };
   },
   methods: {
-    search () {
+    search() {
       this.$axios
         .post("/house/searchHouse", this.keyword)
         .then(successResponse => {
@@ -30,13 +23,16 @@ export default {
             JSON.stringify(successResponse.data.data)
           );
           if (successResponse.data.code === 200) {
-            this.$store.commit('updateHouseList', responseResult)
+            this.$store.commit("updateHouseList", responseResult);
           } else {
-            this.$store.commit("updateSnackbarContent", successResponse.data.message);
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
           }
         })
-        .catch(failResponse => { })
+        .catch(failResponse => {});
     }
   }
-}
+};
 </script>

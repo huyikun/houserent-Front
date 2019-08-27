@@ -14,7 +14,7 @@
       :vertical="mode === 'vertical'"
     >
       {{ text }}
-      <v-btn color="pink" @click="closesnackbar">
+      <v-btn color="primary" @click="closesnackbar">
         Close
       </v-btn>
     </v-snackbar>
