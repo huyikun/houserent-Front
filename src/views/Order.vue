@@ -1,10 +1,16 @@
 <template>
   <div style="padding-left:12.5%; padding-right:12.5%; padding-top:75px">
-    <v-card style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
+    <v-card
+      style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
+    >
       <v-stepper v-model="e13" vertical>
         <v-stepper-step step="1" complete>Step 1</v-stepper-step>
         <v-stepper-content step="1">
-          <v-radio-group class="pl-3 pr-3" v-model="postdata.keyword1" :mandatory="false">
+          <v-radio-group
+            class="pl-3 pr-3"
+            v-model="postdata.keyword1"
+            :mandatory="false"
+          >
             <v-radio label="短租(1~30 days)" value="短租"></v-radio>
             <v-radio label="长租(> 30 days)" value="长租"></v-radio>
           </v-radio-group>
@@ -13,7 +19,11 @@
 
         <v-stepper-step step="2" complete>Step 2</v-stepper-step>
         <v-stepper-content step="2">
-          <v-radio-group class="pl-3 pr-3" v-model="postdata.keyword2" :mandatory="false">
+          <v-radio-group
+            class="pl-3 pr-3"
+            v-model="postdata.keyword2"
+            :mandatory="false"
+          >
             <v-radio label="单人间" value="单人间"></v-radio>
             <v-radio label="双人间" value="双人间"></v-radio>
             <v-radio label="四人间" value="四人间"></v-radio>
@@ -38,14 +48,18 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       e13: 1,
-      postdata: [{ keyword1: "" }, { keyword2: "" }, { keyword3: "" }]
+      postdata: [
+        { keyword1: "" },
+        { keyword2: "" },
+        { keyword3: "" },
+      ]
     };
   },
   methods: {
-    search() {
+    search () {
       // 用于展示 后期删除
       this.$router.push({ name: "HouseList" });
 
@@ -65,12 +79,12 @@ export default {
             );
           }
         })
-        .catch(failResponse => {});
+        .catch(failResponse => { });
     },
-    fstep1() {
+    fstep1 () {
       this.e13++;
     },
-    fstep2() {
+    fstep2 () {
       this.e13++;
     }
   }

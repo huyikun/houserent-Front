@@ -2,7 +2,7 @@
   <v-card
     style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
   >
-    <v-row class="my-10">
+    <v-row class="my-5">
       <v-col>
         <v-card-title>上传图片</v-card-title>
         <v-card-text>
@@ -140,13 +140,7 @@ export default {
       this.imgLen--;
     },
     submit () {
-      let config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'  //之前说的以表单传数据的格式来传递fromdata
-        }
-      }
       for (let key in this.imgs) {
-        console.log(this.imgs[key])
         let name = key.split('?')[0];
         this.formData.append('multipartFiles', this.imgs[key], name);
       }
@@ -173,12 +167,14 @@ export default {
           );
           if (successResponse.data.code === 200) {
             this.$store.commit('updateSnackbarContent', '上传成功')
-            this.showaddhouse = true
-            this.house.photos = responseResult
+            this.reset()
           } else {
             this.$store.commit('updateSnackbarContent', successResponse.data.message)
           }
         }).catch(failResponse => { })
+    },
+    reset () {
+      Object.assign(this.$data, this.$options.data())
     }
   }
 }

@@ -11,23 +11,105 @@ const store = new Vuex.Store({
     usermode: 1,
     snackbar: false,
     text: 'Default text?',
-    houseList: []
+    houseList: [
+      {
+        name: 'room1',
+        address: 'Morenaddress1',
+        price: 10.0,
+        introduce: 'iam1',
+        ownerphone: '111111',
+        photoList: ['../assets/pic2.jpg'],
+        timeLine: []
+      },
+      {
+        name: 'room2',
+        address: 'address2',
+        price: 20.0,
+        introduce: 'iam2',
+        ownerphone: '222222',
+        photoList: ['src/assets/img/2B 02.jpg'],
+        timeLine: []
+      },
+      {
+        name: 'room3',
+        address: 'address3',
+        price: 30.0,
+        introduce: 'iam3',
+        ownerphone: '33333',
+        photoList: ['../assets/img/Andersen.jpg'],
+        timeLine: []
+      },
+      {
+        name: 'room4',
+        address: 'address4',
+        price: 40.0,
+        introduce: 'iam4',
+        ownerphone: '44444',
+        photoList: ['../assets/img/Angela.jpg'],
+        timeLine: []
+      },
+      {
+        name: 'room5',
+        address: 'address5',
+        price: 50.0,
+        introduce: 'iam5',
+        ownerphone: '55555',
+        photoList: ['../assets/img/Cuora.jpg'],
+        timeLine: []
+      },
+      {
+        name: 'room6',
+        address: 'address6',
+        price: 60.0,
+        introduce: 'iam6',
+        ownerphone: '66666',
+        photoList: ['../assets/img/Date A Live.jpg'],
+        timeLine: []
+      },
+      {
+        name: 'room7',
+        address: 'address7',
+        price: 70.0,
+        introduce: 'iam7',
+        ownerphone: '77777',
+        photoList: ['../assets/pic2.jpg'],
+        timeLine: []
+      },
+      {
+        name: 'room7',
+        address: 'address7',
+        price: 70.0,
+        introduce: 'iam7',
+        ownerphone: '77777',
+        photoList: ['../assets/pic2.jpg'],
+        timeLine: []
+      },
+      {
+        name: 'room7',
+        address: 'address7',
+        price: 70.0,
+        introduce: 'iam7',
+        ownerphone: '77777',
+        photoList: ['../assets/pic2.jpg'],
+        timeLine: []
+      }
+    ]
   },
   mutations: {
-    updateMode(state, value) {
+    updateMode (state, value) {
       state.usermode = value.mode
       state.username = value.username
       state.email = value.email
       state.phone = value.phoneNumber
     },
-    updateSnackbar(state, value) {
+    updateSnackbar (state, value) {
       state.snackbar = value
     },
-    updateSnackbarContent(state, value) {
+    updateSnackbarContent (state, value) {
       store.commit('updateSnackbar', true)
       state.text = value
     },
-    updateHouseList(state, value) {
+    updateHouseList (state, value) {
       state.houseList = value
     }
   }
