@@ -5,7 +5,7 @@
       style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
     >
       <v-row>
-        <v-col v-for="(house, index) in houseList" :key="index" offset="left">
+        <v-col v-for="(house, index) in houseList" :key="index">
           <v-card style="max-width: 300px;" class="ml-10">
             <v-img
               :src="house.photos[0]"
