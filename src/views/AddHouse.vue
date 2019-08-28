@@ -141,6 +141,7 @@ export default {
       var i = 0;
       for (; i < this.img.length; i++) {
         this.formData.append("multipartFiles", this.img[i], this.img[i].name);
+        console.log(this.img[i])
       }
       this.$axios
         .post("/picture/batch/upload", this.formData, {
