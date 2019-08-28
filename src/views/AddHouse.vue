@@ -6,10 +6,10 @@
         <v-card-title style="padding-left:50px; padding-right:50px;">注册房源</v-card-title>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-file-input chips multiple label="图片上传" v-model="img" :rules="[rules.length(3)]"></v-file-input>
+          <v-file-input chips multiple label="图片上传" v-model="imgArray" :rules="[rules.length(3)]"></v-file-input>
           <v-container>
             <v-row style="padding-left:50px; padding-right:50px;">
-              <v-col v-for="(img, index) in img" :key="index" style="width:30%">
+              <v-col v-for="(img, index) in imgArray" :key="index" style="width:30%">
                 <v-img max-height="300px" v-bind:src="getObjectURL(img)">
                   <v-btn x-small @click="delImg(index)">x</v-btn>
                 </v-img>
@@ -50,55 +50,6 @@
         </v-row>
       </v-container>
     </v-card>
-
-    <!-- <v-card style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
-      <v-row class="my-5">
-        <v-col>
-          <v-card-title>上传图片</v-card-title>
-          <v-card-text>
-            (建议图片格式为：JPEG/BMP/PNG/GIF，大小不超过5M，最多可上传3张)
-            <br />上传成功后再进行房屋其他信息的注册
-          </v-card-text>
-          <ul>
-            <li v-if="imgLen >= 3 ? false : true">
-              <input
-                type="file"
-                class="upload"
-                @change="addImg"
-                ref="inputer"
-                multiple
-                accept="image/png, image/jpeg, image/gif, image/jpg"
-              />
-            </li>
-            <li v-else>
-              <input value="每次最多上传3张图片 0v0" />
-            </li>
-            <v-row>
-              <v-col v-for="(value, key) in imgs" :key="key" style="max-width: 200px;">
-                <v-img :src="getObjectURL(value)" height="150px" />
-                <a class="close" @click="delImg(key)">×</a>
-              </v-col>
-            </v-row>
-            <v-btn @click="submit">点击上传</v-btn>
-          </ul>
-        </v-col>
-        <v-col>
-          <v-text-field style="max-width: 400px;" label="房屋名称" v-model="house.name" filled></v-text-field>
-          <v-text-field style="max-width: 400px;" label="房屋地址" v-model="house.address" filled></v-text-field>
-          <v-text-field style="max-width: 400px;" label="房屋定价(每晚)" v-model="house.price" filled></v-text-field>
-          <v-text-field style="max-width: 400px;" label="房屋类型" v-model="house.type" filled></v-text-field>
-          <v-text-field style="max-width: 400px;" label="房主联系方式" v-model="house.ownerphone" filled></v-text-field>
-          <v-textarea
-            filled
-            name="input-7-4"
-            label="房屋简介"
-            v-model="house.introduce"
-            style="max-width: 400px;"
-          ></v-textarea>
-          <v-btn v-if="showaddhouse" dark color="red lighten-2" @click="addhouse">注册房屋</v-btn>
-        </v-col>
-      </v-row>
-    </v-card>-->
   </div>
 </template>
 <script>
@@ -106,7 +57,7 @@ export default {
   data() {
     return {
       formData: new FormData(),
-      img: [],
+      imgArray: [],
       upLoaded: false,
       house: {
         name: "",
@@ -138,13 +89,13 @@ export default {
       return url;
     },
     delImg(index) {
-      this.img.splice(index, 1);
+      this.imgArray.splice(index, 1);
     },
     upLoadImg() {
       var i = 0;
-      for (; i < this.img.length; i++) {
-        this.formData.append("multipartFiles", this.img[i], this.img[i].name);
-        console.log(this.img[i]);
+      for (; i < this.imgArray.length; i++) {
+        this.formData.append("multipartFiles", this.imgArray[i], this.imgArray[i].name);
+        console.log(this.imgArray[i]);
       }
       this.$axios
         .post("/picture/batch/upload", this.formData, {
@@ -167,7 +118,7 @@ export default {
         })
         .catch(failResponse => {});
       console.log(this.formData);
-      if (this.img.length > 0) this.upLoaded = true;
+      if (this.imgArray.length > 0) this.upLoaded = true;
     },
     submit() {
       if (this.upLoaded) {

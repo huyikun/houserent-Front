@@ -2,7 +2,7 @@
   <div style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
     <v-container>
       <v-card class="mx-auto mt-5" max-width="500">
-        <v-img class="white--text" height="200px" src="static/img/docks.jpg">
+        <v-img class="white--text" height="200px" src="../../static/img/docks.jpg">
           <v-card-title class="align-end fill-height">Hello, {{ username }}</v-card-title>
         </v-img>
 

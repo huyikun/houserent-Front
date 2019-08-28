@@ -11,12 +11,12 @@
           chips
           multiple
           label="文件上传"
-          v-model="fileUrl"
+          v-model="fileArray"
           :rules="[rules.length(3)]"
         ></v-file-input>
         <v-container>
           <v-row style="padding-left:50px; padding-right:50px;">
-            <v-col v-for="(file, index) in fileUrl" :key="index" style="width:30%">
+            <v-col v-for="(file, index) in fileArray" :key="index" style="width:30%">
               <v-img max-height="300px" v-bind:src="getObjectURL(file)">
                 <v-btn x-small @click="delImg(index)">x</v-btn>
               </v-img>
@@ -46,7 +46,8 @@
 export default {
   data() {
     return {
-      fileUrl: [],
+      formData: new FormData(),
+      fileArray: [],
       upLoaded: false,
       complaintText: "",
       rules: {
@@ -70,17 +71,41 @@ export default {
       return url;
     },
     delImg(index) {
-      this.fileUrl.splice(index, 1);
+      this.fileArray.splice(index, 1);
     },
     upLoadFile() {
-      if (this.fileUrl.length > 0) this.upLoaded = true;
+      for (var i = 0; i < this.fileArray.length; i++) {
+        this.formData.append(
+          "multipartFiles",
+          this.fileArray[i],
+          this.fileArray[i].name
+        );
+        console.log(this.fileArray[i]);
+      }
+      this.$axios
+        .post("/picture/batch/upload", this.formData, {
+          headers: { "Content-Type": "multipart/form-data" }
+        })
+        .then(successResponse => {
+          var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          );
+          if (successResponse.data.code === 200) {
+            this.$store.commit("updateSnackbarContent", "上传成功");
+            if (this.fileArray.length > 0) this.upLoaded = true;
+          } else {
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
+          }
+        })
+        .catch(failResponse => {});
+      console.log(this.formData);
     },
     submit: function() {
       if (this.upLoaded) {
-        //getLocalUrlArray
-        //getLocalComplaintText
-        //postUrlArray
-        //postComplaintText
+        
       }
     }
   }
