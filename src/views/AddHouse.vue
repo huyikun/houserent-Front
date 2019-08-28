@@ -105,8 +105,8 @@
 export default {
   data() {
     return {
-      img: [],
       formData: new FormData(),
+      img: [],
       upLoaded: false,
       house: {
         name: "",
@@ -137,11 +137,14 @@ export default {
       }
       return url;
     },
+    delImg(index) {
+      this.img.splice(index, 1);
+    },
     upLoadImg() {
       var i = 0;
       for (; i < this.img.length; i++) {
         this.formData.append("multipartFiles", this.img[i], this.img[i].name);
-        console.log(this.img[i])
+        console.log(this.img[i]);
       }
       this.$axios
         .post("/picture/batch/upload", this.formData, {
@@ -163,11 +166,8 @@ export default {
           }
         })
         .catch(failResponse => {});
-        console.log(this.formData)
+      console.log(this.formData);
       if (this.img.length > 0) this.upLoaded = true;
-    },
-    delImg(index) {
-      this.img.splice(index, 1);
     },
     submit() {
       if (this.upLoaded) {
