@@ -1,12 +1,6 @@
 <template>
   <div class="text-center" style="padding-top:20px">
-    <v-date-picker
-      v-model="dates"
-      multiple
-      locale="zh-cn"
-      :show-current="false"
-      :allowed-dates="allowedDates"
-    ></v-date-picker>
+    <v-date-picker v-model="dates" multiple :show-current="false" :allowed-dates="allowedDates" no-title="true"></v-date-picker>
   </div>
 </template>
 <script>
@@ -27,20 +21,32 @@ export default {
   methods: {
     // allowedDates: val => parseInt(val.split("-")[2]) % 2 === 0,
     allowedDates: function(val) {
-      // var flag = true;
-      // for (var i = 0; i < this.limitList.length; i++) {
-      //   if (
-      //     !(
-      //       parseInt(val.split("-")) <
-      //         parseInt(this.limitList[i].startDate.split("-")) &&
-      //       parseInt(val.split("-")) > parseInt(this.limitList[i].endDate.split("-"))
-      //     )
-      //   ) {
-      //     return false;
-      //   }
-      // }
-      console.log(this.limitList);
+      var judgeDate = parseInt(
+        val.split("-")[0] + val.split("-")[1] + val.split("-")[2]
+      );
+      var startDate;
+      var endDate;
+      for (var i = 0; i < this.limitList.length; i++) {
+        startDate = parseInt(this.dateToString(this.limitList[i].startDate));
+        endDate = parseInt(this.dateToString(this.limitList[i].endDate));
+        if (startDate <= judgeDate && judgeDate <= endDate) {
+          return false;
+        }
+      }
       return true;
+    },
+    dateToString: function(date) {
+      var year = date.getFullYear();
+      var month = (date.getMonth() + 1).toString();
+      var day = date.getDate().toString();
+      if (month.length == 1) {
+        month = "0" + month;
+      }
+      if (day.length == 1) {
+        day = "0" + day;
+      }
+      var res = year + month + day;
+      return res;
     }
   },
   watch: {
