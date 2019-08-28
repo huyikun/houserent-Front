@@ -6,22 +6,6 @@
         <v-card-title style="padding-left:50px; padding-right:50px;">注册房源</v-card-title>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-file-input chips multiple label="图片上传" v-model="imgArray" :rules="[rules.length(3)]"></v-file-input>
-          <v-container>
-            <v-row style="padding-left:50px; padding-right:50px;">
-              <v-col v-for="(img, index) in imgArray" :key="index" style="width:30%">
-                <v-img max-height="300px" v-bind:src="getObjectURL(img)">
-                  <v-btn x-small @click="delImg(index)">x</v-btn>
-                </v-img>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-row>
-        <v-row justify="center">
-          <v-btn @click="upLoadImg">上传图片</v-btn>
-        </v-row>
-        <br />
-        <v-row style="padding-left:50px; padding-right:50px;">
           <v-text-field label="房间名称" v-model="house.name"></v-text-field>
         </v-row>
         <br />
@@ -43,6 +27,19 @@
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
           <v-text-field label="房间简介" v-model="house.introduce"></v-text-field>
+        </v-row>
+        <br />
+        <v-row style="padding-left:50px; padding-right:50px;">
+          <v-file-input chips multiple label="图片上传" v-model="imgArray" :rules="[rules.length(3)]"></v-file-input>
+          <v-container>
+            <v-row style="padding-left:50px; padding-right:50px;">
+              <v-col v-for="(img, index) in imgArray" :key="index" style="width:30%">
+                <v-img contain max-height="300px" v-bind:src="getObjectURL(img)">
+                  <v-btn x-small @click="delImg(index)">x</v-btn>
+                </v-img>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-row>
         <br />
         <v-row justify="center">
@@ -94,7 +91,11 @@ export default {
     upLoadImg() {
       var i = 0;
       for (; i < this.imgArray.length; i++) {
-        this.formData.append("multipartFiles", this.imgArray[i], this.imgArray[i].name);
+        this.formData.append(
+          "multipartFiles",
+          this.imgArray[i],
+          this.imgArray[i].name
+        );
         console.log(this.imgArray[i]);
       }
       this.$axios
@@ -107,7 +108,7 @@ export default {
           );
           if (successResponse.data.code === 200) {
             this.$store.commit("updateSnackbarContent", "上传成功");
-            this.showaddhouse = true;
+            if (this.imgArray.length > 0) this.upLoaded = true;
             this.house.photos = responseResult;
           } else {
             this.$store.commit(
@@ -118,9 +119,9 @@ export default {
         })
         .catch(failResponse => {});
       console.log(this.formData);
-      if (this.imgArray.length > 0) this.upLoaded = true;
     },
     submit() {
+      this.upLoadImg();
       if (this.upLoaded) {
         this.$axios
           .post("/house/AddHouse", this.house)
