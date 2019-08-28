@@ -12,24 +12,36 @@
 <script>
 export default {
   data: () => ({
-    dates: []
+    dates: [],
+    limitList: [
+      {
+        startDate: new Date("2019-08-28"),
+        endDate: new Date("2019-8-30")
+      },
+      {
+        startDate: new Date("2019-08-14"),
+        endDate: new Date("2019-8-17")
+      }
+    ]
   }),
   methods: {
-    allowedDates: val => parseInt(val.split("-")[2]) % 2 === 0
-    // allowedDates: val => {
-    //   var flag = true;
-    //   for (var i = 0; i < list.length; i++) {
-    //     if (
-    //       !(
-    //         parseInt(val.split("-")) < parseInt(list[i].startDate.split("-")) &&
-    //         parseInt(val.split("-")) > parseInt(list[i].endDate.split("-"))
-    //       )
-    //     ) {
-    //       return false;
-    //     }
-    //   }
-    //   return true;
-    // }
+    // allowedDates: val => parseInt(val.split("-")[2]) % 2 === 0,
+    allowedDates: function(val) {
+      // var flag = true;
+      // for (var i = 0; i < this.limitList.length; i++) {
+      //   if (
+      //     !(
+      //       parseInt(val.split("-")) <
+      //         parseInt(this.limitList[i].startDate.split("-")) &&
+      //       parseInt(val.split("-")) > parseInt(this.limitList[i].endDate.split("-"))
+      //     )
+      //   ) {
+      //     return false;
+      //   }
+      // }
+      console.log(this.limitList);
+      return true;
+    }
   },
   watch: {
     dates: {
@@ -51,7 +63,6 @@ export default {
             this.dates[1] = date3;
           }
         }
-        console.log(this.dates);
       }
     }
   }

@@ -11,8 +11,7 @@ const store = new Vuex.Store({
     usermode: 1,
     snackbar: false,
     text: 'Default text?',
-    houseList: [
-      {
+    houseList: [{
         name: 'room1',
         address: 'Morenaddress1',
         price: 10.0,
@@ -93,23 +92,23 @@ const store = new Vuex.Store({
         photos: ['@/../static/img/pic2.jpg'],
         timeLine: []
       }
-    ]
+    ],
   },
   mutations: {
-    updateMode (state, value) {
+    updateMode(state, value) {
       state.usermode = value.mode
       state.username = value.username
       state.email = value.email
       state.phone = value.phoneNumber
     },
-    updateSnackbar (state, value) {
+    updateSnackbar(state, value) {
       state.snackbar = value
     },
-    updateSnackbarContent (state, value) {
+    updateSnackbarContent(state, value) {
       store.commit('updateSnackbar', true)
       state.text = value
     },
-    updateHouseList (state, value) {
+    updateHouseList(state, value) {
       state.houseList = value
     }
   }
