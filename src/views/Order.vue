@@ -1,91 +1,104 @@
 <template>
-  <div style="padding-left:12.5%; padding-right:12.5%; padding-top:75px">
-    <v-card
-      style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
-    >
-      <v-stepper v-model="e13" vertical>
-        <v-stepper-step step="1" complete>Step 1</v-stepper-step>
-        <v-stepper-content step="1">
-          <v-radio-group
-            class="pl-3 pr-3"
-            v-model="postdata.keyword1"
-            :mandatory="false"
+  <div>
+    <OrderSearch />
+    <div style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
+      <v-container>
+        <v-row>
+          <v-col
+            v-for="(house, index) in houseList"
+            :key="index"
+            v-if="index >= (page - 1) * cnt && index < page * cnt"
           >
-            <v-radio label="短租(1~30 days)" value="短租"></v-radio>
-            <v-radio label="长租(> 30 days)" value="长租"></v-radio>
-          </v-radio-group>
-          <v-btn color="primary" @click="fstep1">Next</v-btn>
-        </v-stepper-content>
+            <v-card style="max-width: 300px;" class="ml-10">
+              <v-img
+                :src="house.photos[0]"
+                class="white--text"
+                height="145px"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              >
+                <v-card-title class="fill-height align-end" v-text="house.address"></v-card-title>
+              </v-img>
 
-        <v-stepper-step step="2" complete>Step 2</v-stepper-step>
-        <v-stepper-content step="2">
-          <v-radio-group
-            class="pl-3 pr-3"
-            v-model="postdata.keyword2"
-            :mandatory="false"
-          >
-            <v-radio label="单人间" value="单人间"></v-radio>
-            <v-radio label="双人间" value="双人间"></v-radio>
-            <v-radio label="四人间" value="四人间"></v-radio>
-          </v-radio-group>
-          <v-btn color="primary" @click="fstep2">Continue</v-btn>
-          <v-btn @click="e13--">Back</v-btn>
-        </v-stepper-content>
-        <v-stepper-step step="3">Step 3</v-stepper-step>
-        <v-stepper-content step="3">
-          <v-text-field
-            v-model="postdata.keyword3"
-            style="max-width: 500px;"
-            placeholder="The address you wish"
-          ></v-text-field>
-          <v-btn color="primary" @click="search">Search</v-btn>
-          <v-btn @click="e13--">Back</v-btn>
-        </v-stepper-content>
-      </v-stepper>
-    </v-card>
+              <v-card-actions>
+                <v-card-text>￥{{ house.price }} / 晚</v-card-text>
+                <v-spacer />
+                <v-dialog v-model="dialog[index % cnt]" width="500">
+                  <template v-slot:activator="{ on }">
+                    <v-btn color="red lighten-2" dark v-on="on">Details</v-btn>
+                  </template>
+
+                  <v-card>
+                    <v-card-title
+                      class="headline grey lighten-1"
+                      primary-title
+                    >欢迎您预览 {{ house.name }}</v-card-title>
+                    <v-carousel
+                      :continuous="false"
+                      :cycle="cycle"
+                      hide-delimiter-background
+                      height="250"
+                    >
+                      <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                        <v-img
+                          :src="require('@/assets/pic2.jpg')"
+                          height="200px"
+                          gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                        />
+                      </v-carousel-item>
+                    </v-carousel>
+                    <v-card-text>
+                      房屋地址: {{ house.address }}
+                      <br />
+                      房屋简介: {{ house.introduce }}
+                      <br />
+                      房东电话: {{ house.ownerphone }}
+                    </v-card-text>
+                    <v-divider></v-divider>
+                    <v-card-actions>
+                      <div class="flex-grow-1"></div>
+                      <v-btn color="red lighten-2" dark @click="closeall(index)">Order Now</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+
+      <div class="text-center" style="z-index:1">
+        <v-pagination v-model="page" :length="Math.ceil(this.$store.state.houseList.length / cnt)"></v-pagination>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
+import OrderSearch from "@/components/OrderSearch.vue";
 export default {
-  data () {
-    return {
-      e13: 1,
-      postdata: [
-        { keyword1: "" },
-        { keyword2: "" },
-        { keyword3: "" },
-      ]
-    };
+  components: {
+    OrderSearch
   },
+  data: () => ({
+    page: 1,
+    cnt: 6,
+    dialog: [false, false, false, false, false, false],
+    cycle: false,
+    slides: ["First", "Second", "Third", "Fourth", "Fifth"]
+  }),
   methods: {
-    search () {
-      // 用于展示 后期删除
-      this.$router.push({ name: "HouseList" });
-
-      this.$axios
-        .post("/search", {
-          keywords: this.postdata
-        })
-        .then(successResponse => {
-          // var responseResult = JSON.parse(JSON.stringify(successResponse.data.data))
-          if (successResponse.data.code === 200) {
-            // this.$store.commit('updateHouseList', responseResult)
-            this.$router.push({ name: "HouseList" });
-          } else {
-            this.$store.commit(
-              "updateSnackbarContent",
-              successResponse.data.message
-            );
-          }
-        })
-        .catch(failResponse => { });
-    },
-    fstep1 () {
-      this.e13++;
-    },
-    fstep2 () {
-      this.e13++;
+    closeall(index) {
+      this.$router.push({ name: "OrderConfirm" });
+      this.dialog[index] = false;
+    }
+  },
+  computed: {
+    houseList: {
+      get() {
+        return this.$store.state.houseList;
+      },
+      set(value) {
+        this.$store.commit("updateHouseList", value);
+      }
     }
   }
 };
