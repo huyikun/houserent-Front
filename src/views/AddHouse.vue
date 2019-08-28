@@ -6,10 +6,10 @@
         <v-card-title style="padding-left:50px; padding-right:50px;">注册房源</v-card-title>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-file-input chips multiple label="图片上传" v-model="imgUrl" :rules="[rules.length(3)]"></v-file-input>
+          <v-file-input chips multiple label="图片上传" v-model="img" :rules="[rules.length(3)]"></v-file-input>
           <v-container>
             <v-row style="padding-left:50px; padding-right:50px;">
-              <v-col v-for="(img, index) in imgUrl" :key="index" style="width:30%">
+              <v-col v-for="(img, index) in img" :key="index" style="width:30%">
                 <v-img max-height="300px" v-bind:src="getObjectURL(img)">
                   <v-btn x-small @click="delImg(index)">x</v-btn>
                 </v-img>
@@ -50,7 +50,7 @@
         </v-row>
       </v-container>
     </v-card>
-    
+
     <!-- <v-card style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
       <v-row class="my-5">
         <v-col>
@@ -98,18 +98,14 @@
           <v-btn v-if="showaddhouse" dark color="red lighten-2" @click="addhouse">注册房屋</v-btn>
         </v-col>
       </v-row>
-    </v-card> -->
+    </v-card>-->
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      formData: new FormData(),
-      fil: {},
-      imgs: {},
-      imgLen: 0,
-      imgUrl: [],
+      img: [],
       upLoaded: false,
       house: {
         name: "",
@@ -126,30 +122,6 @@ export default {
     };
   },
   methods: {
-    addImg(event) {
-      let inputDOM = this.$refs.inputer;
-      // 通过DOM取文件数据
-      this.fil = inputDOM.files;
-      let oldLen = this.imgLen;
-      let len = this.fil.length + oldLen;
-      if (len > 4) {
-        alert("最多可上传4张，您还可以上传" + (4 - oldLen) + "张");
-        return false;
-      }
-      for (let i = 0; i < this.fil.length; i++) {
-        let size = Math.floor(this.fil[i].size / 1024);
-        if (size > 5 * 1024 * 1024) {
-          alert("请选择5M以内的图片！");
-          return false;
-        }
-        this.imgLen++;
-        this.$set(
-          this.imgs,
-          this.fil[i].name + "?" + new Date().getTime() + i,
-          this.fil[i]
-        );
-      }
-    },
     getObjectURL(file) {
       var url = null;
       if (window.createObjectURL != undefined) {
@@ -165,30 +137,42 @@ export default {
       return url;
     },
     upLoadImg() {
-      if (this.imgUrl.length > 0) this.showaddhouse = true;
+      this.$axios
+        .post("/picture/batch/upload", this.img, {
+          headers: { "Content-Type": "multipart/form-data" }
+        })
+        .then(successResponse => {
+          var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          );
+          if (successResponse.data.code === 200) {
+            this.$store.commit("updateSnackbarContent", "上传成功");
+            this.showaddhouse = true;
+            this.house.photos = responseResult;
+          } else {
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
+          }
+        })
+        .catch(failResponse => {});
+      if (this.img.length > 0) this.upLoaded = true;
     },
-    delImg(key) {
-      this.$delete(this.imgs, key);
-      this.imgLen--;
+    delImg(index) {
+      this.img.splice(index, 1);
     },
     submit() {
       if (this.upLoaded) {
-        for (let key in this.imgs) {
-          let name = key.split("?")[0];
-          this.formData.append("multipartFiles", this.imgs[key], name);
-        }
         this.$axios
-          .post("/picture/batch/upload", this.formData, {
-            headers: { "Content-Type": "multipart/form-data" }
-          })
+          .post("/house/AddHouse", this.house)
           .then(successResponse => {
             var responseResult = JSON.parse(
               JSON.stringify(successResponse.data.data)
             );
             if (successResponse.data.code === 200) {
               this.$store.commit("updateSnackbarContent", "上传成功");
-              this.showaddhouse = true;
-              this.house.photos = responseResult;
+              this.reset();
             } else {
               this.$store.commit(
                 "updateSnackbarContent",
@@ -198,28 +182,6 @@ export default {
           })
           .catch(failResponse => {});
       }
-    },
-    addhouse() {
-      this.$axios
-        .post("/house/AddHouse", this.house)
-        .then(successResponse => {
-          var responseResult = JSON.parse(
-            JSON.stringify(successResponse.data.data)
-          );
-          if (successResponse.data.code === 200) {
-            this.$store.commit("updateSnackbarContent", "上传成功");
-            this.reset();
-          } else {
-            this.$store.commit(
-              "updateSnackbarContent",
-              successResponse.data.message
-            );
-          }
-        })
-        .catch(failResponse => {});
-    },
-    reset() {
-      Object.assign(this.$data, this.$options.data());
     }
   }
 };
