@@ -68,6 +68,7 @@ export default {
             this.dates[0] = date1;
             this.dates[1] = date3;
           }
+          this.$emit("getStartAndEndDate", { dates: this.dates });
         }
       }
     }

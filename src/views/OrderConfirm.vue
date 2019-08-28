@@ -23,7 +23,7 @@
     <v-divider class="mx-4"></v-divider>
     <v-card-text>
       <div class="title text--primary">Choose the time to move into</div>
-      <DatePicker />
+      <DatePicker @getStartAndEndDate="flushDates" />
     </v-card-text>
     <v-card-actions>
       <v-spacer />
@@ -40,13 +40,19 @@ export default {
   },
   data: () => ({
     loading: false,
-    selection: 1
+    selection: 1,
+    dates: []
   }),
 
   methods: {
     reserve() {
+      console.log(this.dates);
       this.loading = true;
       setTimeout(() => (this.loading = false), 2000);
+    },
+    flushDates: function(data) {
+      this.dates = data.dates;
+      console.log(this.dates);
     }
   }
 };
