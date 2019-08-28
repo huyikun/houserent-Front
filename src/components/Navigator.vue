@@ -1,6 +1,9 @@
 <template>
   <div>
-    <img style="width:100%; height:100%; position:fixed;" src="static/img/material.jpg" />
+    <img
+      style="width:100%; height:100%; position:fixed;"
+      src="static/img/material.jpg"
+    />
     <v-toolbar color="primary" dark>
       <v-btn icon @click="goBack">
         <v-icon>arrow_back</v-icon>
@@ -15,13 +18,17 @@
       <v-spacer />
 
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn v-if="usermode === 0" text @click.stop="goAddHouse">AddHouse</v-btn>
-        <v-btn v-if="usermode === 1" text @click.stop="goOrder">Order</v-btn>
-        <v-btn v-if="usermode === 1" text @click.stop="goComplaint">Complaint</v-btn>
+        <v-btn v-if="usermode === 0" text @click.stop="goAddHouse"
+          >添加房源</v-btn
+        >
+        <v-btn v-if="usermode === 1" text @click.stop="goOrder">立即预定</v-btn>
+        <v-btn v-if="usermode === 1" text @click.stop="goComplaint"
+          >报修投诉</v-btn
+        >
         <v-btn v-if="usermode === 2" text @click.stop>房东</v-btn>
         <v-btn v-if="usermode === 2" text @click.stop>房东2</v-btn>
         <v-btn v-if="usermode === 3" text @click.stop>工人</v-btn>
-        <v-btn text @click="logout">Logout</v-btn>
+        <v-btn text @click="logout">注销</v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>
@@ -29,7 +36,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       username: this.$store.state.username,
       usermode: this.$store.state.usermode
@@ -39,29 +46,29 @@ export default {
     goBack: () => {
       window.history.back();
     },
-    goAddHouse: function() {
+    goAddHouse: function () {
       if (this.$route.name !== "AddHouse")
         this.$router.push({ name: "AddHouse" });
     },
-    goUser: function() {
+    goUser: function () {
       if (this.$route.name !== "User") this.$router.push({ name: "User" });
     },
-    goHome: function() {
+    goHome: function () {
       if (this.$route.name !== "WorkingPanel")
         this.$router.push({ name: "WorkingPanel" });
     },
-    goOrder: function() {
+    goOrder: function () {
       if (this.$route.name !== "Order") this.$router.push({ name: "Order" });
     },
-    goComplaint: function() {
+    goComplaint: function () {
       if (this.$route.name !== "Complaint")
         this.$router.push({ name: "Complaint" });
     },
-    logout: function() {
+    logout: function () {
       this.$store.commit("updateSnackbarContent", "已登出");
       this.$router.push({ name: "Signin" });
     },
-    search: function() {}
+    search: function () { }
   }
 };
 </script>

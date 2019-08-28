@@ -85,8 +85,8 @@ const store = new Vuex.Store({
         timeLine: []
       },
       {
-        name: 'room7',
-        address: 'address7',
+        name: 'room888',
+        address: 'address888',
         price: 70.0,
         introduce: 'iam7',
         ownerphone: '77777',
