@@ -34,7 +34,7 @@
           <v-container>
             <v-row style="padding-left:50px; padding-right:50px;">
               <v-col v-for="(img, index) in imgArray" :key="index" style="width:30%">
-                <v-img contain max-height="300px" v-bind:src="getObjectURL(img)">
+                <v-img contain height="300px" v-bind:src="getObjectURL(img)">
                   <v-btn x-small @click="delImg(index)">x</v-btn>
                 </v-img>
               </v-col>

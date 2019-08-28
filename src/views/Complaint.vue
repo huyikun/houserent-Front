@@ -26,7 +26,7 @@
             <v-container>
               <v-row style="padding-left:50px; padding-right:50px;">
                 <v-col v-for="(file, index) in fileArray" :key="index" style="width:32%">
-                  <v-img contain max-height="200px" v-bind:src="getObjectURL(file)">
+                  <v-img contain height="200px" v-bind:src="getObjectURL(file)">
                     <v-btn x-small @click="delImg(index)">x</v-btn>
                   </v-img>
                 </v-col>
