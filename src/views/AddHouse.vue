@@ -188,6 +188,32 @@ export default {
             }
           })
           .catch(failResponse => {});
+      } else {
+        this.$store.commit("updateSnackbarContent", "请先上传图片");
+      }
+    },
+    
+    addhouse() {
+      if (this.upLoaded) {
+        this.$axios
+          .post("/house/addHouse", this.house)
+          .then(successResponse => {
+            var responseResult = JSON.parse(
+              JSON.stringify(successResponse.data.data)
+            );
+            if (successResponse.data.code === 200) {
+              this.$store.commit("updateSnackbarContent", "上传成功");
+              this.reset();
+            } else {
+              this.$store.commit(
+                "updateSnackbarContent",
+                successResponse.data.message
+              );
+            }
+          })
+          .catch(failResponse => {});
+      } else {
+        this.$store.commit("updateSnackbarContent", "请先上传图片");
       }
     }
   }
