@@ -2,7 +2,7 @@
   <div class="hello">
     <img
       style="width:100%; height:100%; position:fixed;"
-      src="static/img/material.jpg"
+      src="static/img/background.jpg"
     />
     <div
       style="padding-left:35%; padding-right:35%;padding-top:10%;filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"

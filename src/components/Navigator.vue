@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img style="width:100%; height:100%; position:fixed;" src="static/img/material.jpg" />
+    <img style="width:100%; height:100%; position:fixed;" src="static/img/background.jpg" />
     <v-toolbar color="primary" dark>
       <v-btn icon @click="goBack">
         <v-icon>arrow_back</v-icon>

@@ -1,8 +1,8 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-2" width="800">
+  <v-card :loading="loading" class="mx-auto my-2" width="800" style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
     <v-img
       height="200"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      src="static/img/cooking.png"
     ></v-img>
     <v-card-title>Your home in Haidian</v-card-title>
     <v-card-text>
