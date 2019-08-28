@@ -46,7 +46,7 @@
         </v-row>
         <br />
         <v-row justify="center">
-          <v-btn @click="submit">提交</v-btn>
+          <v-btn @click="addhouse">提交</v-btn>
         </v-row>
       </v-container>
     </v-card>
@@ -107,7 +107,7 @@ export default {
     return {
       formData: new FormData(),
       fil: {},
-      imgs: {},
+      // imgs: {},
       imgLen: 0,
       imgUrl: [],
       upLoaded: false,
@@ -144,7 +144,7 @@ export default {
         }
         this.imgLen++;
         this.$set(
-          this.imgs,
+          this.imgUrl,
           this.fil[i].name + "?" + new Date().getTime() + i,
           this.fil[i]
         );
@@ -165,50 +165,31 @@ export default {
       return url;
     },
     upLoadImg() {
-      if (this.imgUrl.length > 0) this.showaddhouse = true;
+      if (this.imgUrl.length > 0) this.upLoaded = true;
+      this.submit()
     },
     delImg(key) {
-      this.$delete(this.imgs, key);
+      this.$delete(this.imgUrl, key);
       this.imgLen--;
     },
     submit() {
-      if (this.upLoaded) {
-        for (let key in this.imgs) {
-          let name = key.split("?")[0];
-          this.formData.append("multipartFiles", this.imgs[key], name);
-        }
-        this.$axios
-          .post("/picture/batch/upload", this.formData, {
-            headers: { "Content-Type": "multipart/form-data" }
-          })
-          .then(successResponse => {
-            var responseResult = JSON.parse(
-              JSON.stringify(successResponse.data.data)
-            );
-            if (successResponse.data.code === 200) {
-              this.$store.commit("updateSnackbarContent", "上传成功");
-              this.showaddhouse = true;
-              this.house.photos = responseResult;
-            } else {
-              this.$store.commit(
-                "updateSnackbarContent",
-                successResponse.data.message
-              );
-            }
-          })
-          .catch(failResponse => {});
+      var i = 0
+      for (;i < this.imgUrl.length ;i++) {
+        this.formData.append("multipartFiles", this.imgUrl[i], this.imgUrl[i].name);
+        console.log(this.imgUrl[i])
       }
-    },
-    addhouse() {
       this.$axios
-        .post("/house/AddHouse", this.house)
+        .post("/picture/batch/upload", this.formData, {
+          headers: { "Content-Type": "multipart/form-data" }
+        })
         .then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
           );
           if (successResponse.data.code === 200) {
             this.$store.commit("updateSnackbarContent", "上传成功");
-            this.reset();
+            this.showaddhouse = true;
+            this.house.photos = responseResult;
           } else {
             this.$store.commit(
               "updateSnackbarContent",
@@ -217,6 +198,29 @@ export default {
           }
         })
         .catch(failResponse => {});
+    },
+    addhouse() {
+      if(this.upLoaded) {
+        this.$axios
+          .post("/house/addHouse", this.house)
+          .then(successResponse => {
+            var responseResult = JSON.parse(
+              JSON.stringify(successResponse.data.data)
+            );
+            if (successResponse.data.code === 200) {
+              this.$store.commit("updateSnackbarContent", "上传成功");
+              this.reset();
+            } else {
+              this.$store.commit(
+                "updateSnackbarContent",
+                successResponse.data.message
+              );
+            }
+          })
+          .catch(failResponse => {});
+        } else {
+          this.$store.commit('updateSnackbarContent','请先上传图片')
+        }
     },
     reset() {
       Object.assign(this.$data, this.$options.data());
