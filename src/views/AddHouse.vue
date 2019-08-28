@@ -106,6 +106,7 @@ export default {
   data() {
     return {
       img: [],
+      formdata: new FormData(),
       upLoaded: false,
       house: {
         name: "",
@@ -137,26 +138,29 @@ export default {
       return url;
     },
     upLoadImg() {
-      this.$axios
-        .post("/picture/batch/upload", this.img, {
-          headers: { "Content-Type": "multipart/form-data" }
-        })
-        .then(successResponse => {
-          var responseResult = JSON.parse(
-            JSON.stringify(successResponse.data.data)
-          );
-          if (successResponse.data.code === 200) {
-            this.$store.commit("updateSnackbarContent", "上传成功");
-            this.showaddhouse = true;
-            this.house.photos = responseResult;
-          } else {
-            this.$store.commit(
-              "updateSnackbarContent",
-              successResponse.data.message
+      console.log(this.img);
+      for (let index in this.img) {
+        this.$axios
+          .post("/picture/batch/upload", this.img[index], {
+            headers: { "Content-Type": "multipart/form-data" }
+          })
+          .then(successResponse => {
+            var responseResult = JSON.parse(
+              JSON.stringify(successResponse.data.data)
             );
-          }
-        })
-        .catch(failResponse => {});
+            if (successResponse.data.code === 200) {
+              this.$store.commit("updateSnackbarContent", "上传成功");
+              this.showaddhouse = true;
+              this.house.photos = responseResult;
+            } else {
+              this.$store.commit(
+                "updateSnackbarContent",
+                successResponse.data.message
+              );
+            }
+          })
+          .catch(failResponse => {});
+      }
       if (this.img.length > 0) this.upLoaded = true;
     },
     delImg(index) {
