@@ -11,7 +11,7 @@
       <v-btn icon @click="goHome">
         <v-icon>home</v-icon>
       </v-btn>
-      <v-btn icon @click="goUser">
+      <v-btn icon @click="goUserCard">
         <v-icon>account_circle</v-icon>
       </v-btn>
 
@@ -20,6 +20,9 @@
       <v-toolbar-items class="hidden-xs-only">
         <v-btn v-if="usermode === 0" text @click.stop="goAddHouse"
           >添加房源</v-btn
+        >
+        <v-btn v-if="usermode === 0" text @click.stop="goUserControl"
+          >管理用户</v-btn
         >
         <v-btn v-if="usermode === 1" text @click.stop="goOrder">立即预定</v-btn>
         <v-btn v-if="usermode === 1" text @click.stop="goComplaint"
@@ -44,29 +47,35 @@ export default {
   },
   methods: {
     goBack: () => {
-      window.history.back();
+      window.history.back()
     },
     goAddHouse: function () {
       if (this.$route.name !== "AddHouse")
-        this.$router.push({ name: "AddHouse" });
+        this.$router.push({ name: "AddHouse" })
     },
-    goUser: function () {
-      if (this.$route.name !== "User") this.$router.push({ name: "User" });
+    goUserCard: function () {
+      if (this.$route.name !== "UserCard")
+        this.$router.push({ name: "UserCard" })
     },
     goHome: function () {
       if (this.$route.name !== "WorkingPanel")
-        this.$router.push({ name: "WorkingPanel" });
+        this.$router.push({ name: "WorkingPanel" })
+    },
+    goUserControl: function () {
+      if (this.$route.name !== "UserControl")
+        this.$router.push({ name: "UserControl" })
     },
     goOrder: function () {
-      if (this.$route.name !== "Order") this.$router.push({ name: "Order" });
+      if (this.$route.name !== "Order")
+        this.$router.push({ name: "Order" })
     },
     goComplaint: function () {
       if (this.$route.name !== "Complaint")
-        this.$router.push({ name: "Complaint" });
+        this.$router.push({ name: "Complaint" })
     },
     logout: function () {
-      this.$store.commit("updateSnackbarContent", "已登出");
-      this.$router.push({ name: "Signin" });
+      this.$store.commit("updateSnackbarContent", "已登出")
+      this.$router.push({ name: "Signin" })
     },
     search: function () { }
   }

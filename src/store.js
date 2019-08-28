@@ -8,7 +8,7 @@ const store = new Vuex.Store({
     password: 'hyk123',
     email: '958337834@qq.com',
     phone: '15901092037',
-    usermode: 1,
+    usermode: 0,
     snackbar: false,
     text: 'Default text?',
     houseList: [

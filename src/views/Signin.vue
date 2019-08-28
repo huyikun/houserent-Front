@@ -67,7 +67,7 @@ export default {
     },
     Signin () {
       this.$axios
-        .post("/login", {
+        .post("/user/login", {
           username: this.username,
           password: this.password
         })

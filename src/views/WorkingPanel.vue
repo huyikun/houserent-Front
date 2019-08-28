@@ -1,25 +1,31 @@
 <template>
-    <v-container style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
-      <v-card>
-        <v-card-title>
-          您的订单
-          <div class="flex-grow-1"></div>
-          <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="搜索"
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-card-title>
-        <v-data-table :headers="headers" :items="orders" :search="search"></v-data-table>
-      </v-card>
-    </v-container>
+  <v-container
+    style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
+  >
+    <v-card>
+      <v-card-title>
+        您的订单
+        <div class="flex-grow-1"></div>
+        <v-text-field
+          v-model="search"
+          append-icon="search"
+          label="搜索"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="orders"
+        :search="search"
+      ></v-data-table>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       search: "",
       headers: [

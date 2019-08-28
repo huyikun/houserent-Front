@@ -124,7 +124,7 @@ export default {
 
     Signup () {
       this.$axios
-        .post('/register', {
+        .post('/user/register', {
           username: this.username,
           password: this.password,
           email: this.email,
