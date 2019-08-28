@@ -10,7 +10,7 @@
     </div>
     <div style="width: 12%" class="ma-3">
       <v-text-field
-        v-model="keyword.lowprice"
+        v-model="keyword.lowPrice"
         solo
         hide-details
         placeholder="价格区间"
@@ -19,7 +19,7 @@
     </div>
     <div style="width: 12%" class="ma-3">
       <v-text-field
-        v-model="keyword.highprice"
+        v-model="keyword.highPrice"
         solo
         hide-details
         placeholder="价格区间"
@@ -50,29 +50,44 @@ export default {
     return {
       keyword: {
         address: '',
-        lowprice: null,
-        highprice: null,
+        lowPrice: null,
+        highPrice: null,
         type: '',
       },
-      items: ['单人间', '双人间', '四人间'],
+      items: ['单人间', '双人间', '四人间', '全部'],
     };
   },
   methods: {
     search () {
+      if (this.keyword.type === '单人间') {
+        this.keyword.type = 1
+      } else if(this.keyword.type === '双人间') {
+        this.keyword.type = 2
+      } else if(this.keyword.type === '四人间') {
+        this.keyword.type = 4
+      } else if(this.keyword.type === '全部') {
+        this.keyword.type = 0
+      } else {
+        console.log('bug')
+      }
       this.$axios
-        .post("/house/searchHouse", this.keyword)
+        .post("/house/searchHouse", {
+          address: this.keyword.address,
+          lowPrice: this.keyword.lowPrice,
+          highPrice: this.keyword.highPrice,
+          type: this.keyword.type,
+        })
         .then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
           );
           if (successResponse.data.code === 200) {
             this.$store.commit("updateHouseList", responseResult);
-          } else {
+          }
             this.$store.commit(
               "updateSnackbarContent",
               successResponse.data.message
             );
-          }
         })
         .catch(failResponse => { });
     }
