@@ -11,6 +11,15 @@ const store = new Vuex.Store({
     usermode: 1,
     snackbar: false,
     text: 'Default text?',
+    limitDateList: [{
+        startDate: new Date("2019-08-28"),
+        endDate: new Date("2019-8-30")
+      },
+      {
+        startDate: new Date("2019-08-14"),
+        endDate: new Date("2019-8-17")
+      }
+    ],
     houseList: [{
         name: 'room1',
         address: 'Morenaddress1',
