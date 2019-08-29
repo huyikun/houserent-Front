@@ -1,5 +1,7 @@
 <template>
-  <v-col>
+  <v-col
+    style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
+  >
     <v-card width="600px" class="mx-auto">
       <div class="text-center" style="padding-top: 10px;font-size: 20px;">
         合同书

@@ -3,6 +3,8 @@
     <v-date-picker
       v-model="dates"
       multiple
+      min="2019-08-22"
+      max="2019-11-29"
       :show-current="false"
       :allowed-dates="allowedDates"
       no-title
@@ -13,10 +15,13 @@
 <script>
 export default {
   data: () => ({
-    dates: []
+    dates: [],
+    minDate: new Date(),
+    maxDate: new Date(),
   }),
+
   methods: {
-    allowedDates: function(val) {
+    allowedDates: function (val) {
       var judgeDate = parseInt(
         val.split("-")[0] + val.split("-")[1] + val.split("-")[2]
       );
@@ -35,7 +40,7 @@ export default {
       }
       return true;
     },
-    dateToString: function(date) {
+    dateToString: function (date) {
       var year = date.getFullYear();
       var month = (date.getMonth() + 1).toString();
       var day = date.getDate().toString();
@@ -51,7 +56,7 @@ export default {
   },
   watch: {
     dates: {
-      handler(newVal) {
+      handler (newVal) {
         if (this.dates.length > 2) {
           this.dates.splice(2, 1);
         }
@@ -69,6 +74,7 @@ export default {
             this.dates[1] = date3;
           }
           this.$emit("getStartAndEndDate", { dates: this.dates });
+
         }
       }
     }
