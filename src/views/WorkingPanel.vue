@@ -1,7 +1,5 @@
 <template>
-  <v-container
-    style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
-  >
+  <v-container style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
     <v-card>
       <v-card-title>
         您的订单
@@ -10,10 +8,17 @@
           v-model="search"
           append-icon="search"
           label="搜索"
+          style="font-weight:bold"
           single-line
           hide-details
         ></v-text-field>
-        <v-btn class="ml-3 mt-2" @click="pass">通过</v-btn>
+        <v-btn
+          class="ml-3 mt-2"
+          @click="pass"
+          color="blue"
+          dark
+          style="font-size:0.7em"
+        >确认</v-btn>
       </v-card-title>
 
       <v-data-table
@@ -25,34 +30,35 @@
         v-model="selected"
         :single-select="singleSelect"
         class="elevation-1"
-      >
-      </v-data-table>
+      ></v-data-table>
     </v-card>
   </v-container>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       search: "",
       singleSelect: false,
       selected: [],
-      orders: [],
+      orders: []
     };
   },
   computed: {
     headers: {
-      get () {
-        return this.$store.state.usermode === 0 ? this.$store.state.admheader : this.$store.state.usrheader
+      get() {
+        return this.$store.state.usermode === 0
+          ? this.$store.state.admheader
+          : this.$store.state.usrheader;
       }
     }
   },
-  created () {
-    this.getOrders()
+  created() {
+    this.getOrders();
   },
   methods: {
-    getOrders: function () {
+    getOrders: function() {
       this.orders = [
         {
           userName: "HUU",
@@ -61,7 +67,7 @@ export default {
           address: "America",
           checkinDate: "2019-9-1",
           checkoutDate: "2019-10-7",
-          applyTime: '2019-8-29 11:15:08',
+          applyTime: "2019-8-29 11:15:08",
           totalRent: 5000,
           state: "未支付"
         },
@@ -72,7 +78,7 @@ export default {
           address: "America",
           checkinDate: "2019-9-1",
           checkoutDate: "2019-10-7",
-          applyTime: '2019-8-29 11:15:08',
+          applyTime: "2019-8-29 11:15:08",
           totalRent: 5000,
           state: "未支付"
         },
@@ -83,34 +89,46 @@ export default {
           address: "America",
           checkinDate: "2019-9-1",
           checkoutDate: "2019-10-7",
-          applyTime: '2019-8-29 11:15:08',
+          applyTime: "2019-8-29 11:15:08",
           totalRent: 5000,
           state: "未支付"
-        },
-      ]
-      this.$axios.get('/order/get').then(successResponse => {
-        var responseResult = JSON.parse(
-          JSON.stringify(successResponse.data.data)
-        );
-        if (successResponse.data.code === 200) {
-          this.orders = responseResult
-        } else {
-          this.$store.commit("updateSnackbarContent", successResponse.data.message);
         }
-      }).catch(failResponse => { });
+      ];
+      this.$axios
+        .get("/order/get")
+        .then(successResponse => {
+          var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          );
+          if (successResponse.data.code === 200) {
+            this.orders = responseResult;
+          } else {
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
+          }
+        })
+        .catch(failResponse => {});
     },
-    pass: function () {
-      this.$axios.post('/order/pass', selected).then(successResponse => {
-        var responseResult = JSON.parse(
-          JSON.stringify(successResponse.data.data)
-        );
-        if (successResponse.data.code === 200) {
-          this.orders = responseResult
-        } else {
-          this.$store.commit("updateSnackbarContent", successResponse.data.message);
-        }
-      }).catch(failResponse => { });
-    },
+    pass: function() {
+      this.$axios
+        .post("/order/pass", selected)
+        .then(successResponse => {
+          var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          );
+          if (successResponse.data.code === 200) {
+            this.orders = responseResult;
+          } else {
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
+          }
+        })
+        .catch(failResponse => {});
+    }
   }
 };
 </script>

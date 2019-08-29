@@ -1,31 +1,32 @@
 <template>
   <div class="hello">
     <img style="width:100%; height:100%; position:fixed;" src="static/img/background.jpg" />
-    <div style="padding-left:30%; padding-right:30%;padding-top:4%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
+    <div
+      style="padding-left:30%; padding-right:30%;padding-top:4%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
+    >
       <v-card class="mx-auto mt-1" style="max-width: 500px;">
         <v-toolbar color="primary" cards dark flat>
           <v-btn icon @click="goBack">
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
-          <v-card-title class="title font-weight-regular">Sign up</v-card-title>
+          <v-card-title class="title font-weight-regular">注册</v-card-title>
         </v-toolbar>
         <v-form ref="form" v-model="form" class="pa-4 pt-6">
           <v-text-field
             v-model="username"
             :rules="[rules.username]"
             filled
-            style="min-height: 96px"
+            style="font-weight: bold;"
             color="primary"
-            label="Username"
+            label="用户名"
           ></v-text-field>
           <v-text-field
             v-model="password"
             :rules="[rules.password, rules.length(6)]"
             filled
             color="primary"
-            counter="6"
-            label="Password"
-            style="min-height: 96px"
+            label="密码"
+            style="font-weight: bold;"
             type="password"
           ></v-text-field>
           <v-text-field
@@ -33,49 +34,64 @@
             :rules="[rules.phone]"
             filled
             color="primary"
-            label="Phone number"
+            label="手机号码"
+            style="font-weight: bold;"
           ></v-text-field>
           <v-text-field
             v-model="email"
             :rules="[rules.email]"
             filled
             color="primary"
-            label="Email address"
+            label="电子邮箱地址"
+            style="font-weight: bold;"
             type="email"
           ></v-text-field>
           <v-checkbox v-model="agreement" :rules="[rules.required]" color="primary">
             <template v-slot:label>
-              I agree to the &nbsp;
-              <a href="#" @click.stop.prevent="dialog = true">Privacy Policy</a>
+              <div style="font-size: 1.08em;">我同意</div>&nbsp;
+              <a href="#" @click.stop.prevent="dialog = true" style="font-size: 1.08em;">隐私条款</a>
             </template>
           </v-checkbox>
         </v-form>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn @click="$refs.form.reset()">Clear</v-btn>
+          <v-btn
+            @click="$refs.form.reset()"
+            color="green"
+            dark
+            style="font-size: 1.08em; width: 20%;"
+          >清除</v-btn>
           <div class="flex-grow-1"></div>
           <v-btn
             :disabled="!form"
             :loading="isLoading"
             class="white--text"
-            color="primary"
+            color="blue"
+            dark
+            style="font-size: 1.08em; width: 20%;"
             @click="Signup"
-            depressed
-          >Submit</v-btn>
+          >提交</v-btn>
         </v-card-actions>
         <v-dialog v-model="dialog" absolute max-width="400" persistent>
           <v-card>
-            <v-card-title class="headline grey lighten-3">Policy</v-card-title>
-            <v-card-text>There is a Policy you should obey.</v-card-text>
+            <v-card-title class="headline grey lighten-3">隐私条款</v-card-title>
+            <v-card-text style="font-size: 1.08em;">这是您需要遵守的隐私条款</v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn
                 class="white--text"
-                color="primary"
+                color="blue"
+                dark
+                style="font-size: 1.08em;"
                 @click="(agreement = true), (dialog = false)"
-              >Yes</v-btn>
+              >同意</v-btn>
               <div class="flex-grow-1"></div>
-              <v-btn @click="(agreement = false), (dialog = false)">No</v-btn>
+              <v-btn
+                @click="(agreement = false), (dialog = false)"
+                color="red lighten-2"
+                dark
+                style="font-size: 1.08em;"
+              >不同意</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -98,18 +114,14 @@ export default {
       phone: undefined,
       rules: {
         username: v =>
-          (v || "").match(/^[a-zA-Z]{2,}$/) || "Please enter your name",
-        phone: v =>
-          (v || "").match(/^1[3456789]\d{9}$/) ||
-          "Please enter a correct phone number",
-        email: v => (v || "").match(/@/) || "Please enter a valid email",
-        length: len => v =>
-          (v || "").length >= len ||
-          `Invalid character length, required ${len}`,
+          (v || "").match(/^[a-zA-Z]{2,}$/) || "用户名仅由字母组成且至少两位",
+        phone: v => (v || "").match(/^1[3456789]\d{9}$/) || "电话号码格式错误",
+        email: v => (v || "").match(/@/) || "电子邮箱地址格式错误",
+        length: len => v => (v || "").length >= len || `密码至少需要${len}位`,
         password: v =>
           (v || "").match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/) ||
-          "Password must contain letters and numeric characters",
-        required: v => !!v || "This field is required"
+          "密码必须同时包含字母和数字且至少需要6位",
+        required: v => !!v || "您需要同意隐私条款"
       }
     };
   },
@@ -120,7 +132,7 @@ export default {
 
     Signup() {
       this.$axios
-        .post('/user/register', {
+        .post("/user/register", {
           username: this.username,
           password: this.password,
           email: this.email,

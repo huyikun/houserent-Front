@@ -1,47 +1,32 @@
 <template>
-  <div
-    style="padding-left:12.5%; padding-right:12.5%; padding-top:20px ; padding-bottom:20px"
-  >
-    <v-card
-      style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
-    >
+  <div style="padding-left:12.5%; padding-right:12.5%; padding-top:20px ; padding-bottom:20px">
+    <v-card style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
       <v-container>
         <br />
-        <v-card-title style="padding-left:50px; padding-right:50px;"
-          >注册房源</v-card-title
-        >
+        <v-card-title style="padding-left:50px; padding-right:50px;">注册房源</v-card-title>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间名称" v-model="house.name"></v-text-field>
+          <v-text-field label="房间名称" style="font-weight:bold" v-model="house.name"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间地址" v-model="house.address"></v-text-field>
+          <v-text-field label="房间地址" style="font-weight:bold" v-model="house.address"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field
-            label="房间定价（每晚）"
-            v-model="house.price"
-          ></v-text-field>
+          <v-text-field label="房间定价（每晚）" style="font-weight:bold" v-model="house.price"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间类型" v-model="house.type"></v-text-field>
+          <v-text-field label="房间类型" style="font-weight:bold" v-model="house.type"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field
-            label="房主姓名"
-            v-model="house.ownername"
-          ></v-text-field>
+          <v-text-field label="房主姓名" style="font-weight:bold" v-model="house.ownername"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field
-            label="房主联系方式"
-            v-model="house.ownerphone"
-          ></v-text-field>
+          <v-text-field label="房主联系方式" style="font-weight:bold" v-model="house.ownerphone"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
@@ -49,18 +34,15 @@
             chips
             multiple
             label="图片上传"
+            style="font-weight:bold"
             v-model="imgArray"
             :rules="[rules.length(3)]"
           ></v-file-input>
           <v-container>
             <v-row style="padding-left:50px; padding-right:50px;">
-              <v-col
-                v-for="(img, index) in imgArray"
-                :key="index"
-                style="width:30%"
-              >
+              <v-col v-for="(img, index) in imgArray" :key="index" style="width:30%">
                 <v-img contain height="300px" v-bind:src="getObjectURL(img)">
-                  <v-btn x-small @click="delImg(index)">x</v-btn>
+                  <v-btn x-small @click="delImg(index)" color="red lighten-2" dark>x</v-btn>
                 </v-img>
               </v-col>
             </v-row>
@@ -68,7 +50,7 @@
         </v-row>
         <br />
         <v-row justify="center">
-          <v-btn @click="addhouse">提交</v-btn>
+          <v-btn @click="submit" large color="blue" dark style="font-size:1.08em">提交</v-btn>
         </v-row>
       </v-container>
     </v-card>
@@ -76,7 +58,7 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       imgArray: [],
       upLoaded: false,
@@ -96,7 +78,7 @@ export default {
     };
   },
   methods: {
-    getObjectURL (file) {
+    getObjectURL(file) {
       var url = null;
       if (window.createObjectURL != undefined) {
         // basic
@@ -110,10 +92,10 @@ export default {
       }
       return url;
     },
-    delImg (index) {
+    delImg(index) {
       this.imgArray.splice(index, 1);
     },
-    upLoadImg () {
+    upLoadImg() {
       var formData = new FormData();
       var i = 0;
       for (; i < this.imgArray.length; i++) {
@@ -142,11 +124,11 @@ export default {
             );
           }
         })
-        .catch(failResponse => { });
+        .catch(failResponse => {});
       console.log(this.formData);
       if (this.imgArray.length > 0) this.upLoaded = true;
     },
-    submit () {
+    submit() {
       this.upLoadImg();
       if (this.upLoaded) {
         this.$axios
@@ -165,12 +147,12 @@ export default {
               );
             }
           })
-          .catch(failResponse => { });
+          .catch(failResponse => {});
       } else {
         this.$store.commit("updateSnackbarContent", "请先上传图片");
       }
     },
-    reset () {
+    reset() {
       Object.assign(this.$data, this.$options.data());
     }
   }
