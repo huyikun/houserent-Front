@@ -1,5 +1,5 @@
 <template>
-    <v-container style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
+    <v-container style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
       <v-card>
         <v-card-title>
           您的订单

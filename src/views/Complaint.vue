@@ -1,6 +1,6 @@
 <template>
   <div style="padding-left:20%; padding-right:20%; padding-top:60px; padding-bottom:60px">
-    <v-card style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
+    <v-card style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
       <br />
       <v-card-title style="padding-left:100px; padding-right: 100px;">意见反馈</v-card-title>
       <br />
@@ -16,7 +16,7 @@
         <v-container>
           <v-row style="padding-left: 90px; padding-right: 90px;">
             <v-file-input
-              style="filter:alpha(opacity=50); -moz-opacity:0.5; opacity: 0.875; "
+              style="filter:alpha(opacity=50); -moz-opacity:0.5; opacity: 0.925; "
               chips
               multiple
               label="文件上传"

@@ -5,7 +5,7 @@
       src="static/img/background.jpg"
     />
     <div
-      style="padding-left:35%; padding-right:35%;padding-top:10%;filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
+      style="padding-left:35%; padding-right:35%;padding-top:10%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
     >
       <v-card>
         <v-toolbar color="primary" cards dark>

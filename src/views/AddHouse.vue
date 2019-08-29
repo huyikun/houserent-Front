@@ -1,6 +1,6 @@
 <template>
   <div style="padding-left:12.5%; padding-right:12.5%; padding-top:20px ; padding-bottom:20px">
-    <v-card style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
+    <v-card style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
       <v-container>
         <br />
         <v-card-title style="padding-left:50px; padding-right:50px;">注册房源</v-card-title>
