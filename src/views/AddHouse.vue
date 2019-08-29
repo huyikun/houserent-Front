@@ -53,7 +53,6 @@
 export default {
   data() {
     return {
-      formData: new FormData(),
       imgArray: [],
       upLoaded: false,
       house: {
@@ -89,9 +88,10 @@ export default {
       this.imgArray.splice(index, 1);
     },
     upLoadImg() {
+      var formData = new FormData();
       var i = 0;
       for (; i < this.imgArray.length; i++) {
-        this.formData.append(
+        formData.append(
           "multipartFiles",
           this.imgArray[i],
           this.imgArray[i].name
@@ -99,7 +99,7 @@ export default {
         console.log(this.imgArray[i]);
       }
       this.$axios
-        .post("/picture/batch/upload", this.formData, {
+        .post("/picture/batch/upload", formData, {
           headers: { "Content-Type": "multipart/form-data" }
         })
         .then(successResponse => {
