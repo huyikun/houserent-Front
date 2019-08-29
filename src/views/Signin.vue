@@ -1,17 +1,12 @@
 <template>
   <div class="hello">
-    <img
-      style="width:100%; height:100%; position:fixed;"
-      src="static/img/background.jpg"
-    />
+    <img style="width:100%; height:100%; position:fixed;" src="static/img/background.jpg" />
     <div
       style="padding-left:35%; padding-right:35%;padding-top:10%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
     >
       <v-card>
         <v-toolbar color="primary" cards dark>
-          <v-card-title class="title font-weight-regular"
-            >房屋出租系统</v-card-title
-          >
+          <v-card-title class="title font-weight-regular">房屋出租系统</v-card-title>
         </v-toolbar>
         <v-form ref="form" v-model="form" class="pa-4 pt-6">
           <v-text-field
@@ -34,9 +29,9 @@
         </v-form>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn @click="Signin">登录</v-btn>
+          <v-btn @click="goSignup" text color="primary">注册</v-btn>
           <div class="flex-grow-1"></div>
-          <v-btn color="primary" @click="goSignup" depressed>注册</v-btn>
+          <v-btn @click="Signin" text>登录</v-btn>
         </v-card-actions>
       </v-card>
     </div>
@@ -45,7 +40,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       username: "",
       email: "",
@@ -62,10 +57,10 @@ export default {
     };
   },
   methods: {
-    goSignup: function () {
+    goSignup: function() {
       this.$router.push({ name: "Signup" });
     },
-    Signin () {
+    Signin() {
       this.$axios
         .post("/login", {
           username: this.username,
@@ -81,11 +76,12 @@ export default {
             this.$store.commit("updateSnackbarContent", "登录成功");
           } else {
             this.$store.commit(
-              "updateSnackbarContent", successResponse.data.message
+              "updateSnackbarContent",
+              successResponse.data.message
             );
           }
         })
-        .catch(failResponse => { });
+        .catch(failResponse => {});
     }
   }
 };

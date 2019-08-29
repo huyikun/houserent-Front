@@ -20,11 +20,11 @@
               </v-img>
 
               <v-card-actions>
-                <v-card-text>￥{{ house.price }} / 晚</v-card-text>
+                <v-card-text>￥ {{ house.price }} / 晚</v-card-text>
                 <v-spacer />
                 <v-dialog v-model="dialog[index % cnt]" width="500">
                   <template v-slot:activator="{ on }">
-                    <v-btn color="red lighten-2" dark v-on="on">Details</v-btn>
+                    <v-btn text color="red lighten-2" v-on="on">Details</v-btn>
                   </template>
 
                   <v-card>
@@ -56,7 +56,7 @@
                     <v-divider></v-divider>
                     <v-card-actions>
                       <div class="flex-grow-1"></div>
-                      <v-btn color="red lighten-2" dark @click="closeall(index)">Order Now</v-btn>
+                      <v-btn @click="closeall(index)" text color="red lighten-2">Order Now</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-dialog>

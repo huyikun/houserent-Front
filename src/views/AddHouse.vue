@@ -43,7 +43,7 @@
         </v-row>
         <br />
         <v-row justify="center">
-          <v-btn @click="submit">提交</v-btn>
+          <v-btn @click="submit" text color="primary">提交</v-btn>
         </v-row>
       </v-container>
     </v-card>

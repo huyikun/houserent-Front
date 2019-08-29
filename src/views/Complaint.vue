@@ -34,7 +34,7 @@
             </v-container>
           </v-row>
           <v-row justify="center">
-            <v-btn @click="submit">提交</v-btn>
+            <v-btn @click="submit" text color="primary">提交</v-btn>
           </v-row>
         </v-container>
       </v-card-actions>
@@ -91,7 +91,6 @@ export default {
           );
           if (successResponse.data.code === 200) {
             this.$store.commit("updateSnackbarContent", "上传成功");
-            if (this.fileArray.length > 0) this.upLoaded = true;
           } else {
             this.$store.commit(
               "updateSnackbarContent",
@@ -101,6 +100,7 @@ export default {
         })
         .catch(failResponse => {});
       console.log(this.formData);
+      if (this.fileArray.length > 0) this.upLoaded = true;
     },
     submit: function() {
       this.upLoadFile();

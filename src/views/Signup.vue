@@ -1,13 +1,15 @@
 <template>
   <div class="hello">
     <img style="width:100%; height:100%; position:fixed;" src="static/img/background.jpg" />
-    <div style="padding-left:30%; padding-right:30%;padding-top:4%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
-      <v-card class="mx-auto mt-1" style="max-width: 500px;">
+    <div
+      style="padding-left:30%; padding-right:30%;padding-top:4%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
+    >
+      <v-card class="mx-auto mt-1">
         <v-toolbar color="primary" cards dark flat>
           <v-btn icon @click="goBack">
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
-          <v-card-title class="title font-weight-regular">Sign up</v-card-title>
+          <v-card-title class="title font-weight-regular">注册账户</v-card-title>
         </v-toolbar>
         <v-form ref="form" v-model="form" class="pa-4 pt-6">
           <v-text-field
@@ -16,14 +18,13 @@
             filled
             style="min-height: 96px"
             color="primary"
-            label="Username"
+            label="用户名"
           ></v-text-field>
           <v-text-field
             v-model="password"
             :rules="[rules.password, rules.length(6)]"
             filled
             color="primary"
-            counter="6"
             label="Password"
             style="min-height: 96px"
             type="password"
@@ -96,20 +97,19 @@ export default {
       email: undefined,
       password: undefined,
       phone: undefined,
+      user: undefined,
       rules: {
         username: v =>
-          (v || "").match(/^[a-zA-Z]{2,}$/) || "Please enter your name",
+          (v || "").match(/^[a-zA-Z]{2,}$/) ||
+          "用户名由大写字母或小写字母组成，且最少需要两位",
         phone: v =>
-          (v || "").match(/^1[3456789]\d{9}$/) ||
-          "Please enter a correct phone number",
-        email: v => (v || "").match(/@/) || "Please enter a valid email",
-        length: len => v =>
-          (v || "").length >= len ||
-          `Invalid character length, required ${len}`,
+          (v || "").match(/^1[3456789]\d{9}$/) || "请输入正确格式的手机号码",
+        email: v => (v || "").match(/@/) || "请输入正确格式的邮箱",
+        length: len => v => (v || "").length >= len || `密码至少需要${len}位`,
         password: v =>
           (v || "").match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/) ||
-          "Password must contain letters and numeric characters",
-        required: v => !!v || "This field is required"
+          `密码必须同时包含字母和数字，且最少需要6位`,
+        required: v => !!v || `需要同意协议`
       }
     };
   },
@@ -119,6 +119,12 @@ export default {
     },
 
     Signup() {
+      this.user = {
+        username: this.username,
+        password: this.password,
+        email: this.email,
+        phoneNumber: this.phone
+      };
       this.$axios
         .post("/register", {
           username: this.username,
@@ -139,6 +145,7 @@ export default {
           }
         })
         .catch(failResponse => {});
+      console.log(this.user);
     }
   }
 };

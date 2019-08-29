@@ -22,12 +22,12 @@
     </v-card-text>
     <v-divider class="mx-4"></v-divider>
     <v-card-text>
-      <div class="title text--primary">Choose the time to move into</div>
+      <div class="title text--primary">选择起始时间和结束时间</div>
       <DatePicker @getStartAndEndDate="flushDates" />
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn  color="deep-purple accent-4" text @click="reserve">提交</v-btn>
+      <v-btn @click="reserve" text color="primary">提交</v-btn>
     </v-card-actions>
   </v-card>
 </template>
