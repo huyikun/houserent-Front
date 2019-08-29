@@ -25,7 +25,7 @@
             :rules="[rules.password, rules.length(6)]"
             filled
             color="primary"
-            label="Password"
+            label="密码"
             style="min-height: 96px"
             type="password"
           ></v-text-field>
@@ -34,26 +34,26 @@
             :rules="[rules.phone]"
             filled
             color="primary"
-            label="Phone number"
+            label="手机号码"
           ></v-text-field>
           <v-text-field
             v-model="email"
             :rules="[rules.email]"
             filled
             color="primary"
-            label="Email address"
+            label="邮箱地址"
             type="email"
           ></v-text-field>
           <v-checkbox v-model="agreement" :rules="[rules.required]" color="primary">
             <template v-slot:label>
-              I agree to the &nbsp;
-              <a href="#" @click.stop.prevent="dialog = true">Privacy Policy</a>
+              我同意 &nbsp;
+              <a href="#" @click.stop.prevent="dialog = true">隐私条款</a>
             </template>
           </v-checkbox>
         </v-form>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn @click="$refs.form.reset()">Clear</v-btn>
+          <v-btn @click="$refs.form.reset()" text>清除</v-btn>
           <div class="flex-grow-1"></div>
           <v-btn
             :disabled="!form"
@@ -61,13 +61,13 @@
             class="white--text"
             color="primary"
             @click="Signup"
-            depressed
-          >Submit</v-btn>
+            text
+          >提交</v-btn>
         </v-card-actions>
         <v-dialog v-model="dialog" absolute max-width="400" persistent>
           <v-card>
-            <v-card-title class="headline grey lighten-3">Policy</v-card-title>
-            <v-card-text>There is a Policy you should obey.</v-card-text>
+            <v-card-title class="headline grey lighten-3">隐私条款</v-card-title>
+            <v-card-text>这是您应当遵守的隐私条款</v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn
