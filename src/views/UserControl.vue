@@ -1,17 +1,11 @@
 <template>
   <div
-    style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
+    style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925; padding-left:20%;padding-right:20%"
     class="ma-3"
   >
     <v-card>
       <v-card-title>
-        <v-text-field
-          v-model="search"
-          append-icon="search"
-          label="搜索"
-          single-line
-          hide-details
-        ></v-text-field>
+        <v-text-field v-model="search" append-icon="search" label="搜索" single-line hide-details></v-text-field>
       </v-card-title>
       <v-data-table
         :headers="headers"
@@ -28,9 +22,7 @@
             <div class="flex-grow-1"></div>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark class="mb-2" v-on="on"
-                  >创建新用户</v-btn
-                >
+                <v-btn color="primary" dark class="mb-2" v-on="on">创建新用户</v-btn>
               </template>
               <v-card>
                 <v-card-title>
@@ -40,28 +32,16 @@
                   <v-container>
                     <v-row>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.username"
-                          label="用户名"
-                        ></v-text-field>
+                        <v-text-field v-model="editedItem.username" label="用户名"></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.password"
-                          label="密码"
-                        ></v-text-field>
+                        <v-text-field v-model="editedItem.password" label="密码"></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.email"
-                          label="邮箱"
-                        ></v-text-field>
+                        <v-text-field v-model="editedItem.email" label="邮箱"></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.phone"
-                          label="手机"
-                        ></v-text-field>
+                        <v-text-field v-model="editedItem.phone" label="手机"></v-text-field>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -69,22 +49,16 @@
 
                 <v-card-actions>
                   <div class="flex-grow-1"></div>
-                  <v-btn color="blue darken-1" text @click="close"
-                    >Cancel</v-btn
-                  >
-                  <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                  <v-btn color="blue darken-1" text @click="close">取消</v-btn>
+                  <v-btn color="blue darken-1" text @click="save">保存</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-toolbar>
         </template>
         <template v-slot:item.action="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
-            edit
-          </v-icon>
-          <v-icon small @click="deleteItem(item)">
-            delete
-          </v-icon>
+          <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
+          <v-icon small @click="deleteItem(item)">delete</v-icon>
         </template>
         <template v-slot:no-data>
           <div>当前无注册用户</div>
@@ -99,148 +73,172 @@ export default {
     dialog: false,
     search: "",
     headers: [
-      { text: '用户名', align: 'left', value: 'username', sortable: false, },
-      { text: '密码', align: 'center', value: 'password', sortable: false, },
-      { text: '邮箱', align: 'center', value: 'email', sortable: false, },
-      { text: '手机', align: 'center', value: 'phone', sortable: false, },
-      { text: 'Actions', align: 'center', value: 'action', sortable: false },
+      { text: "用户名", align: "left", value: "username", sortable: false },
+      { text: "密码", align: "center", value: "password", sortable: false },
+      { text: "邮箱", align: "center", value: "email", sortable: false },
+      { text: "手机", align: "center", value: "phone", sortable: false },
+      { text: "Actions", align: "center", value: "action", sortable: false }
     ],
     users: [],
     editedIndex: -1,
     editedItem: {
-      username: '',
-      password: '',
-      email: '',
-      phone: '',
+      username: "",
+      password: "",
+      email: "",
+      phone: ""
     },
     defaultItem: {
-      username: '',
-      password: '',
-      email: '',
-      phone: '',
-    },
+      username: "",
+      password: "",
+      email: "",
+      phone: ""
+    }
   }),
 
   computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    },
+    formTitle() {
+      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+    }
   },
 
   watch: {
-    dialog (val) {
-      val || this.close()
-    },
+    dialog(val) {
+      val || this.close();
+    }
   },
 
-  created () {
-    this.initialize()
+  created() {
+    this.initialize();
   },
 
   methods: {
-    initialize () {
+    initialize() {
       this.users = [
         {
-          username: 'Bcascask',
-          password: '11csa223',
-          email: 'hucom',
-          phone: '15901092037',
+          username: "Bcascask",
+          password: "11csa223",
+          email: "hucom",
+          phone: "15901092037"
         },
         {
-          username: 'Bcnk',
-          password: '1123',
-          email: 'hu.com',
-          phone: '15092037',
+          username: "Bcnk",
+          password: "1123",
+          email: "hu.com",
+          phone: "15092037"
         },
         {
-          username: 'Bcnk',
-          password: '1123',
-          email: 'hu&&&qq.com',
-          phone: '15092037',
-        },
-      ]
-      // get 
-      this.$axios.get('/user/get').then(successResponse => {
-        var responseResult = JSON.parse(
-          JSON.stringify(successResponse.data.data)
-        );
-        if (successResponse.data.code === 200) {
-          this.users = responseResult
+          username: "Bcnk",
+          password: "1123",
+          email: "hu&&&qq.com",
+          phone: "15092037"
         }
-        this.$store.commit("updateSnackbarContent", successResponse.data.message);
-      }).catch(failResponse => { });
-    },
-
-    editItem (item) {
-      this.editedIndex = this.users.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
-    },
-
-    deleteItem (item) {
-      const index = this.users.indexOf(item)
-      if (confirm('Are you sure you want to delete this item?')) {
-        // delete
-        let param = new URLSearchParams()
-        param.append('username', item.username)
-        this.$axios.post('/user/delete', param).then(successResponse => {
+      ];
+      // get
+      this.$axios
+        .get("/user/get")
+        .then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
           );
           if (successResponse.data.code === 200) {
-            this.users.splice(index, 1)
+            this.users = responseResult;
           }
-          this.$store.commit("updateSnackbarContent", successResponse.data.message);
-        }).catch(failResponse => { });
+          this.$store.commit(
+            "updateSnackbarContent",
+            successResponse.data.message
+          );
+        })
+        .catch(failResponse => {});
+    },
+
+    editItem(item) {
+      this.editedIndex = this.users.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+
+    deleteItem(item) {
+      const index = this.users.indexOf(item);
+      if (confirm("Are you sure you want to delete this item?")) {
+        // delete
+        let param = new URLSearchParams();
+        param.append("username", item.username);
+        this.$axios
+          .post("/user/delete", param)
+          .then(successResponse => {
+            var responseResult = JSON.parse(
+              JSON.stringify(successResponse.data.data)
+            );
+            if (successResponse.data.code === 200) {
+              this.users.splice(index, 1);
+            }
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
+          })
+          .catch(failResponse => {});
       }
     },
 
-    close () {
-      this.dialog = false
+    close() {
+      this.dialog = false;
       setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      }, 300);
     },
 
-    save () {
+    save() {
       if (this.editedIndex > -1) {
         // Object.assign(this.users[this.editedIndex], this.editedItem)
         // edit
-        let param = new URLSearchParams()
-        param.append('username', item.username)
-        param.append('password', item.password)
-        param.append('email', item.email)
-        param.append('phone', item.phone)
-        this.$axios.post('/user/edit', param).then(successResponse => {
-          var responseResult = JSON.parse(
-            JSON.stringify(successResponse.data.data)
-          );
-          if (successResponse.data.code === 200) {
-            Object.assign(this.users[this.editedIndex], this.editedItem)
-          }
-          this.$store.commit("updateSnackbarContent", successResponse.data.message);
-        }).catch(failResponse => { });
+        let param = new URLSearchParams();
+        param.append("username", item.username);
+        param.append("password", item.password);
+        param.append("email", item.email);
+        param.append("phone", item.phone);
+        this.$axios
+          .post("/user/edit", param)
+          .then(successResponse => {
+            var responseResult = JSON.parse(
+              JSON.stringify(successResponse.data.data)
+            );
+            if (successResponse.data.code === 200) {
+              Object.assign(this.users[this.editedIndex], this.editedItem);
+            }
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
+          })
+          .catch(failResponse => {});
       } else {
         // this.users.push(this.editedItem)
         // post 增
-        let param = new URLSearchParams()
-        param.append('username', item.username)
-        param.append('password', item.password)
-        param.append('email', item.email)
-        param.append('phone', item.phone)
-        this.$axios.post('/user/add', param).then(successResponse => {
-          var responseResult = JSON.parse(
-            JSON.stringify(successResponse.data.data)
-          );
-          if (successResponse.data.code === 200) {
-            this.users.push(this.editedItem)
-          }
-          this.$store.commit("updateSnackbarContent", successResponse.data.message);
-        }).catch(failResponse => { });
+        let param = new URLSearchParams();
+        param.append("username", item.username);
+        param.append("password", item.password);
+        param.append("email", item.email);
+        param.append("phone", item.phone);
+        this.$axios
+          .post("/user/add", param)
+          .then(successResponse => {
+            var responseResult = JSON.parse(
+              JSON.stringify(successResponse.data.data)
+            );
+            if (successResponse.data.code === 200) {
+              this.users.push(this.editedItem);
+            }
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
+          })
+          .catch(failResponse => {});
       }
-      this.close()
-    },
-  },
-}
+      this.close();
+    }
+  }
+};
 </script>
