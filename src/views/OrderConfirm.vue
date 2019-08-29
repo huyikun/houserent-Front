@@ -1,15 +1,15 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-2" width="800">
-    <v-img
-      height="200"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-    ></v-img>
+  <v-card
+    :loading="loading"
+    class="mx-auto my-2"
+    width="800"
+    style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
+  >
+    <v-img height="200" src="../../static/img/cooking.png"></v-img>
     <v-card-title>Your home in Haidian</v-card-title>
     <v-card-text>
-      <v-row align="center"> </v-row>
-      <div class="my-4 subtitle-1 black--text">
-        $ • China, Beijing
-      </div>
+      <v-row align="center"></v-row>
+      <div class="my-4 subtitle-1 black--text">$ • China, Beijing</div>
       <div>
         Our Wooden Lodge with Hot Tub is in Dimmingsdale forest the surroundings
         are beautiful and peaceful. There is lots to do like rock climbing the
@@ -23,33 +23,38 @@
     <v-divider class="mx-4"></v-divider>
     <v-card-text>
       <div class="title text--primary">Choose the time to move into</div>
-      <DatePicker />
+      <DatePicker @getStartAndEndDate="flushDates" />
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn color="deep-purple accent-4" text @click="reserve">
-        Submit
-      </v-btn>
+      <v-btn  color="deep-purple accent-4" text @click="reserve">提交</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import DatePicker from '@/components/DatePicker.vue'
+import DatePicker from "@/components/DatePicker.vue";
 export default {
   components: {
-    DatePicker,
+    DatePicker
   },
   data: () => ({
     loading: false,
     selection: 1,
+    dates: []
   }),
 
   methods: {
-    reserve () {
-      this.loading = true
-      setTimeout(() => (this.loading = false), 2000)
+    reserve() {
+      console.log(this.dates);
+      //
+      this.loading = true;
+      setTimeout(() => (this.loading = false), 2000);
     },
-  },
-}
+    flushDates: function(data) {
+      this.dates = data.dates;
+      console.log(this.dates);
+    }
+  }
+};
 </script>

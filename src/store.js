@@ -11,14 +11,22 @@ const store = new Vuex.Store({
     usermode: 0,
     snackbar: false,
     text: 'Default text?',
-    houseList: [
+    limitDateList: [{
+        startDate: new Date("2019-08-28"),
+        endDate: new Date("2019-8-30")
+      },
       {
+        startDate: new Date("2019-08-14"),
+        endDate: new Date("2019-8-17")
+      }
+    ],
+    houseList: [{
         name: 'room1',
         address: 'Morenaddress1',
         price: 10.0,
         introduce: 'iam1',
         ownerphone: '111111',
-        photos: ['@/../static/img/pic2.jpg'],
+        photos: ['/static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -27,7 +35,7 @@ const store = new Vuex.Store({
         price: 20.0,
         introduce: 'iam2',
         ownerphone: '222222',
-        photos: ['@/../static/img/pic2.jpg'],
+        photos: ['/static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -36,7 +44,7 @@ const store = new Vuex.Store({
         price: 30.0,
         introduce: 'iam3',
         ownerphone: '33333',
-        photos: ['@/../static/img/pic2.jpg'],
+        photos: ['/static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -45,7 +53,7 @@ const store = new Vuex.Store({
         price: 40.0,
         introduce: 'iam4',
         ownerphone: '44444',
-        photos: ['@/../static/img/pic2.jpg'],
+        photos: ['/static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -54,7 +62,7 @@ const store = new Vuex.Store({
         price: 50.0,
         introduce: 'iam5',
         ownerphone: '55555',
-        photos: ['@/../static/img/pic2.jpg'],
+        photos: ['/static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -63,7 +71,7 @@ const store = new Vuex.Store({
         price: 60.0,
         introduce: 'iam6',
         ownerphone: '66666',
-        photos: ['@/../static/img/pic2.jpg'],
+        photos: ['/static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -72,7 +80,7 @@ const store = new Vuex.Store({
         price: 70.0,
         introduce: 'iam7',
         ownerphone: '77777',
-        photos: ['@/../static/img/pic2.jpg'],
+        photos: ['/static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -81,7 +89,7 @@ const store = new Vuex.Store({
         price: 70.0,
         introduce: 'iam7',
         ownerphone: '77777',
-        photos: ['@/../static/img/pic2.jpg'],
+        photos: ['/static/img/pic2.jpg'],
         timeLine: []
       },
       {
@@ -90,26 +98,26 @@ const store = new Vuex.Store({
         price: 70.0,
         introduce: 'iam7',
         ownerphone: '77777',
-        photos: ['@/../static/img/pic2.jpg'],
+        photos: ['/static/img/pic2.jpg'],
         timeLine: []
       }
-    ]
+    ],
   },
   mutations: {
-    updateMode (state, value) {
+    updateMode(state, value) {
       state.usermode = value.mode
       state.username = value.username
       state.email = value.email
       state.phone = value.phoneNumber
     },
-    updateSnackbar (state, value) {
+    updateSnackbar(state, value) {
       state.snackbar = value
     },
-    updateSnackbarContent (state, value) {
+    updateSnackbarContent(state, value) {
       store.commit('updateSnackbar', true)
       state.text = value
     },
-    updateHouseList (state, value) {
+    updateHouseList(state, value) {
       state.houseList = value
     }
   }

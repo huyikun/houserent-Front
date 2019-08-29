@@ -50,8 +50,8 @@ export default {
     return {
       keyword: {
         address: '',
-        lowPrice: null,
-        highPrice: null,
+        lowPrice: '',
+        highPrice: '',
         type: '',
       },
       items: ['单人间', '双人间', '四人间', '全部'],
@@ -71,13 +71,14 @@ export default {
         console.log('bug')
       }
       this.$axios
-        .post("/house/searchHouse", {
-          address: this.keyword.address,
-          lowPrice: this.keyword.lowPrice,
-          highPrice: this.keyword.highPrice,
-          type: this.keyword.type,
-        })
-        .then(successResponse => {
+        .get("/house/searchHouse", {
+          params: {
+            address: this.keyword.address,
+            lowPrice: this.keyword.lowPrice,
+            highPrice: this.keyword.highPrice,
+            type: this.keyword.type,
+          }
+        }).then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
           );

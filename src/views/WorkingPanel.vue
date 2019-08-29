@@ -36,8 +36,8 @@ export default {
           value: "name"
         },
         { text: "房屋地址", value: "address", sortable: false },
-        { text: "入住日期", value: "indate" },
-        { text: "退房日期", value: "outdate" },
+        { text: "入住日期", value: "indate", sortable: false },
+        { text: "退房日期", value: "outdate", sortable: false },
         { text: "订单金额", value: "price" },
         { text: "订单状态", value: "state" }
       ],
