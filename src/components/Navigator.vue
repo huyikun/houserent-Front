@@ -2,7 +2,7 @@
   <div>
     <img
       style="width:100%; height:100%; position:fixed;"
-      src="static/img/material.jpg"
+      src="static/img/background.jpg"
     />
     <v-toolbar color="primary" dark>
       <v-btn icon @click="goBack">
