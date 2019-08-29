@@ -27,7 +27,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn color="deep-purple accent-4" text @click="reserve">Submit</v-btn>
+      <v-btn  color="deep-purple accent-4" text @click="reserve">提交</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -47,6 +47,7 @@ export default {
   methods: {
     reserve() {
       console.log(this.dates);
+      //
       this.loading = true;
       setTimeout(() => (this.loading = false), 2000);
     },
