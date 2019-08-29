@@ -1,25 +1,15 @@
 <template>
-  <div style="padding-left:12.5%; padding-right:12.5%; padding-top:20px ; padding-bottom:20px">
-    <v-card style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
+  <div
+    style="padding-left:12.5%; padding-right:12.5%; padding-top:20px ; padding-bottom:20px"
+  >
+    <v-card
+      style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
+    >
       <v-container>
         <br />
-        <v-card-title style="padding-left:50px; padding-right:50px;">注册房源</v-card-title>
-        <br />
-        <v-row style="padding-left:50px; padding-right:50px;">
-          <v-file-input chips multiple label="图片上传" v-model="imgUrl" :rules="[rules.length(3)]"></v-file-input>
-          <v-container>
-            <v-row style="padding-left:50px; padding-right:50px;">
-              <v-col v-for="(img, index) in imgUrl" :key="index" style="width:30%">
-                <v-img max-height="300px" v-bind:src="getObjectURL(img)">
-                  <v-btn x-small @click="delImg(index)">x</v-btn>
-                </v-img>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-row>
-        <v-row justify="center">
-          <v-btn @click="upLoadImg">上传图片</v-btn>
-        </v-row>
+        <v-card-title style="padding-left:50px; padding-right:50px;"
+          >注册房源</v-card-title
+        >
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
           <v-text-field label="房间名称" v-model="house.name"></v-text-field>
@@ -30,7 +20,10 @@
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间定价（每晚）" v-model="house.price"></v-text-field>
+          <v-text-field
+            label="房间定价（每晚）"
+            v-model="house.price"
+          ></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
@@ -38,19 +31,54 @@
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房主联系方式" v-model="house.ownerphone"></v-text-field>
+          <v-text-field
+            label="房主姓名"
+            v-model="house.ownername"
+          ></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间简介" v-model="house.introduce"></v-text-field>
+          <v-text-field
+            label="房主联系方式"
+            v-model="house.ownerphone"
+          ></v-text-field>
         </v-row>
         <br />
+        <v-row style="padding-left:50px; padding-right:50px;">
+          <v-text-field
+            label="房间简介"
+            v-model="house.introduce"
+          ></v-text-field>
+        </v-row>
+        <br />
+        <v-row style="padding-left:50px; padding-right:50px;">
+          <v-file-input
+            chips
+            multiple
+            label="图片上传"
+            v-model="imgUrl"
+            :rules="[rules.length(3)]"
+          ></v-file-input>
+          <v-container>
+            <v-row style="padding-left:50px; padding-right:50px;">
+              <v-col
+                v-for="(img, index) in imgUrl"
+                :key="index"
+                style="width:30%"
+              >
+                <v-img max-height="300px" v-bind:src="getObjectURL(img)">
+                  <v-btn x-small @click="delImg(index)">x</v-btn>
+                </v-img>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-row>
         <v-row justify="center">
           <v-btn @click="addhouse">提交</v-btn>
         </v-row>
       </v-container>
     </v-card>
-    
+
     <!-- <v-card style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
       <v-row class="my-5">
         <v-col>
@@ -103,7 +131,7 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       formData: new FormData(),
       fil: {},
@@ -115,6 +143,7 @@ export default {
         name: "",
         address: "",
         ownerphone: "",
+        ownername: "",
         type: null,
         price: null,
         introduce: "",
@@ -126,7 +155,7 @@ export default {
     };
   },
   methods: {
-    addImg(event) {
+    addImg (event) {
       let inputDOM = this.$refs.inputer;
       // 通过DOM取文件数据
       this.fil = inputDOM.files;
@@ -150,7 +179,7 @@ export default {
         );
       }
     },
-    getObjectURL(file) {
+    getObjectURL (file) {
       var url = null;
       if (window.createObjectURL != undefined) {
         // basic
@@ -164,17 +193,17 @@ export default {
       }
       return url;
     },
-    upLoadImg() {
+    upLoadImg () {
       if (this.imgUrl.length > 0) this.upLoaded = true;
       this.submit()
     },
-    delImg(key) {
+    delImg (key) {
       this.$delete(this.imgUrl, key);
       this.imgLen--;
     },
-    submit() {
+    submit () {
       var i = 0
-      for (;i < this.imgUrl.length ;i++) {
+      for (; i < this.imgUrl.length; i++) {
         this.formData.append("multipartFiles", this.imgUrl[i], this.imgUrl[i].name);
         console.log(this.imgUrl[i])
       }
@@ -197,10 +226,11 @@ export default {
             );
           }
         })
-        .catch(failResponse => {});
+        .catch(failResponse => { });
     },
-    addhouse() {
-      if(this.upLoaded) {
+    addhouse () {
+      this.submit()
+      if (this.upLoaded) {
         this.$axios
           .post("/house/addHouse", this.house)
           .then(successResponse => {
@@ -217,12 +247,12 @@ export default {
               );
             }
           })
-          .catch(failResponse => {});
-        } else {
-          this.$store.commit('updateSnackbarContent','请先上传图片')
-        }
+          .catch(failResponse => { });
+      } else {
+        this.$store.commit('updateSnackbarContent', '请先上传图片')
+      }
     },
-    reset() {
+    reset () {
       Object.assign(this.$data, this.$options.data());
     }
   }
