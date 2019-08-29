@@ -23,9 +23,14 @@ export default new Router({
           component: () => import('./views/WorkingPanel.vue')
         },
         {
-          path: 'complaint',
-          name: 'Complaint',
-          component: () => import('./views/Complaint.vue')
+          path: 'usercard',
+          name: 'UserCard',
+          component: () => import('./components/UserCard.vue')
+        },
+        {
+          path: 'usercontrol',
+          name: 'UserControl',
+          component: () => import('./views/UserControl.vue')
         },
         {
           path: 'order',
@@ -33,9 +38,9 @@ export default new Router({
           component: () => import('./views/Order.vue')
         },
         {
-          path: 'user',
-          name: 'User',
-          component: () => import('./views/User.vue')
+          path: 'complaint',
+          name: 'Complaint',
+          component: () => import('./views/Complaint.vue')
         },
         {
           path: 'addhouse',

@@ -8,7 +8,13 @@
       <v-card-text style="padding-left: 100px; padding-right: 100px;">
         <v-container>
           <v-row>
-            <v-textarea solo name="input-7-4" label="请写下您的意见与建议" v-model="complaintText"></v-textarea>
+            <v-textarea
+              solo
+              name="input-7-4"
+              label="请写下您的意见与建议"
+              style="font-weight:bold"
+              v-model="complaintText"
+            ></v-textarea>
           </v-row>
         </v-container>
       </v-card-text>
@@ -16,7 +22,7 @@
         <v-container>
           <v-row style="padding-left: 90px; padding-right: 90px;">
             <v-file-input
-              style="filter:alpha(opacity=50); -moz-opacity:0.5; opacity: 0.925; "
+              style="font-weight:bold"
               chips
               multiple
               label="文件上传"
@@ -27,14 +33,14 @@
               <v-row style="padding-left:50px; padding-right:50px;">
                 <v-col v-for="(file, index) in fileArray" :key="index" style="width:32%">
                   <v-img contain height="200px" v-bind:src="getObjectURL(file)">
-                    <v-btn x-small @click="delImg(index)">x</v-btn>
+                    <v-btn x-small @click="delImg(index)" color="red lighten-2" dark>x</v-btn>
                   </v-img>
                 </v-col>
               </v-row>
             </v-container>
           </v-row>
           <v-row justify="center">
-            <v-btn @click="submit" text color="primary">提交</v-btn>
+            <v-btn @click="submit" large color="blue darken-1" dark style="font-weight:bold">提交</v-btn>
           </v-row>
         </v-container>
       </v-card-actions>
@@ -104,8 +110,26 @@ export default {
     },
     submit: function() {
       this.upLoadFile();
-      if (this.upLoaded) {
-      }
+      // if (this.upLoaded) {
+      //   this.$axios
+      //     .post("/picture/batch/upload", this.complaintText, {
+      //       headers: { "Content-Type": "multipart/form-data" }
+      //     })
+      //     .then(successResponse => {
+      //       var responseResult = JSON.parse(
+      //         JSON.stringify(successResponse.data.data)
+      //       );
+      //       if (successResponse.data.code === 200) {
+      //         this.$store.commit("updateSnackbarContent", "上传成功");
+      //       } else {
+      //         this.$store.commit(
+      //           "updateSnackbarContent",
+      //           successResponse.data.message
+      //         );
+      //       }
+      //     })
+      //     .catch(failResponse => {});
+      // }
     }
   }
 };

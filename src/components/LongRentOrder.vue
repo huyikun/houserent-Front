@@ -1,23 +1,19 @@
 <template>
   <v-col>
     <v-card width="600px" class="mx-auto">
-      <div class="text-center" style="padding-top: 10px;font-size: 20px;">合同书</div>
+      <div class="text-center" style="padding-top: 10px;font-size: 20px;">
+        合同书
+      </div>
       <v-card-text style="text-align: left">
         甲方姓名(出租方)：
         <u>__{{ partyA }}__</u> 身份证号码：
         <u>__3303033303003030__</u>
-        <br />乙方姓名(承租方)：
-        <u>__{{ partyB }}__</u> 身份证号码：
+        <br />乙方姓名(承租方)： <u>__{{ partyB }}__</u> 身份证号码：
         <u>__3333333333333333__</u>
-        <br />经双方协商甲方将位于
-        <u>__{{ address }}__</u>的房屋
-        <u>__{{ name }}__</u>出租给乙方居住使用。
-        <br />一、租房从
-        <u>__{{ indate }}__</u>起至
-        <u>__{{ outdate }}__</u>止。
-        <br />二、租金为
-        <u>__{{ price }}__</u>元。
-        <br />三、约定事项
+        <br />经双方协商甲方将位于 <u>__{{ address }}__</u>的房屋
+        <u>__{{ name }}__</u>出租给乙方居住使用。 <br />一、租房从
+        <u>__{{ indate }}__</u>起至 <u>__{{ outdate }}__</u>止。
+        <br />二、租金为 <u>__{{ price }}__</u>元。 <br />三、约定事项
         <br />1、乙方入住时，应及时更换门锁若发生意外与甲方无关。因不慎或使用不当引起火灾、电、气灾害等非自然灾害所造成损失由乙方负责。
         <br />2、乙方无权转租、转借、转卖该房屋，及屋内家具家电，不得擅自改动房屋结构，爱护屋内设施，如有人为原因造成破损丢失应维修完好，否则照价赔偿。并做好防火，防盗，防漏水，和阳台摆放、花盆的安全工作，若造成损失责任自负。
         <br />3、乙方必须按时缴纳房租，否则视为乙方违约。协议终止。
@@ -44,19 +40,19 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      partyA: "HUYK",
-      partyB: "BunNiu",
-      name: "宝宝房",
-      address: "北京",
-      indate: "2019-08-30",
-      outdate: "2019-09-30",
+      partyA: 'HUYK',
+      partyB: 'BunNiu',
+      name: '宝宝房',
+      address: '北京',
+      indate: '2019-08-30',
+      outdate: '2019-09-30',
       price: 9999,
-      message: "无"
-    };
+      message: '无',
+    }
   }
-};
+}
 </script>
 
 <style>

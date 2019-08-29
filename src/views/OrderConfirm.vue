@@ -6,11 +6,11 @@
     style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
   >
     <v-img height="200" src="../../static/img/cooking.png"></v-img>
-    <v-card-title>Your home in Haidian</v-card-title>
+    <v-card-title style="font-weight: bold;">Your home in Haidian</v-card-title>
     <v-card-text>
       <v-row align="center"></v-row>
-      <div class="my-4 subtitle-1 black--text">$ • China, Beijing</div>
-      <div>
+      <div class="my-4 subtitle-1 black--text" style="font-weight: bold;">中国，北京</div>
+      <div style="font-size:1.05em">
         Our Wooden Lodge with Hot Tub is in Dimmingsdale forest the surroundings
         are beautiful and peaceful. There is lots to do like rock climbing the
         Churnet valley Boulders, Eating and drinking at the 5 pubs of Alton.
@@ -22,12 +22,12 @@
     </v-card-text>
     <v-divider class="mx-4"></v-divider>
     <v-card-text>
-      <div class="title text--primary">选择起始时间和结束时间</div>
+      <div class="title text--primary">选择开始和结束日期</div>
       <DatePicker @getStartAndEndDate="flushDates" />
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn @click="reserve" text color="primary">提交</v-btn>
+      <v-btn @click="reserve" large color="blue" dark style=" font-size:1.08em">提交</v-btn>
     </v-card-actions>
   </v-card>
 </template>

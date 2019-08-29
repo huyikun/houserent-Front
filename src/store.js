@@ -8,19 +8,40 @@ const store = new Vuex.Store({
     password: 'hyk123',
     email: '958337834@qq.com',
     phone: '15901092037',
-    usermode: 1,
+    usermode: 0,
     snackbar: false,
     text: 'Default text?',
-    limitDateList: [{
-        startDate: new Date("2019-08-28"),
-        endDate: new Date("2019-8-30")
+    admheader: [
+      { text: '租客名称', value: 'userName', align: 'left' },
+      { text: '房主名称', value: 'ownerName', },
+      { text: '房屋名称', value: 'houseName', },
+      { text: '房屋地址', value: 'address', sortable: false },
+      { text: '入住日期', value: 'checkinDate' },
+      { text: '退房日期', value: 'checkoutDate' },
+      { text: '订单金额', value: 'totalRent' },
+      { text: '生成时间', value: 'applyTime' },
+      { text: '订单状态', value: 'state' },
+    ],
+    usrheader: [
+      { text: '房屋名称', value: 'housename', align: 'left' },
+      { text: '房屋地址', value: 'address', sortable: false },
+      { text: '入住日期', value: 'indate' },
+      { text: '退房日期', value: 'outdate' },
+      { text: '订单金额', value: 'price' },
+      { text: '订单状态', value: 'state' }
+    ],
+    limitDateList: [
+      {
+        startDate: new Date('2019-08-28'),
+        endDate: new Date('2019-8-30')
       },
       {
-        startDate: new Date("2019-08-14"),
-        endDate: new Date("2019-8-17")
+        startDate: new Date('2019-08-14'),
+        endDate: new Date('2019-8-17')
       }
     ],
-    houseList: [{
+    houseList: [
+      {
         name: 'room1',
         address: 'Morenaddress1',
         price: 10.0,
@@ -93,31 +114,31 @@ const store = new Vuex.Store({
         timeLine: []
       },
       {
-        name: 'room7',
-        address: 'address7',
+        name: 'room888',
+        address: 'address888',
         price: 70.0,
         introduce: 'iam7',
         ownerphone: '77777',
         photos: ['/static/img/pic2.jpg'],
         timeLine: []
       }
-    ],
+    ]
   },
   mutations: {
-    updateMode(state, value) {
+    updateMode (state, value) {
       state.usermode = value.mode
       state.username = value.username
       state.email = value.email
       state.phone = value.phoneNumber
     },
-    updateSnackbar(state, value) {
+    updateSnackbar (state, value) {
       state.snackbar = value
     },
-    updateSnackbarContent(state, value) {
+    updateSnackbarContent (state, value) {
       store.commit('updateSnackbar', true)
       state.text = value
     },
-    updateHouseList(state, value) {
+    updateHouseList (state, value) {
       state.houseList = value
     }
   }

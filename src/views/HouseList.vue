@@ -1,7 +1,9 @@
 <template>
   <div>
     <OrderSearch />
-    <div style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
+    <div
+      style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
+    >
       <v-container>
         <v-row>
           <v-col
@@ -16,27 +18,27 @@
                 height="145px"
                 gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               >
-                <v-card-title class="fill-height align-end" v-text="house.address"></v-card-title>
+                <v-card-title
+                  class="fill-height align-end"
+                  v-text="house.address"
+                ></v-card-title>
               </v-img>
 
               <v-card-actions>
-                <div style="font-weight: bold; color: #E53935">￥</div>
-                <div style="font-weight: bold;">{{house.price}} / 天</div>
+                <v-card-text>￥{{ house.price }} / 晚</v-card-text>
                 <v-spacer />
                 <v-dialog v-model="dialog[index % cnt]" width="500">
                   <template v-slot:activator="{ on }">
-                    <v-btn color="red lighten-2" dark v-on="on">DETAILS</v-btn>
+                    <v-btn color="red lighten-2" dark v-on="on">Details</v-btn>
                   </template>
 
                   <v-card>
-                    <v-card-title
-                      class="headline grey lighten-1"
-                      primary-title
-                    >欢迎您预览 {{ house.name }}</v-card-title>
+                    <v-card-title class="headline grey lighten-1" primary-title
+                      >欢迎您预览 {{ house.name }}</v-card-title
+                    >
                     <v-carousel
                       :continuous="false"
                       :cycle="cycle"
-                      continuous
                       hide-delimiter-background
                       height="250"
                     >
@@ -48,7 +50,7 @@
                         />
                       </v-carousel-item>
                     </v-carousel>
-                    <v-card-text style="font-weight: bold;">
+                    <v-card-text>
                       房屋地址: {{ house.address }}
                       <br />
                       房屋简介: {{ house.introduce }}
@@ -58,7 +60,9 @@
                     <v-divider></v-divider>
                     <v-card-actions>
                       <div class="flex-grow-1"></div>
-                      <v-btn @click="closeall(index)" text color="red lighten-2">Order Now</v-btn>
+                      <v-btn color="red lighten-2" dark @click="closeall(index)"
+                        >Order Now</v-btn
+                      >
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
@@ -69,7 +73,10 @@
       </v-container>
 
       <div class="text-center" style="z-index:1">
-        <v-pagination v-model="page" :length="Math.ceil(this.$store.state.houseList.length / cnt)"></v-pagination>
+        <v-pagination
+          v-model="page"
+          :length="Math.ceil(this.$store.state.houseList.length / cnt)"
+        ></v-pagination>
       </div>
     </div>
   </div>
@@ -88,17 +95,17 @@ export default {
     slides: ["First", "Second", "Third", "Fourth", "Fifth"]
   }),
   methods: {
-    closeall(index) {
+    closeall (index) {
       this.$router.push({ name: "OrderConfirm" });
       this.dialog[index] = false;
     }
   },
   computed: {
     houseList: {
-      get() {
+      get () {
         return this.$store.state.houseList;
       },
-      set(value) {
+      set (value) {
         this.$store.commit("updateHouseList", value);
       }
     }

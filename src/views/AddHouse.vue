@@ -6,36 +6,43 @@
         <v-card-title style="padding-left:50px; padding-right:50px;">注册房源</v-card-title>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间名称" v-model="house.name"></v-text-field>
+          <v-text-field label="房间名称" style="font-weight:bold" v-model="house.name"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间地址" v-model="house.address"></v-text-field>
+          <v-text-field label="房间地址" style="font-weight:bold" v-model="house.address"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间定价（每晚）" v-model="house.price"></v-text-field>
+          <v-text-field label="房间定价（每晚）" style="font-weight:bold" v-model="house.price"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间类型" v-model="house.type"></v-text-field>
+          <v-text-field label="房间类型" style="font-weight:bold" v-model="house.type"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房主联系方式" v-model="house.ownerphone"></v-text-field>
+          <v-text-field label="房主姓名" style="font-weight:bold" v-model="house.ownername"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间简介" v-model="house.introduce"></v-text-field>
+          <v-text-field label="房主联系方式" style="font-weight:bold" v-model="house.ownerphone"></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-file-input chips multiple label="图片上传" v-model="imgArray" :rules="[rules.length(3)]"></v-file-input>
+          <v-file-input
+            chips
+            multiple
+            label="图片上传"
+            style="font-weight:bold"
+            v-model="imgArray"
+            :rules="[rules.length(3)]"
+          ></v-file-input>
           <v-container>
             <v-row style="padding-left:50px; padding-right:50px;">
               <v-col v-for="(img, index) in imgArray" :key="index" style="width:30%">
                 <v-img contain height="300px" v-bind:src="getObjectURL(img)">
-                  <v-btn x-small @click="delImg(index)">x</v-btn>
+                  <v-btn x-small @click="delImg(index)" color="red lighten-2" dark>x</v-btn>
                 </v-img>
               </v-col>
             </v-row>
@@ -43,7 +50,7 @@
         </v-row>
         <br />
         <v-row justify="center">
-          <v-btn @click="submit" text color="primary">提交</v-btn>
+          <v-btn @click="submit" large color="blue" dark style="font-size:1.08em">提交</v-btn>
         </v-row>
       </v-container>
     </v-card>
@@ -59,6 +66,7 @@ export default {
         name: "",
         address: "",
         ownerphone: "",
+        ownername: "",
         type: null,
         price: null,
         introduce: "",

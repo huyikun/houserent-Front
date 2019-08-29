@@ -15,6 +15,7 @@
             filled
             color="primary"
             label="用户名"
+            style="font-weight: bold;"
             type="username"
           ></v-text-field>
           <v-text-field
@@ -23,15 +24,20 @@
             filled
             color="primary"
             label="密码"
-            style="min-height: 96px"
+            style="font-weight: bold;"
             type="password"
           ></v-text-field>
         </v-form>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn @click="goSignup" text color="primary">注册</v-btn>
+          <v-btn
+            @click="goSignup"
+            color="yellow darken-2"
+            dark
+            style="font-size:1.08em; width: 20%"
+          >注册</v-btn>
           <div class="flex-grow-1"></div>
-          <v-btn @click="Signin" text>登录</v-btn>
+          <v-btn @click="Signin" color="red" dark style="font-size:1.08em; width: 20%">登录</v-btn>
         </v-card-actions>
       </v-card>
     </div>
@@ -62,7 +68,7 @@ export default {
     },
     Signin() {
       this.$axios
-        .post("/login", {
+        .post("/user/login", {
           username: this.username,
           password: this.password
         })
