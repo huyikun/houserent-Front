@@ -5,8 +5,8 @@
       multiple
       :show-current="true"
       :allowed-dates="allowedDates"
-      :min="minDate()"
-      :max="maxDate()"
+      :min="minDate"
+      :max="maxDate"
       no-title
     ></v-date-picker>
   </div>
@@ -17,42 +17,7 @@ export default {
   data: () => ({
     dates: []
   }),
-  methods: {
-    allowedDates: function(val) {
-      var judgeDate = parseInt(
-        val.split("-")[0] + val.split("-")[1] + val.split("-")[2]
-      );
-      var startDate;
-      var endDate;
-      for (var i = 0; i < this.$store.state.limitDateList.length; i++) {
-        startDate = parseInt(
-          this.dateToString(this.$store.state.limitDateList[i].startDate).split(
-            "-"
-          )[0] +
-            this.dateToString(
-              this.$store.state.limitDateList[i].startDate
-            ).split("-")[1] +
-            this.dateToString(
-              this.$store.state.limitDateList[i].startDate
-            ).split("-")[2]
-        );
-        endDate = parseInt(
-          this.dateToString(this.$store.state.limitDateList[i].endDate).split(
-            "-"
-          )[0] +
-            this.dateToString(this.$store.state.limitDateList[i].endDate).split(
-              "-"
-            )[1] +
-            this.dateToString(this.$store.state.limitDateList[i].endDate).split(
-              "-"
-            )[2]
-        );
-        if (startDate <= judgeDate && judgeDate <= endDate) {
-          return false;
-        }
-      }
-      return true;
-    },
+  computed: {
     minDate: function() {
       return this.dateToString(new Date());
     },
@@ -88,6 +53,43 @@ export default {
         day = 1;
       }
       return year + "-" + month + "-" + day;
+    }
+  },
+  methods: {
+    allowedDates: function(val) {
+      var judgeDate = parseInt(
+        val.split("-")[0] + val.split("-")[1] + val.split("-")[2]
+      );
+      var startDate;
+      var endDate;
+      for (var i = 0; i < this.$store.state.limitDateList.length; i++) {
+        startDate = parseInt(
+          this.dateToString(this.$store.state.limitDateList[i].startDate).split(
+            "-"
+          )[0] +
+            this.dateToString(
+              this.$store.state.limitDateList[i].startDate
+            ).split("-")[1] +
+            this.dateToString(
+              this.$store.state.limitDateList[i].startDate
+            ).split("-")[2]
+        );
+        endDate = parseInt(
+          this.dateToString(this.$store.state.limitDateList[i].endDate).split(
+            "-"
+          )[0] +
+            this.dateToString(this.$store.state.limitDateList[i].endDate).split(
+              "-"
+            )[1] +
+            this.dateToString(this.$store.state.limitDateList[i].endDate).split(
+              "-"
+            )[2]
+        );
+        if (startDate <= judgeDate && judgeDate <= endDate) {
+          return false;
+        }
+      }
+      return true;
     },
     dateToString: function(date) {
       var year = date.getFullYear();
