@@ -13,12 +13,20 @@
           single-line
           hide-details
         ></v-text-field>
+        <v-btn class="ml-3 mt-2" @click="pass">通过</v-btn>
       </v-card-title>
+
       <v-data-table
         :headers="headers"
         :items="orders"
         :search="search"
-      ></v-data-table>
+        item-key="houseName"
+        show-select
+        v-model="selected"
+        :single-select="singleSelect"
+        class="elevation-1"
+      >
+      </v-data-table>
     </v-card>
   </v-container>
 </template>
@@ -28,158 +36,81 @@ export default {
   data () {
     return {
       search: "",
-      headers: [
-        {
-          text: "房屋名称",
-          align: "left",
-          sortable: false,
-          value: "name"
-        },
-        { text: "房屋地址", value: "address", sortable: false },
-        { text: "入住日期", value: "indate", sortable: false },
-        { text: "退房日期", value: "outdate", sortable: false },
-        { text: "订单金额", value: "price" },
-        { text: "订单状态", value: "state" }
-      ],
-      orders: [
-        {
-          name: "Eclair",
-          address: "America",
-          indate: "2019-9-1",
-          outdate: "2019-10-7",
-          price: 5000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Gingerbread",
-          address: "Xi'an",
-          indate: "2018-10-1",
-          outdate: "2019-10-7",
-          price: 100,
-          state: "未支付"
-        },
-        {
-          name: "Jelly bean",
-          address: "Chongqing",
-          indate: "2019-10-1",
-          outdate: "2019-10-7",
-          price: 1080,
-          state: "未支付"
-        },
-        {
-          name: "Lollipop",
-          address: "Tianjing",
-          indate: "2019-11-1",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        },
-        {
-          name: "Cupcake",
-          address: "England",
-          indate: "2019-10-2",
-          outdate: "2019-10-7",
-          price: 1000,
-          state: "未支付"
-        }
-      ]
+      singleSelect: false,
+      selected: [],
+      orders: [],
     };
+  },
+  computed: {
+    headers: {
+      get () {
+        return this.$store.state.usermode === 0 ? this.$store.state.admheader : this.$store.state.usrheader
+      }
+    }
+  },
+  created () {
+    this.getOrders()
+  },
+  methods: {
+    getOrders: function () {
+      this.orders = [
+        {
+          userName: "HUU",
+          ownerName: "Cuu",
+          houseName: "Eclair",
+          address: "America",
+          checkinDate: "2019-9-1",
+          checkoutDate: "2019-10-7",
+          applyTime: '2019-8-29 11:15:08',
+          totalRent: 5000,
+          state: "未支付"
+        },
+        {
+          userName: "HUU",
+          ownerName: "Cupcake",
+          houseName: "Eclppir",
+          address: "America",
+          checkinDate: "2019-9-1",
+          checkoutDate: "2019-10-7",
+          applyTime: '2019-8-29 11:15:08',
+          totalRent: 5000,
+          state: "未支付"
+        },
+        {
+          userName: "HUU",
+          ownerName: "Gingerbread",
+          houseName: "Eccair",
+          address: "America",
+          checkinDate: "2019-9-1",
+          checkoutDate: "2019-10-7",
+          applyTime: '2019-8-29 11:15:08',
+          totalRent: 5000,
+          state: "未支付"
+        },
+      ]
+      this.$axios.get('/order/get').then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          this.orders = responseResult
+        } else {
+          this.$store.commit("updateSnackbarContent", successResponse.data.message);
+        }
+      }).catch(failResponse => { });
+    },
+    pass: function () {
+      this.$axios.post('/order/pass', selected).then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          this.orders = responseResult
+        } else {
+          this.$store.commit("updateSnackbarContent", successResponse.data.message);
+        }
+      }).catch(failResponse => { });
+    },
   }
 };
 </script>
