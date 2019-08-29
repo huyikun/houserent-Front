@@ -108,7 +108,6 @@ export default {
           );
           if (successResponse.data.code === 200) {
             this.$store.commit("updateSnackbarContent", "上传成功");
-            if (this.imgArray.length > 0) this.upLoaded = true;
             this.house.photos = responseResult;
           } else {
             this.$store.commit(
@@ -119,6 +118,7 @@ export default {
         })
         .catch(failResponse => {});
       console.log(this.formData);
+      if (this.imgArray.length > 0) this.upLoaded = true;
     },
     submit() {
       this.upLoadImg();
