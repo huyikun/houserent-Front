@@ -46,6 +46,11 @@ export default new Router({
           path: 'orderconfirm',
           name: 'OrderConfirm',
           component: () => import('./views/OrderConfirm.vue')
+        },
+        {
+          path: 'usercontrol',
+          name: 'UserControl',
+          component: () => import('./views/UserControl.vue')
         }
         // ,
         // {
