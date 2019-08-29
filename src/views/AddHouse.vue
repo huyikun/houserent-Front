@@ -68,7 +68,7 @@
         </v-row>
         <br />
         <v-row justify="center">
-          <v-btn @click="addhouse">提交</v-btn>
+          <v-btn @click="upLoadImg">提交</v-btn>
         </v-row>
       </v-container>
     </v-card>
@@ -135,6 +135,7 @@ export default {
           if (successResponse.data.code === 200) {
             this.$store.commit("updateSnackbarContent", "上传成功");
             this.house.photos = responseResult;
+            this.submit()
           } else {
             this.$store.commit(
               "updateSnackbarContent",
@@ -147,7 +148,7 @@ export default {
       if (this.imgArray.length > 0) this.upLoaded = true;
     },
     submit () {
-      this.upLoadImg();
+      // this.upLoadImg();
       if (this.upLoaded) {
         this.$axios
           .post("/house/AddHouse", this.house)

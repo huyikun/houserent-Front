@@ -13,7 +13,12 @@
           single-line
           hide-details
         ></v-text-field>
-        <v-btn class="ml-3 mt-2" @click="pass">通过</v-btn>
+        <v-btn
+          v-if="this.$store.state.usermode === 0"
+          class="ml-3 mt-2"
+          @click="passOrders"
+          >通过</v-btn
+        >
       </v-card-title>
 
       <v-data-table
@@ -21,11 +26,22 @@
         :items="orders"
         :search="search"
         item-key="houseName"
-        show-select
+        :show-select="showselect"
+        disable-sort
         v-model="selected"
-        :single-select="singleSelect"
         class="elevation-1"
       >
+        <template v-slot:item.action="{ item }">
+          <v-btn
+            small
+            color="primary"
+            dark
+            class="mx-2"
+            @click="goDetail(item)"
+          >
+            Details
+          </v-btn>
+        </template>
       </v-data-table>
     </v-card>
   </v-container>
@@ -36,23 +52,30 @@ export default {
   data () {
     return {
       search: "",
-      singleSelect: false,
       selected: [],
       orders: [],
-    };
+
+    }
   },
   computed: {
     headers: {
       get () {
         return this.$store.state.usermode === 0 ? this.$store.state.admheader : this.$store.state.usrheader
       }
-    }
+    },
+    showselect: function () {
+      return (this.$store.state.usermode === 0 ? true : false)
+    },
   },
   created () {
-    this.getOrders()
+    if (this.$store.state.usermode === 0) {
+      this.getAllOrders()
+    } else if (this.$store.state.usermode === 1) {
+      this.getUserOrders()
+    }
   },
   methods: {
-    getOrders: function () {
+    getAllOrders: function () {
       this.orders = [
         {
           userName: "HUU",
@@ -88,7 +111,7 @@ export default {
           state: "未支付"
         },
       ]
-      this.$axios.get('/order/get').then(successResponse => {
+      this.$axios.get('/order/getAll').then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );
@@ -99,7 +122,58 @@ export default {
         }
       }).catch(failResponse => { });
     },
-    pass: function () {
+    getUserOrders: function () {
+      this.orders = [
+        {
+          userName: "HUU",
+          ownerName: "Cuu",
+          houseName: "Eclair",
+          address: "America",
+          checkinDate: "2019-9-1",
+          checkoutDate: "2019-10-7",
+          applyTime: '2019-8-29 11:15:08',
+          totalRent: 5000,
+          state: "未支付"
+        },
+        {
+          userName: "HUU",
+          ownerName: "Cupcake",
+          houseName: "Eclppir",
+          address: "America",
+          checkinDate: "2019-9-1",
+          checkoutDate: "2019-10-7",
+          applyTime: '2019-8-29 11:15:08',
+          totalRent: 5000,
+          state: "未支付"
+        },
+        {
+          userName: "HUU",
+          ownerName: "Gingerbread",
+          houseName: "Eccair",
+          address: "America",
+          checkinDate: "2019-9-1",
+          checkoutDate: "2019-10-7",
+          applyTime: '2019-8-29 11:15:08',
+          totalRent: 5000,
+          state: "未支付"
+        },
+      ]
+      this.$axios.get('/order/getUser', {
+        params: {
+          userName: this.userName
+        }
+      }).then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          this.orders = responseResult
+        } else {
+          this.$store.commit("updateSnackbarContent", successResponse.data.message);
+        }
+      }).catch(failResponse => { });
+    },
+    passOrders: function () {
       this.$axios.post('/order/pass', selected).then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
@@ -111,6 +185,10 @@ export default {
         }
       }).catch(failResponse => { });
     },
+    goDetail: function (item) {
+      this.$store.commit('updateOrder', item)
+      this.$router.push({ name: 'OrderPage' })
+    }
   }
 };
 </script>
