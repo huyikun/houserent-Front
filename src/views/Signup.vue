@@ -4,20 +4,12 @@
     <div
       style="padding-left:30%; padding-right:30%;padding-top:4%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
     >
-<<<<<<< HEAD
-      <v-card class="mx-auto mt-1">
-=======
       <v-card class="mx-auto mt-1" style="max-width: 500px;">
->>>>>>> Huu
         <v-toolbar color="primary" cards dark flat>
           <v-btn icon @click="goBack">
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
-<<<<<<< HEAD
-          <v-card-title class="title font-weight-regular">注册账户</v-card-title>
-=======
           <v-card-title class="title font-weight-regular">注册</v-card-title>
->>>>>>> Huu
         </v-toolbar>
         <v-form ref="form" v-model="form" class="pa-4 pt-6">
           <v-text-field
@@ -34,11 +26,7 @@
             filled
             color="primary"
             label="密码"
-<<<<<<< HEAD
-            style="min-height: 96px"
-=======
             style="font-weight: bold;"
->>>>>>> Huu
             type="password"
           ></v-text-field>
           <v-text-field

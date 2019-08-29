@@ -1,17 +1,10 @@
 <template>
   <div
-<<<<<<< HEAD
-    style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925; padding-left:20%;padding-right:20%"
-=======
     style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875; padding-left: 15%; padding-right: 15%;"
->>>>>>> Huu
     class="ma-3"
   >
     <v-card>
       <v-card-title>
-<<<<<<< HEAD
-        <v-text-field v-model="search" append-icon="search" label="搜索" single-line hide-details></v-text-field>
-=======
         <v-text-field
           v-model="search"
           append-icon="search"
@@ -20,7 +13,6 @@
           single-line
           hide-details
         ></v-text-field>
->>>>>>> Huu
       </v-card-title>
       <v-data-table
         :headers="headers"
@@ -37,9 +29,6 @@
             <div class="flex-grow-1"></div>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
-<<<<<<< HEAD
-                <v-btn color="primary" dark class="mb-2" v-on="on">创建新用户</v-btn>
-=======
                 <v-btn
                   color="blue darken-1"
                   text
@@ -47,7 +36,6 @@
                   v-on="on"
                   style="font-size:1.08em"
                 >创建新用户</v-btn>
->>>>>>> Huu
               </template>
               <v-card>
                 <v-card-title>
