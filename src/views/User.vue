@@ -20,10 +20,11 @@
         <v-card-actions>
           <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on }">
-              <v-btn color="red lighten-2" dark v-on="on">Contact us</v-btn>
+              <v-spacer />
+              <v-btn text color="red lighten-2" dark v-on="on">联系我们</v-btn>
             </template>
             <v-card>
-              <v-card-title class="headline grey lighten-2" primary-title>Team Member</v-card-title>
+              <v-card-title class="headline grey lighten-2" primary-title>团队成员</v-card-title>
               <v-card-text>
                 <br />HYK 958337834@qq.com
                 <br />Dastur xxx@xx.com
