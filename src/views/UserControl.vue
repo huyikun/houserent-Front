@@ -208,10 +208,10 @@ export default {
         // Object.assign(this.users[this.editedIndex], this.editedItem)
         // edit
         let param = new URLSearchParams()
-        param.append('username', item.username)
-        param.append('password', item.password)
-        param.append('email', item.email)
-        param.append('phone', item.phone)
+        param.append('username', this.editedItem.username)
+        param.append('password', this.editedItem.password)
+        param.append('email', this.editedItem.email)
+        param.append('phone', this.editedItem.phone)
         this.$axios.post('/user/edit', param).then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
@@ -225,10 +225,10 @@ export default {
         // this.users.push(this.editedItem)
         // post 增
         let param = new URLSearchParams()
-        param.append('username', item.username)
-        param.append('password', item.password)
-        param.append('email', item.email)
-        param.append('phone', item.phone)
+        param.append('username', this.editedItem.username)
+        param.append('password', this.editedItem.password)
+        param.append('email', this.editedItem.email)
+        param.append('phone', this.editedItem.phone)
         this.$axios.post('/user/add', param).then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)

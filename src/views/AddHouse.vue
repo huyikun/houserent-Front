@@ -6,22 +6,6 @@
         <v-card-title style="padding-left:50px; padding-right:50px;">注册房源</v-card-title>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-file-input chips multiple label="图片上传" v-model="imgUrl" :rules="[rules.length(3)]"></v-file-input>
-          <v-container>
-            <v-row style="padding-left:50px; padding-right:50px;">
-              <v-col v-for="(img, index) in imgUrl" :key="index" style="width:30%">
-                <v-img max-height="300px" v-bind:src="getObjectURL(img)">
-                  <v-btn x-small @click="delImg(index)">x</v-btn>
-                </v-img>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-row>
-        <v-row justify="center">
-          <v-btn @click="upLoadImg">上传图片</v-btn>
-        </v-row>
-        <br />
-        <v-row style="padding-left:50px; padding-right:50px;">
           <v-text-field label="房间名称" v-model="house.name"></v-text-field>
         </v-row>
         <br />
@@ -38,6 +22,10 @@
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
+          <v-text-field label="房主姓名" v-model="house.ownername"></v-text-field>
+        </v-row>
+        <br />
+        <v-row style="padding-left:50px; padding-right:50px;">
           <v-text-field label="房主联系方式" v-model="house.ownerphone"></v-text-field>
         </v-row>
         <br />
@@ -45,6 +33,19 @@
           <v-text-field label="房间简介" v-model="house.introduce"></v-text-field>
         </v-row>
         <br />
+        <v-row style="padding-left:50px; padding-right:50px;">
+          <v-file-input chips multiple label="图片上传" v-model="imgUrl" :rules="[rules.length(3)]"></v-file-input>
+          <v-container>
+            <v-row style="padding-left:50px; padding-right:50px;">
+              <v-col v-for="(img, index) in imgUrl" :key="index" style="width:30%">
+                <v-img max-height="300px" v-bind:src="getObjectURL(img)">
+                  <v-btn x-small @click="delImg(index)">x</v-btn>
+                </v-img>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-row>
+        <br/>
         <v-row justify="center">
           <v-btn @click="addhouse">提交</v-btn>
         </v-row>
@@ -172,8 +173,8 @@ export default {
       this.$delete(this.imgUrl, key);
       this.imgLen--;
     },
-    submit() {
-      var i = 0
+    addhouse() {
+       var i = 0
       for (;i < this.imgUrl.length ;i++) {
         this.formData.append("multipartFiles", this.imgUrl[i], this.imgUrl[i].name);
         console.log(this.imgUrl[i])
@@ -185,22 +186,23 @@ export default {
         .then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
-          );
+          )
           if (successResponse.data.code === 200) {
-            this.$store.commit("updateSnackbarContent", "上传成功");
-            this.showaddhouse = true;
-            this.house.photos = responseResult;
+            this.$store.commit("updateSnackbarContent", "上传成功")
+            this.upLoaded = true
+            this.house.photos = responseResult
           } else {
             this.$store.commit(
               "updateSnackbarContent",
               successResponse.data.message
-            );
+            )
           }
         })
         .catch(failResponse => {});
-    },
-    addhouse() {
-      if(this.upLoaded) {
+      console.log(this.upLoaded)
+      
+      if(true) {
+        console.log(2)
         this.$axios
           .post("/house/addHouse", this.house)
           .then(successResponse => {
@@ -208,7 +210,7 @@ export default {
               JSON.stringify(successResponse.data.data)
             );
             if (successResponse.data.code === 200) {
-              this.$store.commit("updateSnackbarContent", "上传成功");
+              this.$store.commit("updateSnackbarContent", "上传房屋成功");
               this.reset();
             } else {
               this.$store.commit(
@@ -219,6 +221,7 @@ export default {
           })
           .catch(failResponse => {});
         } else {
+          console.log(3)
           this.$store.commit('updateSnackbarContent','请先上传图片')
         }
     },
