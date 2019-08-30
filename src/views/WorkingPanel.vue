@@ -110,7 +110,7 @@ export default {
       }).catch(failResponse => { });
     },
     passOrders: function () {
-      this.$axios.post('/order/pass', selected).then(successResponse => {
+      this.$axios.post('/order/pass', this.selected).then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );

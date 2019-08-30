@@ -9,7 +9,9 @@
     <v-card-title style="font-weight: bold;">Your home in Haidian</v-card-title>
     <v-card-text>
       <v-row align="center"></v-row>
-      <div class="my-4 subtitle-1 black--text" style="font-weight: bold;">中国，北京</div>
+      <div class="my-4 subtitle-1 black--text" style="font-weight: bold;">
+        中国，北京
+      </div>
       <div style="font-size:1.05em">
         Our Wooden Lodge with Hot Tub is in Dimmingsdale forest the surroundings
         are beautiful and peaceful. There is lots to do like rock climbing the
@@ -25,8 +27,14 @@
       <v-container>
         <v-row>
           <v-col class="title text--primary">选择开始和结束日期:</v-col>
-          <v-col class="title text--primary">开始日期：{{this.dates[0]}}</v-col>
-          <v-col class="title text--primary">结束日期：{{this.dates[1] ? this.dates[1] : this.dates[0]}}</v-col>
+          <v-col class="title text--primary"
+            >开始日期：{{ this.dates[0] }}</v-col
+          >
+          <v-col class="title text--primary"
+            >结束日期：{{
+              this.dates[1] ? this.dates[1] : this.dates[0]
+            }}</v-col
+          >
         </v-row>
       </v-container>
 
@@ -34,7 +42,9 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn @click="reserve" large color="blue" dark style=" font-size:1.08em">提交</v-btn>
+      <v-btn @click="reserve" large color="blue" dark style=" font-size:1.08em"
+        >提交</v-btn
+      >
     </v-card-actions>
   </v-card>
 </template>
@@ -51,7 +61,7 @@ export default {
     selection: 1,
     dates: []
   }),
-  created() {
+  created () {
     this.$store.commit("updateLimitDateList", [
       {
         startDate: new Date("2019-08-28"),
@@ -85,16 +95,16 @@ export default {
       });
   },
   methods: {
-    reserve() {
+    reserve () {
       console.log(this.dates);
       this.loading = true;
       setTimeout(() => (this.loading = false), 2000);
     },
-    flushDates: function(data) {
+    flushDates: function (data) {
       this.dates = data.dates;
       console.log(this.dates);
     },
-    order() {
+    order () {
       this.$axios
         .get("/order/orderHouse", {
           params: {
@@ -110,7 +120,7 @@ export default {
         .then(successResponse => {
           if (successResponse.data.code === 200) {
             this.$store.commit("updateSnackbarContent", "申请成功,等待审核");
-            this.$router.push({ name: "Main" });
+            this.$router.push({ name: "WorkingPanel" });
           } else {
             this.$store.commit(
               "updateSnackbarContent",
