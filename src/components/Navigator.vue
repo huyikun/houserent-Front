@@ -21,7 +21,7 @@
           text
           @click.stop="goAddHouse"
           style="font-size:1.08em"
-          >添加房源</v-btn
+          >注册房源</v-btn
         >
         <v-btn
           v-if="usermode === 0"

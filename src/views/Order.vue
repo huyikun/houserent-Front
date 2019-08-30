@@ -41,9 +41,9 @@
                       hide-delimiter-background
                       height="250"
                     >
-                      <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                      <v-carousel-item v-for="(photo, i) in house.photos" :key="i">
                         <v-img
-                          :src="require('@/assets/pic2.jpg')"
+                          :src="photo"
                           height="200px"
                           gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                         />

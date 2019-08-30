@@ -16,7 +16,7 @@
         ></v-text-field>
         <v-btn
           class="ml-3 mt-2"
-          @click="pass"
+          @click="passOrders"
           color="info"
           dark
           style="font-size:0.7em"
@@ -36,14 +36,14 @@
       >
         <template v-slot:item.action="{ item }">
           <v-btn
-            v-if="showDetail"
+            v-if="showDetail(item)"
             small
             color="primary"
             dark
             class="mx-2"
             @click="goDetail(item)"
           >
-            Details
+            Details 
           </v-btn>
         </template>
       </v-data-table>
@@ -69,9 +69,6 @@ export default {
     showSelect: function () {
       return (this.$store.state.usermode === 0 ? true : false)
     },
-    showDetail: (item) => {
-      return item.state !== "waiting"
-    }
   },
   created () {
     if (this.$store.state.usermode === 0) {
@@ -81,6 +78,10 @@ export default {
     }
   },
   methods: {
+    showDetail: function (value) {
+      console.log(value)
+      return !(value.state === "waiting")
+    },
     getAllOrders: function () {
       this.$axios.get('/order/getAll').then(successResponse => {
         var responseResult = JSON.parse(

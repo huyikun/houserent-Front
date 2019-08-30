@@ -24,10 +24,11 @@
         <template v-slot:top>
           <v-toolbar flat color="white">
             <v-toolbar-title>用户管理</v-toolbar-title>
-            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-divider class="mx-2" inset vertical></v-divider>
+            <v-spacer />
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
-                <v-btn small color="info" dark v-on="on" fab style="font-size:1.08em; margin-left:81%">
+                <v-btn small color="info" dark v-on="on" fab style="font-size:1.08em;">
                   <v-icon>mdi-plus</v-icon>
                 </v-btn>
               </template>
@@ -128,26 +129,6 @@ export default {
 
   methods: {
     initialize () {
-      this.users = [
-        {
-          username: 'Bcascask',
-          password: '11csa223',
-          email: 'hucom',
-          phone: '15901092037',
-        },
-        {
-          username: 'Bcnk',
-          password: '1123',
-          email: 'hu.com',
-          phone: '15092037',
-        },
-        {
-          username: 'Bcnk',
-          password: '1123',
-          email: 'hu&&&qq.com',
-          phone: '15092037',
-        },
-      ]
       // get 
       this.$axios.get('/user/get').then(successResponse => {
         var responseResult = JSON.parse(
@@ -156,7 +137,7 @@ export default {
         if (successResponse.data.code === 200) {
           this.users = responseResult
         }
-        this.$store.commit("updateSnackbarContent", successResponse.data.message);
+        // this.$store.commit("updateSnackbarContent", successResponse.data.message);
       }).catch(failResponse => { });
     },
 

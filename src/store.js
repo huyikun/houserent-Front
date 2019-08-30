@@ -124,78 +124,6 @@ const store = new Vuex.Store({
         ownerPhone: '111111',
         photos: ['/static/img/pic2.jpg']
       },
-      {
-        name: 'room2',
-        address: 'address2',
-        price: 20.0,
-        introduce: 'iam2',
-        ownerName: 'Huu',
-        ownerPhone: '222222',
-        photos: ['/static/img/pic2.jpg']
-      },
-      {
-        name: 'room3',
-        address: 'address3',
-        price: 30.0,
-        introduce: 'iam3',
-        ownerName: 'Huu',
-        ownerPhone: '33333',
-        photos: ['/static/img/pic2.jpg']
-      },
-      {
-        name: 'room4',
-        address: 'address4',
-        price: 40.0,
-        introduce: 'iam4',
-        ownerName: 'Huu',
-        ownerPhone: '44444',
-        photos: ['/static/img/pic2.jpg']
-      },
-      {
-        name: 'room5',
-        address: 'address5',
-        price: 50.0,
-        introduce: 'iam5',
-        ownerName: 'Huu',
-        ownerPhone: '55555',
-        photos: ['/static/img/pic2.jpg']
-      },
-      {
-        name: 'room6',
-        address: 'address6',
-        price: 60.0,
-        introduce: 'iam6',
-        ownerName: 'Huu',
-        ownerPhone: '66666',
-        photos: ['/static/img/pic2.jpg']
-      },
-      {
-        name: 'room7',
-        address: 'address7',
-        price: 70.0,
-        introduce: 'iam7',
-        ownerName: 'Huu',
-        ownerPhone: '77777',
-        photos: ['/static/img/pic2.jpg']
-      },
-      {
-        name: 'room7',
-        address: 'address7',
-        price: 70.0,
-        introduce: 'iam7',
-        ownerName: 'Huu',
-        ownerPhone: '77777',
-        photos: ['/static/img/pic2.jpg']
-      },
-      {
-        name: 'room888',
-        address: 'address888',
-        price: 70.0,
-        introduce: 'iam7',
-        ownerName: 'Huu',
-        ownerPhone: '77777',
-        photos: ['/static/img/pic2.jpg']
-      }
     ]
   },
   mutations: {
@@ -203,7 +131,7 @@ const store = new Vuex.Store({
       state.usermode = value.mode
       state.username = value.username
       state.email = value.email
-      state.phone = value.phoneNumber
+      state.phone = value.phone
     },
     updateSnackbar(state, value) {
       state.snackbar = value

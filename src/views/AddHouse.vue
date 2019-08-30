@@ -30,6 +30,10 @@
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
+          <v-textarea label="房屋简介" name="input-7-4" solo style="font-weight:bold" v-model="house.introduce"></v-textarea>
+        </v-row>
+        <br />
+        <v-row style="padding-left:50px; padding-right:50px;">
           <v-file-input
             chips
             multiple
