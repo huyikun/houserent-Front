@@ -22,7 +22,14 @@
     </v-card-text>
     <v-divider class="mx-4"></v-divider>
     <v-card-text>
-      <div class="title text--primary">选择开始和结束日期</div>
+      <v-container>
+        <v-row>
+          <v-col class="title text--primary">选择开始和结束日期:</v-col>
+          <v-col class="title text--primary">开始日期：{{this.dates[0]}}</v-col>
+          <v-col class="title text--primary">结束日期：{{this.dates[1] ? this.dates[1] : this.dates[0]}}</v-col>
+        </v-row>
+      </v-container>
+
       <DatePicker @getStartAndEndDate="flushDates" />
     </v-card-text>
     <v-card-actions>
