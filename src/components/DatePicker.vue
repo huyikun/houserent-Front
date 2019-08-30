@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { relative } from 'path';
 export default {
   data: () => ({
     dates: []
@@ -62,34 +63,35 @@ export default {
       );
       var startDate;
       var endDate;
-      for (var i = 0; i < this.$store.state.limitDateList.length; i++) {
+      var list = this.$store.state.limitDateList
+      for (var i = 0; i < list.length; i++) {
+        console.log(list[i].startDate);
         startDate = parseInt(
-          this.dateToString(this.$store.state.limitDateList[i].startDate).split(
-            "-"
-          )[0] +
-            this.dateToString(
-              this.$store.state.limitDateList[i].startDate
-            ).split("-")[1] +
-            this.dateToString(
-              this.$store.state.limitDateList[i].startDate
-            ).split("-")[2]
+          list[i].startDate.split("-")[0] +
+          list[i].startDate.split("-")[1] +
+          list[i].startDate.split("-")[2]
         );
         endDate = parseInt(
-          this.dateToString(this.$store.state.limitDateList[i].endDate).split(
-            "-"
-          )[0] +
-            this.dateToString(this.$store.state.limitDateList[i].endDate).split(
-              "-"
-            )[1] +
-            this.dateToString(this.$store.state.limitDateList[i].endDate).split(
-              "-"
-            )[2]
+          list[i].endDate.split("-")[0] +
+          list[i].endDate.split("-")[1] +
+          list[i].endDate.split("-")[2]
         );
         if (startDate <= judgeDate && judgeDate <= endDate) {
           return false;
         }
       }
       return true;
+    },
+    pickable: function(startDate, endDate) {
+      var i = 0
+      var list = this.$store.state.limitDateList
+      for(i ; i < list.length ; i++ ) {
+        var st = list[i].startDate
+        var ed = list[i].endDate
+        if(startDate <= st && ed <= endDate)
+          return false
+      }
+      return true
     },
     dateToString: function(date) {
       var year = date.getFullYear();
@@ -103,7 +105,7 @@ export default {
       }
       var res = year + "-" + month + "-" + day;
       return res;
-    }
+    },
   },
   watch: {
     dates: {
@@ -124,7 +126,13 @@ export default {
             this.dates[0] = date1;
             this.dates[1] = date3;
           }
-          this.$emit("getStartAndEndDate", { dates: this.dates });
+          if(this.pickable(this.dates[0],this.dates[1])) {
+            this.$emit("getStartAndEndDate", { dates: this.dates });
+          } else {
+            this.dates.splice(0, 2)
+            this.$store.commit('updateSnackbarContent', '日期不可选')
+            this.$emit("getStartAndEndDate", { dates: this.dates });
+          }
         }
         if (this.dates.length == 1) {
           this.$emit("getStartAndEndDate", { dates: this.dates });

@@ -1,9 +1,9 @@
 <template>
   <div id="main">
     <Navigator />
-    <!-- <keep-alive> -->
+    <keep-alive>
       <router-view />
-    <!-- </keep-alive> -->
+    </keep-alive>
   </div>
 </template>
 

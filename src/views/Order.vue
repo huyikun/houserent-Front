@@ -97,7 +97,7 @@ export default {
     goOrderConfirm (value) {
       this.$store.commit('updatePickedHouse', value)
       this.$router.push({ name: "OrderConfirm" });
-      this.dialog[index] = false;
+      this.dialog[this.index] = false
     }
   },
   computed: {

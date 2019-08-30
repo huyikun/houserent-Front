@@ -42,7 +42,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn @click="reserve" large color="blue" dark style=" font-size:1.08em"
+      <v-btn @click="order" large color="blue" dark style=" font-size:1.08em"
         >提交</v-btn
       >
     </v-card-actions>
@@ -57,21 +57,10 @@ export default {
   },
   data: () => ({
     house: {},
-    loading: false,
     selection: 1,
     dates: []
   }),
   created () {
-    this.$store.commit("updateLimitDateList", [
-      {
-        startDate: new Date("2019-08-28"),
-        endDate: new Date("2019-08-30")
-      },
-      {
-        startDate: new Date("2019-08-14"),
-        endDate: new Date("2019-08-17")
-      }
-    ]);
     this.house = this.$store.state.pickedHouse;
     this.$axios
       .get("/house/getOccupiedDate", {
@@ -95,14 +84,8 @@ export default {
       });
   },
   methods: {
-    reserve () {
-      console.log(this.dates);
-      this.loading = true;
-      setTimeout(() => (this.loading = false), 2000);
-    },
     flushDates: function (data) {
       this.dates = data.dates;
-      console.log(this.dates);
     },
     order () {
       this.$axios
