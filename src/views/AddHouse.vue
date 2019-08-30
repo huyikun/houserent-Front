@@ -33,14 +33,14 @@
         <v-row style="padding-left:50px; padding-right:50px;">
           <v-text-field
             label="房主姓名"
-            v-model="house.ownername"
+            v-model="house.ownerName"
           ></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
           <v-text-field
             label="房主联系方式"
-            v-model="house.ownerphone"
+            v-model="house.ownerPhone"
           ></v-text-field>
         </v-row>
         <br />
@@ -83,8 +83,8 @@ export default {
       house: {
         name: "",
         address: "",
-        ownerphone: "",
-        ownername: "",
+        ownerPhone: "",
+        ownerName: "",
         type: null,
         price: null,
         introduce: "",
