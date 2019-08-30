@@ -33,12 +33,14 @@ export default {
     DatePicker
   },
   data: () => ({
-    house: this.$store.state.PickedHouse,
+    house: {},
     loading: false,
     selection: 1,
     dates: []
   }),
-
+  created () {
+    this.house = this.$store.state.pickedHouse
+  },
   methods: {
     reserve () {
       console.log(this.dates);
