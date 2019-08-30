@@ -1,6 +1,6 @@
 <template>
   <div
-    style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
+    style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875; padding-left: 15%; padding-right: 15%;"
     class="ma-3"
   >
     <v-card>
@@ -9,6 +9,7 @@
           v-model="search"
           append-icon="search"
           label="搜索"
+          style="font-weight:bold"
           single-line
           hide-details
         ></v-text-field>
@@ -24,13 +25,11 @@
           <v-toolbar flat color="white">
             <v-toolbar-title>用户管理</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
-
-            <div class="flex-grow-1"></div>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark class="mb-2" v-on="on"
-                  >创建新用户</v-btn
-                >
+                <v-btn small color="info" dark v-on="on" fab style="font-size:1.08em; margin-left:81%">
+                  <v-icon>mdi-plus</v-icon>
+                </v-btn>
               </template>
               <v-card>
                 <v-card-title>
@@ -43,48 +42,38 @@
                         <v-text-field
                           v-model="editedItem.username"
                           label="用户名"
+                          style="font-size:1.1em"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.password"
                           label="密码"
+                          style="font-size:1.1em"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.email"
-                          label="邮箱"
-                        ></v-text-field>
+                        <v-text-field v-model="editedItem.email" label="邮箱" style="font-size:1.1em"></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.phone"
-                          label="手机"
-                        ></v-text-field>
+                        <v-text-field v-model="editedItem.phone" label="手机" style="font-size:1.1em"></v-text-field>
                       </v-col>
                     </v-row>
                   </v-container>
                 </v-card-text>
 
                 <v-card-actions>
+                  <v-btn @click="close" color="error" text style="font-size: 1.08em; width: 20%">取消</v-btn>
                   <div class="flex-grow-1"></div>
-                  <v-btn color="blue darken-1" text @click="close"
-                    >Cancel</v-btn
-                  >
-                  <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                  <v-btn @click="save" color="info" text style="font-size: 1.08em; width: 20%">保存</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-toolbar>
         </template>
         <template v-slot:item.action="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
-            edit
-          </v-icon>
-          <v-icon small @click="deleteItem(item)">
-            delete
-          </v-icon>
+          <v-icon small class="mr-2" @click="editItem(item)" color="blue">edit</v-icon>
+          <v-icon small @click="deleteItem(item)" color="error">delete</v-icon>
         </template>
         <template v-slot:no-data>
           <div>当前无注册用户</div>

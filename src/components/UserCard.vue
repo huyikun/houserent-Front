@@ -7,7 +7,7 @@
         </v-img>
 
         <v-card-text>
-          <span class="text--primary">
+          <span class="text--primary" style="font-size: 1.08em">
             <span>Username: {{ username }}</span>
             <br />
             <span>Email : {{ email }}</span>
@@ -21,11 +21,11 @@
           <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on }">
               <v-spacer />
-              <v-btn text color="red lighten-2" dark v-on="on">联系我们</v-btn>
+              <v-btn text color="blue" style="font-size: 1.08em" v-on="on">联系我们</v-btn>
             </template>
             <v-card>
               <v-card-title class="headline grey lighten-2" primary-title>团队成员</v-card-title>
-              <v-card-text>
+              <v-card-text style="font-size: 1.08em">
                 <br />HYK 958337834@qq.com
                 <br />Dastur xxx@xx.com
                 <br />
@@ -33,7 +33,7 @@
               <v-divider></v-divider>
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn color="primary" text @click="dialog = false">OK</v-btn>
+                <v-btn color="blue" text @click="dialog = false" style="font-size: 1.08em">关闭</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>

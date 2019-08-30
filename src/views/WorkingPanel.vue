@@ -1,7 +1,5 @@
 <template>
-  <v-container
-    style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
-  >
+  <v-container style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
     <v-card>
       <v-card-title>
         您的订单
@@ -10,15 +8,11 @@
           v-model="search"
           append-icon="search"
           label="搜索"
+          style="font-weight:bold"
           single-line
           hide-details
         ></v-text-field>
-        <v-btn
-          v-if="this.$store.state.usermode === 0"
-          class="ml-3 mt-2"
-          @click="passOrders"
-          >通过</v-btn
-        >
+        <v-btn class="ml-3 mt-2" @click="pass" color="info" dark style="font-size:0.7em">确认</v-btn>
       </v-card-title>
 
       <v-data-table
@@ -26,23 +20,11 @@
         :items="orders"
         :search="search"
         item-key="houseName"
-        :show-select="showselect"
-        disable-sort
+        show-select
         v-model="selected"
+        :single-select="singleSelect"
         class="elevation-1"
-      >
-        <template v-slot:item.action="{ item }">
-          <v-btn
-            small
-            color="primary"
-            dark
-            class="mx-2"
-            @click="goDetail(item)"
-          >
-            Details
-          </v-btn>
-        </template>
-      </v-data-table>
+      ></v-data-table>
     </v-card>
   </v-container>
 </template>

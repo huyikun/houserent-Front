@@ -27,39 +27,95 @@ const store = new Vuex.Store({
       ownerPhone: '77777',
       photos: ['/static/img/pic2.jpg']
     },
-    admheader: [
-      { text: '租客名称', value: 'userName', align: 'left' },
-      { text: '房主名称', value: 'ownerName', align: 'center' },
-      { text: '房屋名称', value: 'houseName', align: 'center' },
-      { text: '房屋地址', value: 'address', align: 'center' },
-      { text: '入住日期', value: 'checkinDate', align: 'center' },
-      { text: '退房日期', value: 'checkoutDate', align: 'center' },
-      { text: '订单金额', value: 'totalRent', align: 'center' },
-      { text: '生成时间', value: 'applyTime', align: 'center' },
-      { text: '订单状态', value: 'state', align: 'center' }
-    ],
-    usrheader: [
-      { text: '房屋名称', value: 'houseName', align: 'left' },
-      { text: '房屋地址', value: 'address', align: 'center' },
-      { text: '入住日期', value: 'checkinDate', align: 'center' },
-      { text: '退房日期', value: 'checkoutDate', align: 'center' },
-      { text: '订单金额', value: 'totalRent', align: 'center' },
-      { text: '生成时间', value: 'applyTime', align: 'center' },
-      { text: '订单状态', value: 'state', align: 'center' },
-      { text: 'Actions', value: 'action', align: 'center' }
-    ],
-    limitDateList: [
-      {
-        startDate: new Date('2019-08-28'),
-        endDate: new Date('2019-08-30')
+    admheader: [{
+        text: '租客名称',
+        value: 'userName',
+        align: 'left'
       },
       {
-        startDate: new Date('2019-08-14'),
-        endDate: new Date('2019-08-17')
+        text: '房主名称',
+        value: 'ownerName',
+        align: 'center'
+      },
+      {
+        text: '房屋名称',
+        value: 'houseName',
+        align: 'center'
+      },
+      {
+        text: '房屋地址',
+        value: 'address',
+        align: 'center'
+      },
+      {
+        text: '入住日期',
+        value: 'checkinDate',
+        align: 'center'
+      },
+      {
+        text: '退房日期',
+        value: 'checkoutDate',
+        align: 'center'
+      },
+      {
+        text: '订单金额',
+        value: 'totalRent',
+        align: 'center'
+      },
+      {
+        text: '生成时间',
+        value: 'applyTime',
+        align: 'center'
+      },
+      {
+        text: '订单状态',
+        value: 'state',
+        align: 'center'
       }
     ],
-    houseList: [
+    usrheader: [{
+        text: '房屋名称',
+        value: 'houseName',
+        align: 'left'
+      },
       {
+        text: '房屋地址',
+        value: 'address',
+        align: 'center'
+      },
+      {
+        text: '入住日期',
+        value: 'checkinDate',
+        align: 'center'
+      },
+      {
+        text: '退房日期',
+        value: 'checkoutDate',
+        align: 'center'
+      },
+      {
+        text: '订单金额',
+        value: 'totalRent',
+        align: 'center'
+      },
+      {
+        text: '生成时间',
+        value: 'applyTime',
+        align: 'center'
+      },
+      {
+        text: '订单状态',
+        value: 'state',
+        align: 'center'
+      },
+      {
+        text: 'Actions',
+        value: 'action',
+        align: 'center'
+      }
+    ],
+    limitDateList: [],
+    houseList: [{
         name: 'room1',
         address: 'Morenaddress1',
         price: 10.0,
@@ -143,26 +199,26 @@ const store = new Vuex.Store({
     ]
   },
   mutations: {
-    updateMode (state, value) {
+    updateMode(state, value) {
       state.usermode = value.mode
       state.username = value.username
       state.email = value.email
       state.phone = value.phoneNumber
     },
-    updateSnackbar (state, value) {
+    updateSnackbar(state, value) {
       state.snackbar = value
     },
-    updateSnackbarContent (state, value) {
+    updateSnackbarContent(state, value) {
       store.commit('updateSnackbar', true)
       state.text = value
     },
-    updateHouseList (state, value) {
+    updateHouseList(state, value) {
       state.houseList = value
     },
-    updatePickedHouse (state, value) {
+    updatePickedHouse(state, value) {
       state.pickedHouse = value
     },
-    updateOrder (state, value) {
+    updateOrder(state, value) {
       state.order = value
     },
     updateLimitDateList(state, value) {

@@ -62,9 +62,7 @@ export default {
       );
       var startDate;
       var endDate;
-      console.log(2)
       for (var i = 0; i < this.$store.state.limitDateList.length; i++) {
-        console.log(1)
         startDate = parseInt(
           this.dateToString(this.$store.state.limitDateList[i].startDate).split(
             "-"
@@ -94,7 +92,6 @@ export default {
       return true;
     },
     dateToString: function(date) {
-      console.log(date)
       var year = date.getFullYear();
       var month = (date.getMonth() + 1).toString();
       var day = date.getDate().toString();
@@ -127,6 +124,9 @@ export default {
             this.dates[0] = date1;
             this.dates[1] = date3;
           }
+          this.$emit("getStartAndEndDate", { dates: this.dates });
+        }
+        if (this.dates.length == 1) {
           this.$emit("getStartAndEndDate", { dates: this.dates });
         }
       }
