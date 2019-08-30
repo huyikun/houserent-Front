@@ -1,5 +1,7 @@
 <template>
-  <v-container style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;">
+  <v-container
+    style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
+  >
     <v-card>
       <v-card-title>
         您的订单
@@ -12,7 +14,14 @@
           single-line
           hide-details
         ></v-text-field>
-        <v-btn class="ml-3 mt-2" @click="pass" color="info" dark style="font-size:0.7em">确认</v-btn>
+        <v-btn
+          class="ml-3 mt-2"
+          @click="pass"
+          color="info"
+          dark
+          style="font-size:0.7em"
+          >确认</v-btn
+        >
       </v-card-title>
 
       <v-data-table
@@ -20,11 +29,24 @@
         :items="orders"
         :search="search"
         item-key="houseName"
-        show-select
+        :show-select="showSelect"
+        disable-sort
         v-model="selected"
-        :single-select="singleSelect"
         class="elevation-1"
-      ></v-data-table>
+      >
+        <template v-slot:item.action="{ item }">
+          <v-btn
+            v-if="showDetail"
+            small
+            color="primary"
+            dark
+            class="mx-2"
+            @click="goDetail(item)"
+          >
+            Details
+          </v-btn>
+        </template>
+      </v-data-table>
     </v-card>
   </v-container>
 </template>
@@ -36,7 +58,6 @@ export default {
       search: "",
       selected: [],
       orders: [],
-
     }
   },
   computed: {
@@ -45,9 +66,12 @@ export default {
         return this.$store.state.usermode === 0 ? this.$store.state.admheader : this.$store.state.usrheader
       }
     },
-    showselect: function () {
+    showSelect: function () {
       return (this.$store.state.usermode === 0 ? true : false)
     },
+    showDetail: (item) => {
+      return item.state !== "waiting"
+    }
   },
   created () {
     if (this.$store.state.usermode === 0) {
@@ -58,41 +82,6 @@ export default {
   },
   methods: {
     getAllOrders: function () {
-      this.orders = [
-        {
-          userName: "HUU",
-          ownerName: "Cuu",
-          houseName: "Eclair",
-          address: "America",
-          checkinDate: "2019-9-1",
-          checkoutDate: "2019-10-7",
-          applyTime: '2019-8-29 11:15:08',
-          totalRent: 5000,
-          state: "未支付"
-        },
-        {
-          userName: "HUU",
-          ownerName: "Cupcake",
-          houseName: "Eclppir",
-          address: "America",
-          checkinDate: "2019-9-1",
-          checkoutDate: "2019-10-7",
-          applyTime: '2019-8-29 11:15:08',
-          totalRent: 5000,
-          state: "未支付"
-        },
-        {
-          userName: "HUU",
-          ownerName: "Gingerbread",
-          houseName: "Eccair",
-          address: "America",
-          checkinDate: "2019-9-1",
-          checkoutDate: "2019-10-7",
-          applyTime: '2019-8-29 11:15:08',
-          totalRent: 5000,
-          state: "未支付"
-        },
-      ]
       this.$axios.get('/order/getAll').then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
@@ -105,44 +94,9 @@ export default {
       }).catch(failResponse => { });
     },
     getUserOrders: function () {
-      this.orders = [
-        {
-          userName: "HUU",
-          ownerName: "Cuu",
-          houseName: "Eclair",
-          address: "America",
-          checkinDate: "2019-9-1",
-          checkoutDate: "2019-10-7",
-          applyTime: '2019-8-29 11:15:08',
-          totalRent: 5000,
-          state: "未支付"
-        },
-        {
-          userName: "HUU",
-          ownerName: "Cupcake",
-          houseName: "Eclppir",
-          address: "America",
-          checkinDate: "2019-9-1",
-          checkoutDate: "2019-10-7",
-          applyTime: '2019-8-29 11:15:08',
-          totalRent: 5000,
-          state: "未支付"
-        },
-        {
-          userName: "HUU",
-          ownerName: "Gingerbread",
-          houseName: "Eccair",
-          address: "America",
-          checkinDate: "2019-9-1",
-          checkoutDate: "2019-10-7",
-          applyTime: '2019-8-29 11:15:08',
-          totalRent: 5000,
-          state: "未支付"
-        },
-      ]
-      this.$axios.get('/order/getUser', {
+      this.$axios.get('/order/getUserOrder', {
         params: {
-          userName: this.userName
+          userName: this.$store.state.username
         }
       }).then(successResponse => {
         var responseResult = JSON.parse(
