@@ -6,28 +6,22 @@
     style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
   >
     <v-img height="200" src="../../static/img/cooking.png"></v-img>
-    <v-card-title>Your home in Haidian</v-card-title>
+    <v-card-title>Your home : {{ house.name }}</v-card-title>
     <v-card-text>
       <v-row align="center"></v-row>
-      <div class="my-4 subtitle-1 black--text">$ • China, Beijing</div>
+      <div class="my-4 subtitle-1 black--text">$ • {{ house.address }}</div>
       <div>
-        Our Wooden Lodge with Hot Tub is in Dimmingsdale forest the surroundings
-        are beautiful and peaceful. There is lots to do like rock climbing the
-        Churnet valley Boulders, Eating and drinking at the 5 pubs of Alton.
-        Walking the staffordshire way or exploring the many forest tracks on
-        your doorstep. You may want a fun packed day at Alton Towers park or
-        spa. Cook on the BBQ, sit on your tree swing or relax in our new Hot Tub
-        or toast marshmallows on your fire pit and listen to the owls hoot.
+        {{ house.introduce }}
       </div>
     </v-card-text>
     <v-divider class="mx-4"></v-divider>
     <v-card-text>
-      <div class="title text--primary">Choose the time to move into</div>
+      <div class="title text--primary">请选择入住日期</div>
       <DatePicker @getStartAndEndDate="flushDates" />
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn  color="deep-purple accent-4" text @click="reserve">提交</v-btn>
+      <v-btn color="deep-purple accent-4" text @click="order">提交</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -39,22 +33,48 @@ export default {
     DatePicker
   },
   data: () => ({
+    house: this.$store.state.PickedHouse,
     loading: false,
     selection: 1,
     dates: []
   }),
 
   methods: {
-    reserve() {
+    reserve () {
       console.log(this.dates);
-      //
       this.loading = true;
       setTimeout(() => (this.loading = false), 2000);
     },
-    flushDates: function(data) {
+    flushDates: function (data) {
       this.dates = data.dates;
       console.log(this.dates);
-    }
+    },
+    order () {
+      this.$axios.get('/order', {
+        params: {
+          userName: this.$store.state.username,
+          ownerName: this.house.ownerName,
+          houseName: this.house.name,
+          address: this.house.address,
+          price: this.house.price,
+          checkinDate: this.dates[0],
+          checkoutDate: this.dates[1],
+        }
+      }).then(
+        successResponse => {
+          if (successResponse.data.code === 200) {
+            this.$store.commit("updateSnackbarContent", "申请成功,等待审核");
+            this.$store.commit('updatePickedHouse', value)
+            this.$router.push({ name: "Main" });
+          } else {
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
+          }
+        }
+      )
+    },
   }
 };
 </script>

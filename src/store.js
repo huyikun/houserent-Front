@@ -15,9 +15,10 @@ const store = new Vuex.Store({
       houseName: '宝宝房',
       address: '北京市海淀区北京航空航天大学三公寓',
       ownerName: 'Huu',
-
+      //
       type: 'short'
     },
+    pickedHouse: {},
     admheader: [
       { text: '租客名称', value: 'userName', align: 'left' },
       { text: '房主名称', value: 'ownerName', align: 'center' },
@@ -55,6 +56,7 @@ const store = new Vuex.Store({
         address: 'Morenaddress1',
         price: 10.0,
         introduce: 'iam1',
+        ownerName: 'Huu',
         ownerPhone: '111111',
         photos: ['/static/img/pic2.jpg']
       },
@@ -63,6 +65,7 @@ const store = new Vuex.Store({
         address: 'address2',
         price: 20.0,
         introduce: 'iam2',
+        ownerName: 'Huu',
         ownerPhone: '222222',
         photos: ['/static/img/pic2.jpg']
       },
@@ -71,6 +74,7 @@ const store = new Vuex.Store({
         address: 'address3',
         price: 30.0,
         introduce: 'iam3',
+        ownerName: 'Huu',
         ownerPhone: '33333',
         photos: ['/static/img/pic2.jpg']
       },
@@ -79,6 +83,7 @@ const store = new Vuex.Store({
         address: 'address4',
         price: 40.0,
         introduce: 'iam4',
+        ownerName: 'Huu',
         ownerPhone: '44444',
         photos: ['/static/img/pic2.jpg']
       },
@@ -87,6 +92,7 @@ const store = new Vuex.Store({
         address: 'address5',
         price: 50.0,
         introduce: 'iam5',
+        ownerName: 'Huu',
         ownerPhone: '55555',
         photos: ['/static/img/pic2.jpg']
       },
@@ -95,6 +101,7 @@ const store = new Vuex.Store({
         address: 'address6',
         price: 60.0,
         introduce: 'iam6',
+        ownerName: 'Huu',
         ownerPhone: '66666',
         photos: ['/static/img/pic2.jpg']
       },
@@ -103,6 +110,7 @@ const store = new Vuex.Store({
         address: 'address7',
         price: 70.0,
         introduce: 'iam7',
+        ownerName: 'Huu',
         ownerPhone: '77777',
         photos: ['/static/img/pic2.jpg']
       },
@@ -111,6 +119,7 @@ const store = new Vuex.Store({
         address: 'address7',
         price: 70.0,
         introduce: 'iam7',
+        ownerName: 'Huu',
         ownerPhone: '77777',
         photos: ['/static/img/pic2.jpg']
       },
@@ -119,6 +128,7 @@ const store = new Vuex.Store({
         address: 'address888',
         price: 70.0,
         introduce: 'iam7',
+        ownerName: 'Huu',
         ownerPhone: '77777',
         photos: ['/static/img/pic2.jpg']
       }
@@ -140,6 +150,9 @@ const store = new Vuex.Store({
     },
     updateHouseList (state, value) {
       state.houseList = value
+    },
+    updatePickedHouse (state, value) {
+      state.pickedHouse = value
     },
     updateOrder (state, value) {
       state.order = value

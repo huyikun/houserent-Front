@@ -42,9 +42,12 @@
                       hide-delimiter-background
                       height="250"
                     >
-                      <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                      <v-carousel-item
+                        v-for="(photo, i) in house.photos"
+                        :key="i"
+                      >
                         <v-img
-                          :src="require('@/assets/pic2.jpg')"
+                          :src="photo"
                           height="200px"
                           gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                         />
@@ -55,12 +58,15 @@
                       <br />
                       房屋简介: {{ house.introduce }}
                       <br />
-                      房东电话: {{ house.ownerphone }}
+                      房东电话: {{ house.ownerPhone }}
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
                       <div class="flex-grow-1"></div>
-                      <v-btn color="red lighten-2" dark @click="closeall(index)"
+                      <v-btn
+                        color="red lighten-2"
+                        dark
+                        @click="goOrderConfirm(house)"
                         >Order Now</v-btn
                       >
                     </v-card-actions>
@@ -95,7 +101,8 @@ export default {
     slides: ["First", "Second", "Third", "Fourth", "Fifth"]
   }),
   methods: {
-    closeall (index) {
+    goOrderConfirm (value) {
+      this.$store.commit('updatePickedHouse', value)
       this.$router.push({ name: "OrderConfirm" });
       this.dialog[index] = false;
     }
