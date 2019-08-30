@@ -18,7 +18,15 @@ const store = new Vuex.Store({
       //
       type: 'short'
     },
-    pickedHouse: {},
+    pickedHouse: {
+      name: 'room888',
+      address: 'address888',
+      price: 70.0,
+      introduce: 'iam7',
+      ownerName: 'Huu',
+      ownerPhone: '77777',
+      photos: ['/static/img/pic2.jpg']
+    },
     admheader: [
       { text: '租客名称', value: 'userName', align: 'left' },
       { text: '房主名称', value: 'ownerName', align: 'center' },
