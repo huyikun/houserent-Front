@@ -46,7 +46,7 @@
       <v-btn
         class="mt-3 pr-5"
         large
-        color="red lighten-2"
+        color="info"
         dark
         @click="search"
         style="font-size: 1.08em;"

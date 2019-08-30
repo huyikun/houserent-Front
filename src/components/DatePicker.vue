@@ -126,6 +126,9 @@ export default {
           }
           this.$emit("getStartAndEndDate", { dates: this.dates });
         }
+        if (this.dates.length == 1) {
+          this.$emit("getStartAndEndDate", { dates: this.dates });
+        }
       }
     }
   }

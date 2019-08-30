@@ -32,12 +32,12 @@
         <v-card-actions>
           <v-btn
             @click="goSignup"
-            color="yellow darken-2"
+            color="warning"
             dark
             style="font-size:1.08em; width: 20%"
           >注册</v-btn>
           <div class="flex-grow-1"></div>
-          <v-btn @click="Signin" color="red" dark style="font-size:1.08em; width: 20%">登录</v-btn>
+          <v-btn @click="Signin" color="success" dark style="font-size:1.08em; width: 20%">登录</v-btn>
         </v-card-actions>
       </v-card>
     </div>
@@ -58,7 +58,7 @@ export default {
         length: len => v => (v || "").length >= len || `密码至少需要${len}位`,
         password: v =>
           (v || "").match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/) ||
-          "密码必须包含字母和数字"
+          "密码必须包含字母和数字且最少6位"
       }
     };
   },

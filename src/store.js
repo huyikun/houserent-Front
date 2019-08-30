@@ -32,12 +32,12 @@ const store = new Vuex.Store({
     ],
     limitDateList: [
       {
-        startDate: new Date('2019-08-28'),
-        endDate: new Date('2019-8-30')
+        startDate: new Date('2019-09-04'),
+        endDate: new Date('2019-09-15')
       },
       {
-        startDate: new Date('2019-08-14'),
-        endDate: new Date('2019-8-17')
+        startDate: new Date('2019-09-17'),
+        endDate: new Date('2019-09-19')
       }
     ],
     houseList: [

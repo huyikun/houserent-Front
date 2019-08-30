@@ -20,12 +20,13 @@
               </v-img>
 
               <v-card-actions>
-                <div style="font-weight: bold; color: #E53935">￥</div>
-                <div style="font-weight: bold;">{{house.price}} / 天</div>
+                <div style="font-size: 1.08em;">￥{{house.price}} / 天</div>
                 <v-spacer />
                 <v-dialog v-model="dialog[index % cnt]" width="500">
                   <template v-slot:activator="{ on }">
-                    <v-btn color="red lighten-2" dark v-on="on">DETAILS</v-btn>
+                    <v-btn color="info" style="font-size: 1.08em;" small fab dark v-on="on">
+                      <v-icon>launch</v-icon>
+                    </v-btn>
                   </template>
 
                   <v-card>
@@ -48,7 +49,7 @@
                         />
                       </v-carousel-item>
                     </v-carousel>
-                    <v-card-text style="font-weight: bold;">
+                    <v-card-text style="font-size: 1.08em;">
                       房屋地址: {{ house.address }}
                       <br />
                       房屋简介: {{ house.introduce }}
@@ -58,7 +59,12 @@
                     <v-divider></v-divider>
                     <v-card-actions>
                       <div class="flex-grow-1"></div>
-                      <v-btn @click="closeall(index)" text color="red lighten-2">Order Now</v-btn>
+                      <v-btn
+                        @click="closeall(index)"
+                        dark
+                        color="info"
+                        style="font-size:1.08em"
+                      >预定</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-dialog>

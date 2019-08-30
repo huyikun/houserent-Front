@@ -25,17 +25,11 @@
           <v-toolbar flat color="white">
             <v-toolbar-title>用户管理</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
-
-            <div class="flex-grow-1"></div>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  class="mb-2"
-                  v-on="on"
-                  style="font-size:1.08em"
-                >创建新用户</v-btn>
+                <v-btn small color="info" dark v-on="on" fab style="font-size:1.08em; margin-left:81%">
+                  <v-icon>mdi-plus</v-icon>
+                </v-btn>
               </template>
               <v-card>
                 <v-card-title>
@@ -48,44 +42,30 @@
                         <v-text-field
                           v-model="editedItem.username"
                           label="用户名"
-                          style="font-weight:bold"
+                          style="font-size:1.1em"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.password"
                           label="密码"
-                          style="font-weight:bold"
+                          style="font-size:1.1em"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.email"
-                          label="邮箱"
-                          style="font-weight:bold"
-                        ></v-text-field>
+                        <v-text-field v-model="editedItem.email" label="邮箱" style="font-size:1.1em"></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.phone"
-                          label="手机"
-                          style="font-weight:bold"
-                        ></v-text-field>
+                        <v-text-field v-model="editedItem.phone" label="手机" style="font-size:1.1em"></v-text-field>
                       </v-col>
                     </v-row>
                   </v-container>
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn
-                    @click="close"
-                    color="red lighten-2"
-                    dark
-                    style="font-size: 1.08em; width:20%"
-                  >取消</v-btn>
+                  <v-btn @click="close" color="error" text style="font-size: 1.08em; width: 20%">取消</v-btn>
                   <div class="flex-grow-1"></div>
-
-                  <v-btn @click="save" color="green" dark style="font-size: 1.08em; width: 20%">保存</v-btn>
+                  <v-btn @click="save" color="info" text style="font-size: 1.08em; width: 20%">保存</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -93,7 +73,7 @@
         </template>
         <template v-slot:item.action="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)" color="blue">edit</v-icon>
-          <v-icon small @click="deleteItem(item)" color="red lighten-2">delete</v-icon>
+          <v-icon small @click="deleteItem(item)" color="error">delete</v-icon>
         </template>
         <template v-slot:no-data>
           <div>当前无注册用户</div>
@@ -112,7 +92,7 @@ export default {
       { text: "密码", align: "center", value: "password", sortable: false },
       { text: "邮箱", align: "center", value: "email", sortable: false },
       { text: "手机", align: "center", value: "phone", sortable: false },
-      { text: "Actions", align: "center", value: "action", sortable: false }
+      { text: "操作", align: "center", value: "action", sortable: false }
     ],
     users: [],
     editedIndex: -1,
@@ -132,7 +112,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "添加用户" : "编辑用户信息";
     }
   },
 

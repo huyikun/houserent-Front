@@ -42,7 +42,9 @@
             <v-row style="padding-left:50px; padding-right:50px;">
               <v-col v-for="(img, index) in imgArray" :key="index" style="width:30%">
                 <v-img contain height="300px" v-bind:src="getObjectURL(img)">
-                  <v-btn x-small @click="delImg(index)" color="red lighten-2" dark>x</v-btn>
+                  <v-btn x-small @click="delImg(index)" fab color="red lighten-2" depressed dark>
+                    <v-icon>delete</v-icon>
+                  </v-btn>
                 </v-img>
               </v-col>
             </v-row>
@@ -50,7 +52,9 @@
         </v-row>
         <br />
         <v-row justify="center">
-          <v-btn @click="submit" large color="blue" dark style="font-size:1.08em">提交</v-btn>
+          <v-btn @click="submit" color="blue" dark fab>
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
         </v-row>
       </v-container>
     </v-card>

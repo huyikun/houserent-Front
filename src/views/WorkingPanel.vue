@@ -12,13 +12,7 @@
           single-line
           hide-details
         ></v-text-field>
-        <v-btn
-          class="ml-3 mt-2"
-          @click="pass"
-          color="blue"
-          dark
-          style="font-size:0.7em"
-        >确认</v-btn>
+        <v-btn class="ml-3 mt-2" @click="pass" color="info" dark style="font-size:0.7em">确认</v-btn>
       </v-card-title>
 
       <v-data-table
