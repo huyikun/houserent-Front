@@ -42,8 +42,8 @@
             <v-row style="padding-left:50px; padding-right:50px;">
               <v-col v-for="(img, index) in imgArray" :key="index" style="width:30%">
                 <v-img contain height="300px" v-bind:src="getObjectURL(img)">
-                  <v-btn x-small @click="delImg(index)" fab color="red lighten-2" depressed dark>
-                    <v-icon>delete</v-icon>
+                  <v-btn x-small @click="delImg(index)" fab color="error" depressed dark>
+                    <v-icon>close</v-icon>
                   </v-btn>
                 </v-img>
               </v-col>

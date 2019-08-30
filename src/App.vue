@@ -32,6 +32,14 @@ export default {
       timeout: 6000,
     }
   },
+  created() {
+    
+    localStorage.getItem("userMsg") && this.$store.replaceState(JSON.parse(localStorage.getItem("userMsg")));
+    
+    window.addEventListener("beforeunload",()=>{
+        localStorage.setItem("userMsg",JSON.stringify(this.$store.state))
+    })
+  },
   methods: {
     closesnackbar: function () {
       this.$store.commit('updateSnackbar', false)

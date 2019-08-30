@@ -54,13 +54,13 @@
                       <br />
                       房屋简介: {{ house.introduce }}
                       <br />
-                      房东电话: {{ house.ownerphone }}
+                      房东电话: {{ house.ownerPhone }}
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
                       <div class="flex-grow-1"></div>
                       <v-btn
-                        @click="closeall(index)"
+                        @click="goOrderConfirm(house)"
                         dark
                         color="info"
                         style="font-size:1.08em"
@@ -94,17 +94,18 @@ export default {
     slides: ["First", "Second", "Third", "Fourth", "Fifth"]
   }),
   methods: {
-    closeall(index) {
+    goOrderConfirm (value) {
+      this.$store.commit('updatePickedHouse', value)
       this.$router.push({ name: "OrderConfirm" });
       this.dialog[index] = false;
     }
   },
   computed: {
     houseList: {
-      get() {
+      get () {
         return this.$store.state.houseList;
       },
-      set(value) {
+      set (value) {
         this.$store.commit("updateHouseList", value);
       }
     }

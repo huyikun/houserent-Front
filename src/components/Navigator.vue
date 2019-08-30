@@ -11,9 +11,7 @@
       <v-btn icon @click="goUserCard">
         <v-icon>account_circle</v-icon>
       </v-btn>
-
       <v-spacer />
-
       <v-toolbar-items class="hidden-xs-only">
         <v-btn v-if="usermode === 0" text @click.stop="goAddHouse" style="font-size:1.08em">添加房源</v-btn>
         <v-btn v-if="usermode === 0" text @click.stop="goUserControl" style="font-size:1.08em">管理用户</v-btn>

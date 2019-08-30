@@ -32,7 +32,7 @@
         <v-card-actions>
           <v-btn
             @click="goSignup"
-            color="warning"
+            color="info"
             dark
             style="font-size:1.08em; width: 20%"
           >注册</v-btn>

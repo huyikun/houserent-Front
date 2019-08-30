@@ -33,7 +33,9 @@
               <v-row style="padding-left:50px; padding-right:50px;">
                 <v-col v-for="(file, index) in fileArray" :key="index" style="width:32%">
                   <v-img contain height="200px" v-bind:src="getObjectURL(file)">
-                    <v-btn x-small @click="delImg(index)" color="red lighten-2" dark>x</v-btn>
+                    <v-btn @click="delImg(index)" x-small color="error" fab depressed dark>
+                      <v-icon>close</v-icon>
+                    </v-btn>
                   </v-img>
                 </v-col>
               </v-row>

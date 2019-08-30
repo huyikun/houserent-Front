@@ -31,28 +31,33 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       search: "",
-      singleSelect: false,
       selected: [],
-      orders: []
-    };
+      orders: [],
+
+    }
   },
   computed: {
     headers: {
-      get() {
-        return this.$store.state.usermode === 0
-          ? this.$store.state.admheader
-          : this.$store.state.usrheader;
+      get () {
+        return this.$store.state.usermode === 0 ? this.$store.state.admheader : this.$store.state.usrheader
       }
+    },
+    showselect: function () {
+      return (this.$store.state.usermode === 0 ? true : false)
+    },
+  },
+  created () {
+    if (this.$store.state.usermode === 0) {
+      this.getAllOrders()
+    } else if (this.$store.state.usermode === 1) {
+      this.getUserOrders()
     }
   },
-  created() {
-    this.getOrders();
-  },
   methods: {
-    getOrders: function() {
+    getAllOrders: function () {
       this.orders = [
         {
           userName: "HUU",
@@ -61,7 +66,7 @@ export default {
           address: "America",
           checkinDate: "2019-9-1",
           checkoutDate: "2019-10-7",
-          applyTime: "2019-8-29 11:15:08",
+          applyTime: '2019-8-29 11:15:08',
           totalRent: 5000,
           state: "未支付"
         },
@@ -72,7 +77,7 @@ export default {
           address: "America",
           checkinDate: "2019-9-1",
           checkoutDate: "2019-10-7",
-          applyTime: "2019-8-29 11:15:08",
+          applyTime: '2019-8-29 11:15:08',
           totalRent: 5000,
           state: "未支付"
         },
@@ -83,45 +88,88 @@ export default {
           address: "America",
           checkinDate: "2019-9-1",
           checkoutDate: "2019-10-7",
-          applyTime: "2019-8-29 11:15:08",
+          applyTime: '2019-8-29 11:15:08',
           totalRent: 5000,
           state: "未支付"
+        },
+      ]
+      this.$axios.get('/order/getAll').then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          this.orders = responseResult
+        } else {
+          this.$store.commit("updateSnackbarContent", successResponse.data.message);
         }
-      ];
-      this.$axios
-        .get("/order/get")
-        .then(successResponse => {
-          var responseResult = JSON.parse(
-            JSON.stringify(successResponse.data.data)
-          );
-          if (successResponse.data.code === 200) {
-            this.orders = responseResult;
-          } else {
-            this.$store.commit(
-              "updateSnackbarContent",
-              successResponse.data.message
-            );
-          }
-        })
-        .catch(failResponse => {});
+      }).catch(failResponse => { });
     },
-    pass: function() {
-      this.$axios
-        .post("/order/pass", selected)
-        .then(successResponse => {
-          var responseResult = JSON.parse(
-            JSON.stringify(successResponse.data.data)
-          );
-          if (successResponse.data.code === 200) {
-            this.orders = responseResult;
-          } else {
-            this.$store.commit(
-              "updateSnackbarContent",
-              successResponse.data.message
-            );
-          }
-        })
-        .catch(failResponse => {});
+    getUserOrders: function () {
+      this.orders = [
+        {
+          userName: "HUU",
+          ownerName: "Cuu",
+          houseName: "Eclair",
+          address: "America",
+          checkinDate: "2019-9-1",
+          checkoutDate: "2019-10-7",
+          applyTime: '2019-8-29 11:15:08',
+          totalRent: 5000,
+          state: "未支付"
+        },
+        {
+          userName: "HUU",
+          ownerName: "Cupcake",
+          houseName: "Eclppir",
+          address: "America",
+          checkinDate: "2019-9-1",
+          checkoutDate: "2019-10-7",
+          applyTime: '2019-8-29 11:15:08',
+          totalRent: 5000,
+          state: "未支付"
+        },
+        {
+          userName: "HUU",
+          ownerName: "Gingerbread",
+          houseName: "Eccair",
+          address: "America",
+          checkinDate: "2019-9-1",
+          checkoutDate: "2019-10-7",
+          applyTime: '2019-8-29 11:15:08',
+          totalRent: 5000,
+          state: "未支付"
+        },
+      ]
+      this.$axios.get('/order/getUser', {
+        params: {
+          userName: this.userName
+        }
+      }).then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          this.orders = responseResult
+        } else {
+          this.$store.commit("updateSnackbarContent", successResponse.data.message);
+        }
+      }).catch(failResponse => { });
+    },
+    passOrders: function () {
+      this.$axios.post('/order/pass', selected).then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          this.orders = responseResult
+        } else {
+          this.$store.commit("updateSnackbarContent", successResponse.data.message);
+        }
+      }).catch(failResponse => { });
+    },
+    goDetail: function (item) {
+      this.$store.commit('updateOrder', item)
+      this.$router.push({ name: 'OrderPage' })
     }
   }
 };

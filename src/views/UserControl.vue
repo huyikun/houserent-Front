@@ -88,172 +88,148 @@ export default {
     dialog: false,
     search: "",
     headers: [
-      { text: "用户名", align: "left", value: "username", sortable: false },
-      { text: "密码", align: "center", value: "password", sortable: false },
-      { text: "邮箱", align: "center", value: "email", sortable: false },
-      { text: "手机", align: "center", value: "phone", sortable: false },
-      { text: "操作", align: "center", value: "action", sortable: false }
+      { text: '用户名', align: 'left', value: 'username', sortable: false, },
+      { text: '密码', align: 'center', value: 'password', sortable: false, },
+      { text: '邮箱', align: 'center', value: 'email', sortable: false, },
+      { text: '手机', align: 'center', value: 'phone', sortable: false, },
+      { text: 'Actions', align: 'center', value: 'action', sortable: false },
     ],
     users: [],
     editedIndex: -1,
     editedItem: {
-      username: "",
-      password: "",
-      email: "",
-      phone: ""
+      username: '',
+      password: '',
+      email: '',
+      phone: '',
     },
     defaultItem: {
-      username: "",
-      password: "",
-      email: "",
-      phone: ""
-    }
+      username: '',
+      password: '',
+      email: '',
+      phone: '',
+    },
   }),
 
   computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "添加用户" : "编辑用户信息";
-    }
+    formTitle () {
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
   },
 
   watch: {
-    dialog(val) {
-      val || this.close();
-    }
+    dialog (val) {
+      val || this.close()
+    },
   },
 
-  created() {
-    this.initialize();
+  created () {
+    this.initialize()
   },
 
   methods: {
-    initialize() {
+    initialize () {
       this.users = [
         {
-          username: "Bcascask",
-          password: "11csa223",
-          email: "hucom",
-          phone: "15901092037"
+          username: 'Bcascask',
+          password: '11csa223',
+          email: 'hucom',
+          phone: '15901092037',
         },
         {
-          username: "Bcnk",
-          password: "1123",
-          email: "hu.com",
-          phone: "15092037"
+          username: 'Bcnk',
+          password: '1123',
+          email: 'hu.com',
+          phone: '15092037',
         },
         {
-          username: "Bcnk",
-          password: "1123",
-          email: "hu&&&qq.com",
-          phone: "15092037"
+          username: 'Bcnk',
+          password: '1123',
+          email: 'hu&&&qq.com',
+          phone: '15092037',
+        },
+      ]
+      // get 
+      this.$axios.get('/user/get').then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          this.users = responseResult
         }
-      ];
-      // get
-      this.$axios
-        .get("/user/get")
-        .then(successResponse => {
+        this.$store.commit("updateSnackbarContent", successResponse.data.message);
+      }).catch(failResponse => { });
+    },
+
+    editItem (item) {
+      this.editedIndex = this.users.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
+    },
+
+    deleteItem (item) {
+      const index = this.users.indexOf(item)
+      if (confirm('Are you sure you want to delete this item?')) {
+        // delete
+        let param = new URLSearchParams()
+        param.append('username', item.username)
+        this.$axios.post('/user/delete', param).then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
           );
           if (successResponse.data.code === 200) {
-            this.users = responseResult;
+            this.users.splice(index, 1)
           }
-          this.$store.commit(
-            "updateSnackbarContent",
-            successResponse.data.message
-          );
-        })
-        .catch(failResponse => {});
-    },
-
-    editItem(item) {
-      this.editedIndex = this.users.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-
-    deleteItem(item) {
-      const index = this.users.indexOf(item);
-      if (confirm("Are you sure you want to delete this item?")) {
-        // delete
-        let param = new URLSearchParams();
-        param.append("username", item.username);
-        this.$axios
-          .post("/user/delete", param)
-          .then(successResponse => {
-            var responseResult = JSON.parse(
-              JSON.stringify(successResponse.data.data)
-            );
-            if (successResponse.data.code === 200) {
-              this.users.splice(index, 1);
-            }
-            this.$store.commit(
-              "updateSnackbarContent",
-              successResponse.data.message
-            );
-          })
-          .catch(failResponse => {});
+          this.$store.commit("updateSnackbarContent", successResponse.data.message);
+        }).catch(failResponse => { });
       }
     },
 
-    close() {
-      this.dialog = false;
+    close () {
+      this.dialog = false
       setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      }, 300);
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
     },
 
-    save() {
+    save () {
       if (this.editedIndex > -1) {
         // Object.assign(this.users[this.editedIndex], this.editedItem)
         // edit
-        let param = new URLSearchParams();
-        param.append("username", item.username);
-        param.append("password", item.password);
-        param.append("email", item.email);
-        param.append("phone", item.phone);
-        this.$axios
-          .post("/user/edit", param)
-          .then(successResponse => {
-            var responseResult = JSON.parse(
-              JSON.stringify(successResponse.data.data)
-            );
-            if (successResponse.data.code === 200) {
-              Object.assign(this.users[this.editedIndex], this.editedItem);
-            }
-            this.$store.commit(
-              "updateSnackbarContent",
-              successResponse.data.message
-            );
-          })
-          .catch(failResponse => {});
+        let param = new URLSearchParams()
+        param.append('username', this.editedItem.username)
+        param.append('password', this.editedItem.password)
+        param.append('email', this.editedItem.email)
+        param.append('phone', this.editedItem.phone)
+        this.$axios.post('/user/edit', param).then(successResponse => {
+          var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          );
+          if (successResponse.data.code === 200) {
+            Object.assign(this.users[this.editedIndex], this.editedItem)
+          }
+          this.$store.commit("updateSnackbarContent", successResponse.data.message);
+        }).catch(failResponse => { });
       } else {
         // this.users.push(this.editedItem)
         // post 增
-        let param = new URLSearchParams();
-        param.append("username", item.username);
-        param.append("password", item.password);
-        param.append("email", item.email);
-        param.append("phone", item.phone);
-        this.$axios
-          .post("/user/add", param)
-          .then(successResponse => {
-            var responseResult = JSON.parse(
-              JSON.stringify(successResponse.data.data)
-            );
-            if (successResponse.data.code === 200) {
-              this.users.push(this.editedItem);
-            }
-            this.$store.commit(
-              "updateSnackbarContent",
-              successResponse.data.message
-            );
-          })
-          .catch(failResponse => {});
+        let param = new URLSearchParams()
+        param.append('username', this.editedItem.username)
+        param.append('password', this.editedItem.password)
+        param.append('email', this.editedItem.email)
+        param.append('phone', this.editedItem.phone)
+        this.$axios.post('/user/add', param).then(successResponse => {
+          var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          );
+          if (successResponse.data.code === 200) {
+            this.users.push(this.editedItem)
+          }
+          this.$store.commit("updateSnackbarContent", successResponse.data.message);
+        }).catch(failResponse => { });
       }
-      this.close();
-    }
-  }
-};
+      this.close()
+    },
+  },
+}
 </script>

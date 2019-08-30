@@ -46,21 +46,78 @@ export default {
     DatePicker
   },
   data: () => ({
+    house: {},
     loading: false,
     selection: 1,
     dates: []
   }),
-
+  created() {
+    this.$store.commit("updateLimitDateList", [
+      {
+        startDate: new Date("2019-08-28"),
+        endDate: new Date("2019-08-30")
+      },
+      {
+        startDate: new Date("2019-08-14"),
+        endDate: new Date("2019-08-17")
+      }
+    ]);
+    this.house = this.$store.state.pickedHouse;
+    this.$axios
+      .get("/house/getOccupiedDate", {
+        params: {
+          houseName: this.house.name,
+          address: this.house.address
+        }
+      })
+      .then(successResponse => {
+        var responseResult = JSON.parse(
+          JSON.stringify(successResponse.data.data)
+        );
+        if (successResponse.data.code === 200) {
+          this.$store.commit("updateLimitDateList", responseResult);
+        } else {
+          this.$store.commit(
+            "updateSnackbarContent",
+            successResponse.data.message
+          );
+        }
+      });
+  },
   methods: {
     reserve() {
       console.log(this.dates);
-      //
       this.loading = true;
       setTimeout(() => (this.loading = false), 2000);
     },
     flushDates: function(data) {
       this.dates = data.dates;
       console.log(this.dates);
+    },
+    order() {
+      this.$axios
+        .get("/order/orderHouse", {
+          params: {
+            userName: this.$store.state.username,
+            ownerName: this.house.ownerName,
+            houseName: this.house.name,
+            address: this.house.address,
+            price: this.house.price,
+            checkinDate: this.dates[0],
+            checkoutDate: this.dates[1]
+          }
+        })
+        .then(successResponse => {
+          if (successResponse.data.code === 200) {
+            this.$store.commit("updateSnackbarContent", "申请成功,等待审核");
+            this.$router.push({ name: "Main" });
+          } else {
+            this.$store.commit(
+              "updateSnackbarContent",
+              successResponse.data.message
+            );
+          }
+        });
     }
   }
 };
