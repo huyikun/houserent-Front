@@ -43,11 +43,11 @@ const store = new Vuex.Store({
     limitDateList: [
       {
         startDate: new Date('2019-08-28'),
-        endDate: new Date('2019-8-30')
+        endDate: new Date('2019-08-30')
       },
       {
         startDate: new Date('2019-08-14'),
-        endDate: new Date('2019-8-17')
+        endDate: new Date('2019-08-17')
       }
     ],
     houseList: [
@@ -156,6 +156,9 @@ const store = new Vuex.Store({
     },
     updateOrder (state, value) {
       state.order = value
+    },
+    updateLimitDateList(state, value) {
+      state.limitDateList = value
     }
   }
 })

@@ -33,12 +33,33 @@ export default {
     DatePicker
   },
   data: () => ({
-    house: this.$store.state.PickedHouse,
+    house: {},
     loading: false,
     selection: 1,
     dates: []
   }),
-
+  created() {
+    this.house = this.$store.state.pickedHouse
+    this.$axios.get('/house/getOccupiedDate',{
+      params: {
+        houseName: this.house.name,
+        address: this.house.address,
+      }
+    }).then(
+      successResponse => {
+        var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          )
+        if (successResponse.data.code === 200) {
+          this.$store.commit('updateLimitDateList',responseResult)
+        } else {
+          this.$store.commit(
+            "updateSnackbarContent",
+            successResponse.data.message
+          );
+        }
+      })
+  },
   methods: {
     reserve () {
       console.log(this.dates);
@@ -50,7 +71,7 @@ export default {
       console.log(this.dates);
     },
     order () {
-      this.$axios.get('/order', {
+      this.$axios.get('/order/orderHouse', {
         params: {
           userName: this.$store.state.username,
           ownerName: this.house.ownerName,
@@ -64,7 +85,6 @@ export default {
         successResponse => {
           if (successResponse.data.code === 200) {
             this.$store.commit("updateSnackbarContent", "申请成功,等待审核");
-            this.$store.commit('updatePickedHouse', value)
             this.$router.push({ name: "Main" });
           } else {
             this.$store.commit(

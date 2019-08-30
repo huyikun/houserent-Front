@@ -3,10 +3,10 @@
     <v-date-picker
       v-model="dates"
       multiple
-      min="2019-08-22"
-      max="2019-11-29"
-      :show-current="false"
+      :show-current="true"
       :allowed-dates="allowedDates"
+      :min="minDate"
+      :max="maxDate"
       no-title
     ></v-date-picker>
   </div>
@@ -15,24 +15,77 @@
 <script>
 export default {
   data: () => ({
-    dates: [],
-    minDate: new Date(),
-    maxDate: new Date(),
+    dates: []
   }),
-
+  computed: {
+    minDate: function() {
+      return this.dateToString(new Date());
+    },
+    maxDate: function() {
+      var today = new Date();
+      var year = today.getFullYear();
+      var month = today.getMonth() + 1;
+      var day = today.getDate();
+      var flag = false;
+      if (month + 3 > 12) {
+        month = (month + 3) % 12;
+        year++;
+      } else {
+        month = month + 3;
+      }
+      if (
+        (year % 100 != 0 && year % 4 == 0) ||
+        (year % 100 == 0 && year % 400 == 0)
+      ) {
+        flag = true;
+      }
+      if (flag && month == 2 && day > 29) {
+        month++;
+        day = day - 29;
+      } else if (!flag && month == 2 && day > 28) {
+        month++;
+        day = day - 28;
+      } else if (
+        (month == 4 || month == 6 || month == 9 || month == 11) &&
+        day == 31
+      ) {
+        month++;
+        day = 1;
+      }
+      return year + "-" + month + "-" + day;
+    }
+  },
   methods: {
-    allowedDates: function (val) {
+    allowedDates: function(val) {
       var judgeDate = parseInt(
         val.split("-")[0] + val.split("-")[1] + val.split("-")[2]
       );
       var startDate;
       var endDate;
+      console.log(2)
       for (var i = 0; i < this.$store.state.limitDateList.length; i++) {
+        console.log(1)
         startDate = parseInt(
-          this.dateToString(this.$store.state.limitDateList[i].startDate)
+          this.dateToString(this.$store.state.limitDateList[i].startDate).split(
+            "-"
+          )[0] +
+            this.dateToString(
+              this.$store.state.limitDateList[i].startDate
+            ).split("-")[1] +
+            this.dateToString(
+              this.$store.state.limitDateList[i].startDate
+            ).split("-")[2]
         );
         endDate = parseInt(
-          this.dateToString(this.$store.state.limitDateList[i].endDate)
+          this.dateToString(this.$store.state.limitDateList[i].endDate).split(
+            "-"
+          )[0] +
+            this.dateToString(this.$store.state.limitDateList[i].endDate).split(
+              "-"
+            )[1] +
+            this.dateToString(this.$store.state.limitDateList[i].endDate).split(
+              "-"
+            )[2]
         );
         if (startDate <= judgeDate && judgeDate <= endDate) {
           return false;
@@ -40,7 +93,8 @@ export default {
       }
       return true;
     },
-    dateToString: function (date) {
+    dateToString: function(date) {
+      console.log(date)
       var year = date.getFullYear();
       var month = (date.getMonth() + 1).toString();
       var day = date.getDate().toString();
@@ -50,13 +104,13 @@ export default {
       if (day.length == 1) {
         day = "0" + day;
       }
-      var res = year + month + day;
+      var res = year + "-" + month + "-" + day;
       return res;
     }
   },
   watch: {
     dates: {
-      handler (newVal) {
+      handler(newVal) {
         if (this.dates.length > 2) {
           this.dates.splice(2, 1);
         }
@@ -74,7 +128,6 @@ export default {
             this.dates[1] = date3;
           }
           this.$emit("getStartAndEndDate", { dates: this.dates });
-
         }
       }
     }
