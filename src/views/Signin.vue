@@ -1,12 +1,17 @@
 <template>
   <div class="hello">
-    <img style="width:100%; height:100%; position:fixed;" src="static/img/background.jpg" />
+    <img
+      style="width:100%; height:100%; position:fixed;"
+      src="static/img/background.jpg"
+    />
     <div
       style="padding-left:35%; padding-right:35%;padding-top:10%;filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
     >
       <v-card>
         <v-toolbar color="primary" cards dark>
-          <v-card-title class="title font-weight-regular">房屋出租系统</v-card-title>
+          <v-card-title class="title font-weight-regular"
+            >房屋出租系统</v-card-title
+          >
         </v-toolbar>
         <v-form ref="form" v-model="form" class="pa-4 pt-6">
           <v-text-field
@@ -35,9 +40,16 @@
             color="info"
             dark
             style="font-size:1.08em; width: 20%"
-          >注册</v-btn>
+            >注册</v-btn
+          >
           <div class="flex-grow-1"></div>
-          <v-btn @click="Signin" color="success" dark style="font-size:1.08em; width: 20%">登录</v-btn>
+          <v-btn
+            @click="Signin"
+            color="success"
+            dark
+            style="font-size:1.08em; width: 20%"
+            >登录</v-btn
+          >
         </v-card-actions>
       </v-card>
     </div>
@@ -80,6 +92,8 @@ export default {
             this.$store.commit("updateMode", responseResult);
             this.$router.push({ name: "WorkingPanel" });
             this.$store.commit("updateSnackbarContent", "登录成功");
+            localStorage.setItem("logged", JSON.stringify({ logged: true }));
+            this.$router.push(this.$route.query.redirect);
           } else {
             this.$store.commit(
               "updateSnackbarContent", successResponse.data.message

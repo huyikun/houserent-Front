@@ -11,22 +11,8 @@ const store = new Vuex.Store({
     usermode: 1,
     snackbar: false,
     text: 'Default text?',
-    order: {
-      houseName: '宝宝房',
-      address: '北京市海淀区北京航空航天大学三公寓',
-      ownerName: 'Huu',
-      //
-      type: 'short'
-    },
-    pickedHouse: {
-      name: 'room888',
-      address: 'address888',
-      price: 70.0,
-      introduce: 'iam7',
-      ownerName: 'Huu',
-      ownerPhone: '77777',
-      photos: ['/static/img/pic2.jpg']
-    },
+    order: {},
+    pickedHouse: {},
     admheader: [
       {
         text: '租客名称',
@@ -144,17 +130,7 @@ const store = new Vuex.Store({
       }
     ],
     limitDateList: [],
-    houseList: [
-      {
-        name: 'room1',
-        address: 'Morenaddress1',
-        price: 10.0,
-        introduce: 'iam1',
-        ownerName: 'Huu',
-        ownerPhone: '111111',
-        photos: ['/static/img/pic2.jpg']
-      }
-    ]
+    houseList: []
   },
   mutations: {
     updateMode (state, value) {
