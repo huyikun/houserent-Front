@@ -72,7 +72,7 @@
         >
       </v-card-title>
       <v-data-table
-        :headers="headers"
+        :headers="headers2"
         :items="complaints"
         :search="search2"
         item-key="complaintTime"
@@ -118,8 +118,13 @@ export default {
           return this.$store.state.admheader
         else if (this.usermode === 1)
           return this.$store.state.usrheader
-        else if (this.usermode === 2)
-          return this.$store.state.workerhead
+        // else if (this.usermode === 2)
+        //   return this.$store.state.workerhead
+      }
+    },
+    headers2: {
+      get () {
+        return this.$store.state.workerhead
       }
     },
     showSelect: function () {
