@@ -155,7 +155,7 @@ export default {
       }
     },
     showSelect: function () {
-      return (this.$store.state.usermode === 0 ? true : false)
+      return (this.$store.state.usermode === 1 ? false : true)
     },
     showOrder: function () {
       return (this.$store.state.usermode === 2) ? false : true
@@ -223,7 +223,6 @@ export default {
       this.$store.commit('updateOrder', item)
       this.$router.push({ name: 'OrderPage' })
     },
-
     getAllComplaints: function () {
       this.$axios.get('/complaint/getAll').then(successResponse => {
         var responseResult = JSON.parse(
@@ -270,19 +269,35 @@ export default {
       }).catch(failResponse => { });
     },
     distributeComplaints: function () {
-      this.$axios.post('/complaint/distribute', this.selected2)
-        .then(successResponse => {
-          var responseResult = JSON.parse(
-            JSON.stringify(successResponse.data.data)
-          );
-          if (successResponse.data.code === 200) {
-            this.complaints = responseResult
-            this.selected2 = []
-            this.$store.commit("updateSnackbarContent", '分配成功')
-          } else {
-            this.$store.commit("updateSnackbarContent", successResponse.data.message);
-          }
-        }).catch(failResponse => { });
+      if (this.usermode === 0) {
+        this.$axios.post('/complaint/distribute', this.selected2)
+          .then(successResponse => {
+            var responseResult = JSON.parse(
+              JSON.stringify(successResponse.data.data)
+            );
+            if (successResponse.data.code === 200) {
+              this.complaints = responseResult
+              this.selected2 = []
+              this.$store.commit("updateSnackbarContent", '分配成功')
+            } else {
+              this.$store.commit("updateSnackbarContent", successResponse.data.message);
+            }
+          }).catch(failResponse => { });
+      } else {
+        this.$axios.post('/complaint/distribute2', this.selected2)
+          .then(successResponse => {
+            var responseResult = JSON.parse(
+              JSON.stringify(successResponse.data.data)
+            );
+            if (successResponse.data.code === 200) {
+              this.complaints = responseResult
+              this.selected2 = []
+              this.$store.commit("updateSnackbarContent", '处理成功')
+            } else {
+              this.$store.commit("updateSnackbarContent", successResponse.data.message);
+            }
+          }).catch(failResponse => { });
+      }
     },
   }
 };

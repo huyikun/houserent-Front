@@ -51,15 +51,6 @@
           style="font-size:1.08em"
           >报修投诉</v-btn
         >
-        <v-btn v-if="usermode === 2" text @click.stop style="font-size:1.08em"
-          >房东</v-btn
-        >
-        <v-btn v-if="usermode === 2" text @click.stop style="font-size:1.08em"
-          >房东2</v-btn
-        >
-        <v-btn v-if="usermode === 3" text @click.stop style="font-size:1.08em"
-          >工人</v-btn
-        >
         <v-btn text @click="logout" style="font-size:1.08em">注销</v-btn>
       </v-toolbar-items>
     </v-toolbar>
