@@ -24,9 +24,7 @@ router.beforeEach((to, from, next) => {
       if (!to.meta.role) {
         next();
       }
-      else if (
-        to.meta.role == JSON.parse(localStorage.getItem('myuser')).usermode
-      ) {
+      else if (to.meta.role == JSON.parse(localStorage.getItem('myuser')).usermode) {
         next()
       } else {
         next({
@@ -36,7 +34,6 @@ router.beforeEach((to, from, next) => {
     } else {
       next({
         path: '/', // 未登录则跳转至signin页面
-        
       })
     }
   } else {

@@ -91,6 +91,7 @@ export default {
           if (successResponse.data.code === 200) {
             this.$store.commit("updateMode", responseResult);
             localStorage.setItem("logged", JSON.stringify({ logged: true }));
+            localStorage.setItem("myuser", JSON.stringify(this.$store.state));
             this.$router.push({ name: "WorkingPanel" });
             this.$store.commit("updateSnackbarContent", "登录成功");
           } else {
