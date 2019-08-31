@@ -92,7 +92,7 @@ export default {
         length: len => v => (v || "").length <= len || `最多上传${len}张图片`
       },
       complaint: {
-        userName: this.$store.state.username,
+        userName: '',
         houseAddress: '',
         reasons: '',
         photos: ''
@@ -137,6 +137,7 @@ export default {
           if (successResponse.data.code === 200) {
             // this.$store.commit("updateSnackbarContent", "上传成功");
             this.complaint.photos = responseResult
+            this.complaint.userName = this.$store.state.username
             this.submit()
           } else {
             this.$store.commit(

@@ -1,7 +1,9 @@
 <template>
   <div>
     <OrderSearch />
-    <div style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
+    <div
+      style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
+    >
       <v-container>
         <v-row>
           <v-col
@@ -16,24 +18,33 @@
                 height="145px"
                 gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               >
-                <v-card-title class="fill-height align-end" v-text="house.address"></v-card-title>
+                <v-card-title
+                  class="fill-height align-end"
+                  v-text="house.address"
+                ></v-card-title>
               </v-img>
 
               <v-card-actions>
-                <div style="font-size: 1.08em;">￥{{house.price}} / 天</div>
+                <div style="font-size: 1.08em;">￥{{ house.price }} / 天</div>
                 <v-spacer />
                 <v-dialog v-model="dialog[index % cnt]" width="500">
                   <template v-slot:activator="{ on }">
-                    <v-btn color="info" style="font-size: 1.08em;" small fab dark v-on="on">
+                    <v-btn
+                      color="info"
+                      style="font-size: 1.08em;"
+                      small
+                      fab
+                      dark
+                      v-on="on"
+                    >
                       <v-icon>launch</v-icon>
                     </v-btn>
                   </template>
 
                   <v-card>
-                    <v-card-title
-                      class="headline grey lighten-1"
-                      primary-title
-                    >欢迎您预览 {{ house.name }}</v-card-title>
+                    <v-card-title class="headline grey lighten-1" primary-title
+                      >欢迎您预览 {{ house.name }}</v-card-title
+                    >
                     <v-carousel
                       :continuous="false"
                       :cycle="cycle"
@@ -41,7 +52,10 @@
                       hide-delimiter-background
                       height="250"
                     >
-                      <v-carousel-item v-for="(photo, i) in house.photos" :key="i">
+                      <v-carousel-item
+                        v-for="(photo, i) in house.photos"
+                        :key="i"
+                      >
                         <v-img
                           :src="photo"
                           height="200px"
@@ -64,7 +78,8 @@
                         dark
                         color="info"
                         style="font-size:1.08em"
-                      >预定</v-btn>
+                        >预定</v-btn
+                      >
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
@@ -75,7 +90,10 @@
       </v-container>
 
       <div class="text-center" style="z-index:1">
-        <v-pagination v-model="page" :length="Math.ceil(this.$store.state.houseList.length / cnt)"></v-pagination>
+        <v-pagination
+          v-model="page"
+          :length="Math.ceil(this.$store.state.houseList.length / cnt)"
+        ></v-pagination>
       </div>
     </div>
   </div>
@@ -94,10 +112,27 @@ export default {
     slides: ["First", "Second", "Third", "Fourth", "Fifth"]
   }),
   methods: {
+    created () {
+      this.getAll()
+    },
     goOrderConfirm (value) {
       this.$store.commit('updatePickedHouse', value)
       this.$router.push({ name: "OrderConfirm" });
       this.dialog[this.index] = false
+    },
+    getAll: function () {
+      this.$axios.get('/house/searchAll').then(
+        successResponse => {
+          var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          );
+          if (successResponse.data.code === 200) {
+            this.$store.commit('updateHouseList', responseResult)
+          } else {
+            this.$store.commit('updateSnackbarContent', 'error')
+          }
+        }
+      ).catch(failResponse => { });
     }
   },
   computed: {

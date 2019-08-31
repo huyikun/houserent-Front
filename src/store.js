@@ -4,10 +4,10 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    username: 'HuYK',
-    password: 'hyk123',
-    email: '958337834@qq.com',
-    phone: '15901092037',
+    username: '',
+    password: '',
+    email: '',
+    phone: '',
     usermode: 1,
     snackbar: false,
     text: 'Default text?',
@@ -27,7 +27,8 @@ const store = new Vuex.Store({
       ownerPhone: '77777',
       photos: ['/static/img/pic2.jpg']
     },
-    admheader: [{
+    admheader: [
+      {
         text: '租客名称',
         value: 'userName',
         align: 'left'
@@ -73,7 +74,8 @@ const store = new Vuex.Store({
         align: 'center'
       }
     ],
-    usrheader: [{
+    usrheader: [
+      {
         text: '房屋名称',
         value: 'houseName',
         align: 'left'
@@ -114,8 +116,36 @@ const store = new Vuex.Store({
         align: 'center'
       }
     ],
+    workerheader: [
+      {
+        text: '投诉房屋名称',
+        value: 'houseName',
+        align: 'left'
+      },
+      {
+        text: '投诉房屋地址',
+        value: 'address',
+        align: 'center'
+      },
+      {
+        text: '投诉时间',
+        value: 'applyTime',
+        align: 'center'
+      },
+      {
+        text: '订单状态',
+        value: 'state',
+        align: 'center'
+      },
+      {
+        text: 'Actions',
+        value: 'action',
+        align: 'center'
+      }
+    ],
     limitDateList: [],
-    houseList: [{
+    houseList: [
+      {
         name: 'room1',
         address: 'Morenaddress1',
         price: 10.0,
@@ -123,33 +153,33 @@ const store = new Vuex.Store({
         ownerName: 'Huu',
         ownerPhone: '111111',
         photos: ['/static/img/pic2.jpg']
-      },
+      }
     ]
   },
   mutations: {
-    updateMode(state, value) {
+    updateMode (state, value) {
       state.usermode = value.mode
       state.username = value.username
       state.email = value.email
       state.phone = value.phone
     },
-    updateSnackbar(state, value) {
+    updateSnackbar (state, value) {
       state.snackbar = value
     },
-    updateSnackbarContent(state, value) {
+    updateSnackbarContent (state, value) {
       store.commit('updateSnackbar', true)
       state.text = value
     },
-    updateHouseList(state, value) {
+    updateHouseList (state, value) {
       state.houseList = value
     },
-    updatePickedHouse(state, value) {
+    updatePickedHouse (state, value) {
       state.pickedHouse = value
     },
-    updateOrder(state, value) {
+    updateOrder (state, value) {
       state.order = value
     },
-    updateLimitDateList(state, value) {
+    updateLimitDateList (state, value) {
       state.limitDateList = value
     }
   }

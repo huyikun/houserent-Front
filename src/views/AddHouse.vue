@@ -103,7 +103,7 @@
         </v-row>
         <br />
         <v-row justify="center">
-          <v-btn @click="submit" color="blue" dark fab>
+          <v-btn @click="upLoadImg" color="blue" dark fab>
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-row>
@@ -172,6 +172,7 @@ export default {
           if (successResponse.data.code === 200) {
             // this.$store.commit("updateSnackbarContent", "上传成功");
             this.house.photos = responseResult;
+            this.upLoaded = true
             this.submit()
           } else {
             this.$store.commit(
