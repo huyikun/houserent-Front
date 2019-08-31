@@ -35,9 +35,10 @@ export default {
   created() {
     
     localStorage.getItem("userMsg") && this.$store.replaceState(JSON.parse(localStorage.getItem("userMsg")));
-    
+    localStorage.setItem("logged", JSON.stringify({logged : false}));
     window.addEventListener("beforeunload",()=>{
-        localStorage.setItem("userMsg",JSON.stringify(this.$store.state))
+        localStorage.setItem("userMsg",JSON.stringify(this.$store.state));
+        localStorage.setItem("logged", JSON.stringify({logged : false}))
     })
   },
   methods: {

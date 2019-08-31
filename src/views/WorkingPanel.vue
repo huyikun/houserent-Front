@@ -28,7 +28,7 @@
         :headers="headers"
         :items="orders"
         :search="search"
-        item-key="houseName"
+        item-key="applyTime"
         :show-select="showSelect"
         disable-sort
         v-model="selected"
@@ -75,7 +75,7 @@
         :headers="headers"
         :items="complaints"
         :search="search2"
-        item-key="houseName"
+        item-key="complaintime"
         :show-select="showSelect"
         disable-sort
         v-model="selected2"
@@ -200,7 +200,7 @@ export default {
       }).catch(failResponse => { });
     },
     getUserComplaints: function () {
-      this.$axios.get('/order/getUserComplaint', {
+      this.$axios.get('/complaint/getUserComplaint', {
         params: {
           userName: this.$store.state.username
         }

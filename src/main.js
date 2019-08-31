@@ -21,8 +21,10 @@ router.beforeEach((to, from, next) => {
     // 验证是否需要登陆
     if (JSON.parse(localStorage.getItem('logged')).logged) {
       // 查询本地存储信息是否已经登陆
-      console.log(to.meta.role)
-      if (
+      if (!to.meta.role) {
+        next();
+      }
+      else if (
         to.meta.role == JSON.parse(localStorage.getItem('userMsg')).usermode
       ) {
         next()
@@ -34,9 +36,7 @@ router.beforeEach((to, from, next) => {
     } else {
       next({
         path: '/', // 未登录则跳转至signin页面
-        query: {
-          redirect: to.fullPath
-        } // 将跳转的路由path作为参数，登录成功后跳转到该路由
+        
       })
     }
   } else {
