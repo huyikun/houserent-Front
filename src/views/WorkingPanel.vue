@@ -17,7 +17,7 @@
         <v-btn
           v-if="showSelect"
           class="ml-3 mt-2"
-          @click="passOrders"
+          @click="distributeOrders"
           color="info"
           dark
           style="font-size:0.7em"
@@ -64,7 +64,7 @@
         <v-btn
           v-if="showSelect"
           class="ml-3 mt-2"
-          @click="passComplaints"
+          @click="distributeComplaints"
           color="info"
           dark
           style="font-size:0.7em"
@@ -173,8 +173,8 @@ export default {
         }
       }).catch(failResponse => { });
     },
-    passOrders: function () {
-      this.$axios.post('/order/pass', this.selected).then(successResponse => {
+    distributeOrders: function () {
+      this.$axios.post('/order/distribute', this.selected).then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );
@@ -236,8 +236,8 @@ export default {
         }
       }).catch(failResponse => { });
     },
-    passComplaints: function () {
-      this.$axios.post('/complaint/pass', this.selected2)
+    distributeComplaints: function () {
+      this.$axios.post('/complaint/distribute', this.selected2)
         .then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
