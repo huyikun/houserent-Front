@@ -28,7 +28,14 @@
             <v-spacer />
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
-                <v-btn small color="info" dark v-on="on" fab style="font-size:1.08em;">
+                <v-btn
+                  small
+                  color="info"
+                  dark
+                  v-on="on"
+                  fab
+                  style="font-size:1.08em;"
+                >
                   <v-icon>mdi-plus</v-icon>
                 </v-btn>
               </template>
@@ -54,26 +61,48 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field v-model="editedItem.email" label="邮箱" style="font-size:1.1em"></v-text-field>
+                        <v-text-field
+                          v-model="editedItem.email"
+                          label="邮箱"
+                          style="font-size:1.1em"
+                        ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field v-model="editedItem.phone" label="手机" style="font-size:1.1em"></v-text-field>
+                        <v-text-field
+                          v-model="editedItem.phone"
+                          label="手机"
+                          style="font-size:1.1em"
+                        ></v-text-field>
                       </v-col>
                     </v-row>
                   </v-container>
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn @click="close" color="error" text style="font-size: 1.08em; width: 20%">取消</v-btn>
+                  <v-btn
+                    @click="close"
+                    color="error"
+                    text
+                    style="font-size: 1.08em; width: 20%"
+                    >取消</v-btn
+                  >
                   <div class="flex-grow-1"></div>
-                  <v-btn @click="save" color="info" text style="font-size: 1.08em; width: 20%">保存</v-btn>
+                  <v-btn
+                    @click="save"
+                    color="info"
+                    text
+                    style="font-size: 1.08em; width: 20%"
+                    >保存</v-btn
+                  >
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-toolbar>
         </template>
         <template v-slot:item.action="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)" color="blue">edit</v-icon>
+          <v-icon small class="mr-2" @click="editItem(item)" color="blue"
+            >edit</v-icon
+          >
           <v-icon small @click="deleteItem(item)" color="error">delete</v-icon>
         </template>
         <template v-slot:no-data>
@@ -187,7 +216,7 @@ export default {
             JSON.stringify(successResponse.data.data)
           );
           if (successResponse.data.code === 200) {
-            Object.assign(this.users[this.editedIndex], this.editedItem)
+            Object.assign(this.users[this.editedIndex], responseResult)
           }
           this.$store.commit("updateSnackbarContent", successResponse.data.message);
         }).catch(failResponse => { });
@@ -204,7 +233,7 @@ export default {
             JSON.stringify(successResponse.data.data)
           );
           if (successResponse.data.code === 200) {
-            this.users.push(this.editedItem)
+            this.users.push(responseResult)
           }
           this.$store.commit("updateSnackbarContent", successResponse.data.message);
         }).catch(failResponse => { });
