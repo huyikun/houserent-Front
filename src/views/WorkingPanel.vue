@@ -172,6 +172,8 @@ export default {
         );
         if (successResponse.data.code === 200) {
           this.orders = responseResult
+          this.selected = []
+          this.$store.commit("updateSnackbarContent", '审核通过')
         } else {
           this.$store.commit("updateSnackbarContent", successResponse.data.message);
         }
@@ -217,6 +219,8 @@ export default {
         );
         if (successResponse.data.code === 200) {
           this.complaints = responseResult
+          this.selected2 = []
+          this.$store.commit("updateSnackbarContent", '分配成功')
         } else {
           this.$store.commit("updateSnackbarContent", successResponse.data.message);
         }
