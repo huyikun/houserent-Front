@@ -47,7 +47,7 @@
           <v-text-field
             label="房主姓名"
             style="font-weight:bold"
-            v-model="house.ownername"
+            v-model="house.ownerName"
           ></v-text-field>
         </v-row>
         <br />
@@ -55,7 +55,7 @@
           <v-text-field
             label="房主联系方式"
             style="font-weight:bold"
-            v-model="house.ownerphone"
+            v-model="house.ownerPhone"
           ></v-text-field>
         </v-row>
         <br />
