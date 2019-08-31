@@ -151,7 +151,7 @@ export default {
     },
     submit: function () {
       if (this.upLoaded) {
-        this.$axios.post('', this.complaint)
+        this.$axios.post('/complaint/upload', this.complaint)
           .then(successResponse => {
             if (successResponse.data.code === 200) {
               this.$store.commit('updateSnackbarContent', '投诉成功')
