@@ -1,36 +1,72 @@
 <template>
-  <div style="padding-left:12.5%; padding-right:12.5%; padding-top:20px ; padding-bottom:20px">
-    <v-card style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;">
+  <div
+    style="padding-left:12.5%; padding-right:12.5%; padding-top:20px ; padding-bottom:20px"
+  >
+    <v-card
+      style="filter:alpha(opacity=92.5); -moz-opacity:0.925; opacity: 0.925;"
+    >
       <v-container>
         <br />
-        <v-card-title style="padding-left:50px; padding-right:50px;">注册房源</v-card-title>
+        <v-card-title style="padding-left:50px; padding-right:50px;"
+          >注册房源</v-card-title
+        >
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间名称" style="font-weight:bold" v-model="house.name"></v-text-field>
+          <v-text-field
+            label="房间名称"
+            style="font-weight:bold"
+            v-model="house.name"
+          ></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间地址" style="font-weight:bold" v-model="house.address"></v-text-field>
+          <v-text-field
+            label="房间地址"
+            style="font-weight:bold"
+            v-model="house.address"
+          ></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间定价（每晚）" style="font-weight:bold" v-model="house.price"></v-text-field>
+          <v-text-field
+            label="房间定价（每晚）"
+            style="font-weight:bold"
+            v-model="house.price"
+          ></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房间类型" style="font-weight:bold" v-model="house.type"></v-text-field>
+          <v-text-field
+            label="房间类型"
+            style="font-weight:bold"
+            v-model="house.type"
+          ></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房主姓名" style="font-weight:bold" v-model="house.ownername"></v-text-field>
+          <v-text-field
+            label="房主姓名"
+            style="font-weight:bold"
+            v-model="house.ownername"
+          ></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-text-field label="房主联系方式" style="font-weight:bold" v-model="house.ownerphone"></v-text-field>
+          <v-text-field
+            label="房主联系方式"
+            style="font-weight:bold"
+            v-model="house.ownerphone"
+          ></v-text-field>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
-          <v-textarea label="房屋简介" name="input-7-4" solo style="font-weight:bold" v-model="house.introduce"></v-textarea>
+          <v-textarea
+            label="房屋简介"
+            name="input-7-4"
+            solo
+            style="font-weight:bold"
+            v-model="house.introduce"
+          ></v-textarea>
         </v-row>
         <br />
         <v-row style="padding-left:50px; padding-right:50px;">
@@ -44,9 +80,20 @@
           ></v-file-input>
           <v-container>
             <v-row style="padding-left:50px; padding-right:50px;">
-              <v-col v-for="(img, index) in imgArray" :key="index" style="width:30%">
+              <v-col
+                v-for="(img, index) in imgArray"
+                :key="index"
+                style="width:30%"
+              >
                 <v-img contain height="300px" v-bind:src="getObjectURL(img)">
-                  <v-btn x-small @click="delImg(index)" fab color="error" depressed dark>
+                  <v-btn
+                    x-small
+                    @click="delImg(index)"
+                    fab
+                    color="error"
+                    depressed
+                    dark
+                  >
                     <v-icon>close</v-icon>
                   </v-btn>
                 </v-img>
@@ -123,7 +170,7 @@ export default {
             JSON.stringify(successResponse.data.data)
           )
           if (successResponse.data.code === 200) {
-            this.$store.commit("updateSnackbarContent", "上传成功");
+            // this.$store.commit("updateSnackbarContent", "上传成功");
             this.house.photos = responseResult;
             this.submit()
           } else {
@@ -143,9 +190,6 @@ export default {
         this.$axios
           .post("/house/addHouse", this.house)
           .then(successResponse => {
-            var responseResult = JSON.parse(
-              JSON.stringify(successResponse.data.data)
-            );
             if (successResponse.data.code === 200) {
               this.$store.commit("updateSnackbarContent", "上传房屋成功");
               this.reset();
@@ -158,7 +202,7 @@ export default {
           })
           .catch(failResponse => { });
       } else {
-        this.$store.commit("updateSnackbarContent", "请先上传图片");
+        this.$store.commit("updateSnackbarContent", "请上传图片");
       }
     },
     reset () {
