@@ -17,7 +17,7 @@
         预订天数： {{ this.order.rentDays }} <br />
         支付资金： {{ this.order.totalRent }} <br />
       </v-card-text>
-      <v-img :src="require('@/../static/img/imgforpay.jpg')">
+      <v-img :src="require('@/../static/img/imgforpay.jpg')" />
       <v-card-actions>
         <v-spacer />
         <v-btn color="primary">OK</v-btn>
