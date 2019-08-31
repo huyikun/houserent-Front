@@ -129,9 +129,12 @@ export default {
   created () {
     if (this.$store.state.usermode === 0) {
       this.getAllOrders()
+      this.getAllComplaints()
     } else if (this.$store.state.usermode === 1) {
       this.getUserOrders()
+      this.getUserComplaints()
     }
+    
   },
   methods: {
     showDetail: function (value) {
