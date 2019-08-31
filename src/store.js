@@ -115,12 +115,17 @@ const store = new Vuex.Store({
       },
       {
         text: '投诉时间',
-        value: 'applyTime',
+        value: 'complaintTime',
         align: 'center'
       },
       {
         text: '订单状态',
         value: 'state',
+        align: 'center'
+      },
+      {
+        text: '分配工人',
+        value: 'workerName',
         align: 'center'
       },
       {
