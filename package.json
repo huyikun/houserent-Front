@@ -5,17 +5,20 @@
   "author": "huyikun <48144200+huyikun@users.noreply.github.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "dev": "node build/dev-server.js",
+    "build": "node build/build.js",
+    "server": "nodemon app.js",
+    "start": "node app.js",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs"
   },
   "dependencies": {
     "@mdi/js": "^4.1.95",
     "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuetify": "^2.0.10",
