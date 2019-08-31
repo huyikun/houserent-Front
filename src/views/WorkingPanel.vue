@@ -51,7 +51,7 @@
     <br />
     <v-card>
       <v-card-title>
-        您的报修投诉
+        投诉订单
         <div class="flex-grow-1"></div>
         <v-text-field
           v-model="search2"
@@ -124,7 +124,34 @@ export default {
     },
     headers2: {
       get () {
-        return this.$store.state.workerhead
+        // console.log(this.$store.state)
+        return [
+          {
+            text: '投诉房屋名称',
+            value: 'houseName',
+            align: 'left'
+          },
+          {
+            text: '投诉房屋地址',
+            value: 'houseAddress',
+            align: 'center'
+          },
+          {
+            text: '投诉时间',
+            value: 'complaintTime',
+            align: 'center'
+          },
+          {
+            text: '订单状态',
+            value: 'state',
+            align: 'center'
+          },
+          {
+            text: '分配工人',
+            value: 'workerName',
+            align: 'center'
+          },
+        ]
       }
     },
     showSelect: function () {
@@ -141,7 +168,7 @@ export default {
     } else if (this.$store.state.usermode === 1) {
       this.getUserOrders()
       this.getUserComplaints()
-    } else if (this.$store.usermode === 2) {
+    } else if (this.$store.state.usermode === 2) {
       this.getWorkerComplaints()
     }
 
@@ -204,6 +231,7 @@ export default {
         );
         if (successResponse.data.code === 200) {
           this.complaints = responseResult
+          console.log(this.complaints)
         } else {
           this.$store.commit("updateSnackbarContent", successResponse.data.message);
         }

@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
         next();
       }
       else if (
-        to.meta.role == JSON.parse(localStorage.getItem('userMsg')).usermode
+        to.meta.role == JSON.parse(localStorage.getItem('myuser')).usermode
       ) {
         next()
       } else {
