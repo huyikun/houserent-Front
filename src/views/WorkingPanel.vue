@@ -108,7 +108,7 @@ export default {
       selected2: [],
       orders: [],
       complaints: [],
-      usermode: this.store.state.usermode
+      usermode: this.$store.state.usermode
     }
   },
   computed: {

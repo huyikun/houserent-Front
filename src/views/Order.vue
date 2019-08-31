@@ -111,8 +111,12 @@ export default {
     cycle: false,
     slides: ["First", "Second", "Third", "Fourth", "Fifth"]
   }),
+  created () {
+    this.initialize()
+    console.log(1)
+  },
   methods: {
-    created () {
+    initialize: function() {
       this.getAll()
     },
     goOrderConfirm (value) {
@@ -121,7 +125,7 @@ export default {
       this.dialog[this.index] = false
     },
     getAll: function () {
-      this.$axios.get('/house/searchAll').then(
+      this.$axios.post('/house/searchAll').then(
         successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
