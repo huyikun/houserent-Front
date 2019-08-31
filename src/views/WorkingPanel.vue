@@ -206,7 +206,7 @@ export default {
       }).catch(failResponse => { });
     },
     distributeOrders: function () {
-      this.$axios.post('/order/distribute', this.selected).then(successResponse => {
+      this.$axios.post('/order/pass', this.selected).then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );
