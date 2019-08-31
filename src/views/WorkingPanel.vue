@@ -2,7 +2,7 @@
   <v-container
     style="filter:alpha(opacity=87.5); -moz-opacity:0.875; opacity: 0.875;"
   >
-    <v-card>
+    <v-card v-if="showOrder">
       <v-card-title>
         您的订单
         <div class="flex-grow-1"></div>
@@ -75,7 +75,7 @@
         :headers="headers"
         :items="complaints"
         :search="search2"
-        item-key="complaintime"
+        item-key="complaintTime"
         :show-select="showSelect"
         disable-sort
         v-model="selected2"
@@ -125,6 +125,9 @@ export default {
     showSelect: function () {
       return (this.$store.state.usermode === 0 ? true : false)
     },
+    showOrder: function () {
+      return (this.$store.state.usermode === 2) ? false : true
+    }
   },
   created () {
     if (this.$store.state.usermode === 0) {
@@ -133,8 +136,10 @@ export default {
     } else if (this.$store.state.usermode === 1) {
       this.getUserOrders()
       this.getUserComplaints()
+    } else if (this.$store.usermode === 2) {
+      this.getWorkerComplaints()
     }
-    
+
   },
   methods: {
     showDetail: function (value) {
@@ -215,19 +220,36 @@ export default {
         }
       }).catch(failResponse => { });
     },
-    passComplaints: function () {
-      this.$axios.post('/complaint/pass', this.selected2).then(successResponse => {
+    getWorkerComplaints: function () {
+      this.$axios.get('/complaint/getWorkerComplaint', {
+        params: {
+          workerName: this.$store.state.username
+        }
+      }).then(successResponse => {
         var responseResult = JSON.parse(
           JSON.stringify(successResponse.data.data)
         );
         if (successResponse.data.code === 200) {
           this.complaints = responseResult
-          this.selected2 = []
-          this.$store.commit("updateSnackbarContent", '分配成功')
         } else {
           this.$store.commit("updateSnackbarContent", successResponse.data.message);
         }
       }).catch(failResponse => { });
+    },
+    passComplaints: function () {
+      this.$axios.post('/complaint/pass', this.selected2)
+        .then(successResponse => {
+          var responseResult = JSON.parse(
+            JSON.stringify(successResponse.data.data)
+          );
+          if (successResponse.data.code === 200) {
+            this.complaints = responseResult
+            this.selected2 = []
+            this.$store.commit("updateSnackbarContent", '分配成功')
+          } else {
+            this.$store.commit("updateSnackbarContent", successResponse.data.message);
+          }
+        }).catch(failResponse => { });
     },
   }
 };

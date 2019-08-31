@@ -74,6 +74,13 @@
                           style="font-size:1.1em"
                         ></v-text-field>
                       </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.usermode"
+                          label="类型：普通租客(默认)或工人"
+                          style="font-size:1.1em"
+                        ></v-text-field>
+                      </v-col>
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -131,18 +138,20 @@ export default {
       password: '',
       email: '',
       phone: '',
+      usermode: null,
     },
     defaultItem: {
       username: '',
       password: '',
       email: '',
       phone: '',
+      usermode: null,
     },
   }),
 
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? '新建用户' : '编辑用户信息'
     },
   },
 
@@ -211,6 +220,7 @@ export default {
         param.append('password', this.editedItem.password)
         param.append('email', this.editedItem.email)
         param.append('phone', this.editedItem.phone)
+        param.append('mode', this.editedItem.usermode)
         this.$axios.post('/user/edit', param).then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
@@ -228,6 +238,7 @@ export default {
         param.append('password', this.editedItem.password)
         param.append('email', this.editedItem.email)
         param.append('phone', this.editedItem.phone)
+        param.append('mode', this.editedItem.usermode)
         this.$axios.post('/user/add', param).then(successResponse => {
           var responseResult = JSON.parse(
             JSON.stringify(successResponse.data.data)
